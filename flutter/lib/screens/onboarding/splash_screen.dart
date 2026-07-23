@@ -2,6 +2,7 @@ import 'package:alpha_app/media/images.dart';
 import 'package:alpha_app/providers/themeprovider.dart';
 import 'package:alpha_app/screens/auth/login.dart';
 import 'package:alpha_app/providers/auth_provider.dart';
+import 'package:alpha_app/screens/main_screen.dart';
 import 'package:alpha_app/screens/onboarding/onboarding_screen.dart';
 import 'package:alpha_app/screens/home/home_screen.dart';
 import 'package:alpha_app/core/utils/app_colors.dart';
@@ -107,8 +108,8 @@ class _SplashScreenState extends State<SplashScreen> {
                   Alignment.bottomCenter,
               child: CircularProgressIndicator(
                 color: isDark
-                    ? AppColors.darkAccent
-                    : AppColors.lightAccent,
+                    ? AppColors.darkPrimary
+                    : AppColors.lightPrimary,
               ),
             ),
           ),
@@ -142,7 +143,7 @@ class _SplashScreenState extends State<SplashScreen> {
         context,
         MaterialPageRoute(
           builder: (_) =>
-              const HomeScreen(),
+              MainNavigationScreen(),
         ),
       );
 
