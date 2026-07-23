@@ -23,6 +23,7 @@ import 'package:alpha_app/screens/analysis/financial_analysis_screen.dart';
 import 'package:alpha_app/screens/auth/create_account.dart';
 import 'package:alpha_app/screens/auth/login.dart';
 import 'package:alpha_app/screens/expenses/choose_expense_action_screen.dart';
+import 'package:alpha_app/screens/home/home_screen.dart';
 
 import 'package:alpha_app/screens/main_screen.dart';
 import 'package:alpha_app/screens/onboarding/splash_screen.dart';
@@ -127,7 +128,7 @@ class _MyAppState extends State<MyApp> {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             navigatorKey: navigatorKey,
-            home: const SplashScreen());
+            home: PersonalInfoScreen() );
       },
     );
   }
