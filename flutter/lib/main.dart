@@ -6,6 +6,7 @@ import 'package:alpha_app/providers/financial_analysis_provider.dart';
 import 'package:alpha_app/providers/financial_setup_provider.dart';
 import 'package:alpha_app/providers/goal_provider.dart';
 import 'package:alpha_app/providers/home_provider.dart';
+import 'package:alpha_app/providers/notification_provider.dart';
 
 import 'package:alpha_app/providers/language_provider.dart';
 import 'package:alpha_app/providers/leaderbord_provider.dart';
@@ -33,16 +34,25 @@ import 'package:alpha_app/screens/receipts/receipt_review_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:alpha_app/config/api_config.dart';
 
 import 'package:provider/provider.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: '.env');
+  // API Config handles environment setup now
   await EasyLocalization.ensureInitialized();
+
+  if (kDebugMode) {
+    debugPrint('\n=========================================');
+    debugPrint('AlphaV3 Environment: ${ApiConfig.environment.name.toUpperCase()}');
+    debugPrint('API Base URL: ${ApiConfig.apiV1BaseUrl}');
+    debugPrint('=========================================\n');
+  }
 
   runApp(
     EasyLocalization(
@@ -88,6 +98,9 @@ void main() async {
           ),
           ChangeNotifierProvider(
             create: (_) => FinancialAnalysisProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => NotificationProvider(),
           ),
           ChangeNotifierProvider(
             create: (_) => ProfileProvider(),

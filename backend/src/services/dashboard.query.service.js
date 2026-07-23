@@ -148,34 +148,22 @@ class DashboardQueryService {
       savingsBps = allocations[0].savings_bps !== null ? Number(allocations[0].savings_bps) : null;
     }
 
-    // Savings actual
-    const [savingsTrans] = await db.execute(
-      `SELECT SUM(amount) as total
-       FROM transactions 
-       WHERE user_id = ? AND cycle_id = ? AND budget_bucket = 'savings' AND direction = 'outflow' AND status = 'confirmed'`,
-      [userId, cycleId]
-    );
-    let savingsActual = savingsTrans.length > 0 ? (Number(savingsTrans[0].total) || 0) : 0;
+    const { SavingsAccountingService } = require('./savings-accounting.service');
+    const savingsState = await SavingsAccountingService.getSettlementSavingsState(userId, cycleId);
+    
+    const savingsActual = savingsState.actuals.totalSavingsActual;
+    const actualGoalContributions = savingsState.actuals.actualGoalContributions;
+    const emergencyFundFundedThisCycle = savingsState.actuals.emergencyFundFundedThisCycle;
+    const unallocatedSavingsActual = savingsState.actuals.unallocatedSavingsActual;
 
-    // Planned savings from cycle-linked allocation
-    const [savingsAlloc] = await db.execute(
-      `SELECT emergency_fund_amount, emergency_fund_rate, total_goal_allocations, unallocated_savings_amount, status
-       FROM cycle_savings_allocations
-       WHERE cycle_id = ?`,
-      [cycleId]
-    );
-    let plannedEmergencyFund = 0;
-    let plannedEmergencyFundRate = null;
-    let plannedGoalAllocations = 0;
-    let unallocatedSavings = 0;
+    const plannedSavings = savingsState.plan.plannedSavings;
+    const plannedEmergencyFund = savingsState.plan.plannedEmergencyFund;
+    const plannedGoalAllocations = savingsState.plan.plannedGoalAllocations;
+    const unallocatedSavings = savingsState.plan.unallocatedSavings;
+    const plannedEmergencyFundRate = null; // Legacy compatibility
 
-    if (savingsAlloc.length > 0) {
-      plannedEmergencyFund = Number(savingsAlloc[0].emergency_fund_amount);
-      plannedEmergencyFundRate = savingsAlloc[0].emergency_fund_rate !== null ? Number(savingsAlloc[0].emergency_fund_rate) : null;
-      plannedGoalAllocations = Number(savingsAlloc[0].total_goal_allocations);
-      unallocatedSavings = Number(savingsAlloc[0].unallocated_savings_amount);
-    }
-
+    const emergencyFundBalance = savingsState.ef.emergencyFundBalance;
+    const emergencyFundTarget = savingsState.ef.emergencyFundTarget;
     // Goals
     const [goalsList] = await db.execute(
       `SELECT id, name, target_amount as targetAmount, current_balance as currentBalance, status
@@ -254,11 +242,17 @@ class DashboardQueryService {
           savings: {
             target: savingsTarget,
             targetBps: savingsBps,
+            plannedSavings,
             actual: savingsActual,
-            plannedEmergencyFund: plannedEmergencyFund,
-            plannedEmergencyFundRate: plannedEmergencyFundRate,
-            plannedGoalAllocations: plannedGoalAllocations,
-            unallocatedSavings: unallocatedSavings,
+            actualGoalContributions,
+            emergencyFundFundedThisCycle,
+            unallocatedSavingsActual,
+            plannedEmergencyFund,
+            plannedEmergencyFundRate,
+            plannedGoalAllocations,
+            unallocatedSavings,
+            emergencyFundBalance,
+            emergencyFundTarget,
             remaining: savingsTarget - savingsActual,
             usagePercent: savingsTarget > 0 ? (savingsActual / savingsTarget) * 100 : null,
             status: calculateBucketStatus(savingsActual, savingsTarget, elapsedRatio)

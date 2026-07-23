@@ -136,7 +136,7 @@ class FinanceRepository {
   static async getGoals(userId) {
     const [rows] = await db.execute(
       `SELECT id, name, target_amount, current_balance, cycle_allocation,
-              planned_contribution, priority, status, target_date, custom_name, goal_type, created_at, ready_at, executed_at, is_system_managed
+              planned_contribution, priority, status, target_date, custom_name, goal_type, planning_mode, created_at, ready_at, executed_at, is_system_managed
        FROM goals WHERE user_id = ? ORDER BY created_at DESC`,
       [userId]
     );
@@ -182,13 +182,13 @@ class FinanceRepository {
   }
 
   static async createGoalTransaction(connection, data) {
-    const { userId, goalId, amount, transactionType, relatedGoalId, idempotencyKey, requestHash, description } = data;
+    const { userId, goalId, amount, transactionType, relatedGoalId, idempotencyKey, requestHash, description, cycleId, sourceType, sourceId, settlementId } = data;
     try {
       const [result] = await connection.execute(
         `INSERT INTO goal_transactions
-         (user_id, goal_id, amount, transaction_type, related_goal_id, idempotency_key, request_hash, description)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-        [userId, goalId, amount, transactionType, relatedGoalId || null, idempotencyKey || null, requestHash || null, description || null]
+         (user_id, goal_id, amount, transaction_type, related_goal_id, idempotency_key, request_hash, description, cycle_id, source_type, source_id, settlement_id)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [userId, goalId, amount, transactionType, relatedGoalId || null, idempotencyKey || null, requestHash || null, description || null, cycleId || null, sourceType || null, sourceId || null, settlementId || null]
       );
       const [rows] = await connection.execute(
         `SELECT id, goal_id, amount, transaction_type FROM goal_transactions WHERE id = ?`,
