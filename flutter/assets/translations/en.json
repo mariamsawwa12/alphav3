@@ -15,7 +15,602 @@
     "password_required": "password required",
     "password_short": "password short"
   },
-  "complete_profile": "Complete your financial profile",
+  "common": {
+    "user": "User",
+    "view": "View",
+    "view_all": "View All",
+    "income": "Income",
+    "expenses": "Expenses",
+    "savings": "Savings",
+    "not_available": "Not available",
+    "something_went_wrong": "Something went wrong",
+    "try_again": "Try Again",
+    "jod": "JOD",
+    "ai": "AI",
+    "save_changes": "Save Changes",
+    "complete_required_fields": "Please complete all required fields",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "home": {
+    "hello_user": "Hello, {name} 👋",
+    "improve_finances_today": "Let's improve your finances today",
+    "score": "Score",
+    "financial_score": "Financial Score",
+    "financial_score_placeholder": "Your financial score details will appear here.",
+    "today_insight": "Today's Insight",
+    "alpha_smart_insight": "Alpha Smart Insight",
+    "insight_placeholder": "Your financial insight will appear here.",
+    "view_advice": "View Advice",
+    "goal_progress": "Goal Progress",
+    "keep_saving_goal": "Keep saving to reach your goal",
+    "active_challenge": "Active Challenge",
+    "challenge_progress_message": "You're getting closer to completing it",
+    "quick_actions": "Quick Actions",
+    "unable_to_load": "Unable to load home data"
+  },
+  "quick_actions": {
+    "add_expense": "Add Expense",
+    "track_spending": "Track your spending",
+    "analytics": "Analytics",
+    "view_spending_trends": "View spending trends",
+    "scan_receipt": "Scan Receipt",
+    "capture_expenses": "Capture expenses",
+    "challenges": "Challenges",
+    "build_good_habits": "Build good habits"
+  },
+  "expenses": {
+    "title": "Expenses",
+    "recorded_singular": "{count} expense recorded",
+    "recorded_plural": "{count} expenses recorded",
+    "empty_title": "No expenses yet",
+    "empty_description": "Start recording your expenses to unlock spending analysis and personalized Alpha insights.",
+    "add_first_expense": "Add your first expense",
+    "add_new_expense": "Add a new expense",
+    "delete_title": "Delete Expense",
+    "delete_message": "Are you sure you want to delete \"{title}\"?",
+    "deleted_successfully": "Expense deleted successfully",
+    "this_month": "This Month",
+    "month_summary_singular": "{count} expense • {month} {year}",
+    "month_summary_plural": "{count} expenses • {month} {year}",
+    "spending_analytics": "Spending Analytics",
+    "no_analytics_data": "No analytics data yet",
+    "last_7_days": "Last 7 Days",
+    "alpha_insight": "Alpha Insight",
+    "insight_placeholder": "Your personalized spending insight will appear here.",
+    "recent_expenses": "Recent Expenses",
+    "analytics": {
+      "payment": "Payment",
+      "movement": "Movement",
+      "source": "Source",
+      "need_want": "Need / Want",
+      "category": "Category"
+    }
+  },
+  "new_expense": {
+    "edit_expense": "Edit Expense",
+    "add_expense": "Add Expense",
+    "update_description": "Update the expense details below.",
+    "add_description": "Record the expense accurately so Alpha can analyze its effect on your budget.",
+    "category": "Category",
+    "enter_category_name": "Enter category name",
+    "expense_name": "Expense name",
+    "enter_expense_name": "Enter expense name",
+    "amount": "Amount",
+    "enter_amount": "Enter amount",
+    "expense_type": "Expense type",
+    "movement_type": "Movement type",
+    "coverage_period": "Coverage period",
+    "payment_method": "Payment method",
+    "date": "Date",
+    "select_expense_date": "Select expense date",
+    "note_optional": "Note (optional)",
+    "add_note": "Add a note",
+    "add_to_session": "Add to Session",
+    "could_not_save": "Could not save expense",
+    "updated_successfully": "Expense updated successfully",
+    "added_to_session": "Expense added to shopping session",
+    "added_successfully": "Expense added successfully",
+    "options": {
+      "food": "Food",
+      "shopping": "Shopping",
+      "transport": "Transport",
+      "bills": "Bills",
+      "health": "Health",
+      "education": "Education",
+      "entertainment": "Entertainment",
+      "travel": "Travel",
+      "investment": "Investment",
+      "other": "Other",
+      "cash": "Cash",
+      "card": "Card",
+      "wallet": "Wallet",
+      "occasional": "Occasional",
+      "recurring": "Recurring",
+      "one_day": "1 Day",
+      "three_days": "3 Days",
+      "one_week": "1 Week",
+      "two_weeks": "2 Weeks",
+      "monthly": "Monthly",
+      "need": "Need",
+      "want": "Want"
+    }
+  },
+  "expense_card": {
+    "expense": "Expense",
+    "payment": "Payment",
+    "one_time": "One-time",
+    "options": "Expense options",
+    "delete": "Delete Expense"
+  },
+  "goals": {
+    "title": "My Goals",
+    "active_singular": "{count} active goal",
+    "active_plural": "{count} active goals",
+    "empty_title": "No goals yet",
+    "empty_description": "Create your first financial goal and start saving toward it.",
+    "add_first_goal": "Add your first goal",
+    "add_new_goal": "Add a new goal",
+    "delete_title": "Delete Goal",
+    "delete_message": "Are you sure you want to delete \"{title}\"?",
+    "deleted_successfully": "Goal deleted successfully"
+  },
+  "goal_card": {
+    "days_left_singular": "{count} day left",
+    "days_left_plural": "{count} days left",
+    "options": "Goal options",
+    "delete": "Delete Goal",
+    "saved_so_far": "Saved so far",
+    "of_target": "of {amount} {currency}",
+    "progress_placeholder": "Progress will appear here",
+    "goal_amount": "Goal {amount} {currency}",
+    "goal": "Goal",
+    "recommended_monthly_saving": "Recommended Monthly Saving",
+    "per_month": "/ month"
+  },
+  "goal_categories": {
+    "emergency_fund": "Emergency Fund",
+    "laptop": "Laptop",
+    "travel": "Travel",
+    "car": "Car",
+    "education": "Education",
+    "house": "House",
+    "business": "Business",
+    "furniture": "Furniture",
+    "other": "Other"
+  },
+  "new_goal": {
+    "title": "Add Goal",
+    "description": "Set a realistic financial goal and Alpha will help you track your progress.",
+    "choose_goal": "Choose your goal",
+    "goal_name": "Goal name",
+    "enter_goal_name": "Enter goal name",
+    "monthly_saving_amount": "Monthly saving amount",
+    "amount_per_month": "Amount per month",
+    "priority": "Priority",
+    "target_date": "Target date",
+    "select_target_date": "Select your target date",
+    "alpha_preview": "Alpha Preview",
+    "add_goal": "Add Goal",
+    "could_not_save": "Could not save goal",
+    "added_successfully": "Goal added successfully",
+    "preview": {
+      "choose_goal": "Choose a goal to receive a personalized saving suggestion.",
+      "enter_amount": "Enter a realistic monthly saving amount so Alpha can evaluate your plan.",
+      "select_date": "Select a target date to complete your goal plan.",
+      "high_priority": "This is a high-priority goal. Alpha will give it more importance when analyzing your spending.",
+      "low_saving": "Your monthly saving amount is relatively low. Reaching the goal may take more time.",
+      "realistic": "Your goal setup looks realistic. Alpha will track your progress and help you stay consistent."
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "no_email": "No email available",
+    "goals": "Goals",
+    "expenses": "Expenses",
+    "member_since": "Member Since",
+    "settings": "Settings",
+    "personal_information": "Personal Information",
+    "notifications": "Notifications",
+    "privacy_security": "Privacy & Security",
+    "dark_mode": "Dark Mode",
+    "language": "Language",
+    "logout": "Log Out",
+    "edit_profile": "Edit Profile",
+    "full_name": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "birth_date": "Birth date",
+    "complete_personal_info": "Please complete all personal information.",
+    "updated_successfully": "Profile updated successfully.",
+    "coming_soon": "{feature} will be available soon.",
+    "logout_question": "Are you sure you want to log out?",
+    "english": "English",
+    "arabic": "arabic"
+  },
+  "chat": {
+    "welcome": "Hello, I'm Alpha. How can I help you today?",
+    "online_now": "Online now",
+    "input_hint": "Ask Alpha anything..."
+  },
+  "voice": {
+    "title": "Talk to Alpha",
+    "listening": "Listening...",
+    "tap_microphone": "Tap microphone",
+    "listening_description": "Speak clearly and Alpha will convert your voice into text.",
+    "idle_description": "Your voice message will appear below.",
+    "message_hint": "Your message will appear here",
+    "send": "Send"
+  },
+  "financial_analysis": {
+    "title": "Alpha Analysis",
+    "analysis_as_of": "Analysis as of {date}",
+    "listen_to_alpha": "Listen to Alpha",
+    "preparing_audio": "Preparing audio...",
+    "voice_analysis": "Voice financial analysis",
+    "audio_unavailable": "Audio is unavailable",
+    "view_transcript": "View voice transcript",
+    "analysis_summary": "Analysis Summary",
+    "no_summary": "No summary is available.",
+    "financial_indicators": "Financial Indicators",
+    "key_insights": "Key Insights",
+    "no_insights": "No insights are available.",
+    "recommendations": "Recommendations",
+    "no_recommendations": "No recommendations are available.",
+    "done": "Done",
+    "empty_title": "No analysis available",
+    "empty_description": "Generate a financial analysis to view your summary, insights and recommendations.",
+    "load_analysis": "Load Analysis",
+    "metrics": {
+      "savings": "Savings",
+      "needs": "Needs",
+      "wants": "Wants"
+    },
+    "status": {
+      "on_track": "On Track",
+      "warning": "Warning",
+      "critical": "Critical",
+      "unknown": "Unknown"
+    }
+  } ,
+
+  "receipt_input": {
+    "title": "Scan Receipt",
+    "listening": "Listening...",
+    "place_receipt": "Place the receipt inside the frame",
+    "describe_expense": "Describe the store, items and amounts",
+    "use_voice": "Or use your voice to add the expense",
+    "tap_mic_stop": "Tap the microphone to stop",
+    "tap_mic_more": "Tap the microphone again to add more speech",
+    "input_methods": "Gallery • Camera • Voice",
+    "review_voice_text": "Review and edit the recognized text",
+    "analyze_expense": "Analyze Expense",
+    "camera_open_failed": "Could not open the camera",
+    "capture_failed": "Could not capture receipt",
+    "flash_unavailable": "Flash is unavailable",
+    "no_camera_found": "No camera was found on this device",
+    "camera_not_initialized": "Camera is not initialized",
+    "analyzing_expense": "Analyzing expense..."
+  }
+  ,
+"receipt_review": {
+  "empty_title": "No receipt data found",
+  "empty_description": "Scan a receipt or use voice input to add an expense.",
+  "add_receipt": "Add Receipt",
+  "confirm": "Confirm",
+  "expense_added": "Expense added successfully",
+
+  "edit_store": "Edit Store",
+  "store_name": "Store name",
+  "save": "Save",
+
+  "select_category": "Select Category",
+
+  "edit_item": "Edit Item",
+  "item_name": "Item name",
+
+  "remove_item_title": "Remove item?",
+  "remove": "Remove",
+  "edit": "Edit",
+
+  "expense_recognized": "Expense recognized",
+  "receipt_recognized": "Receipt recognized",
+
+  "confidence": "Auto-extracted at {percentage}% confidence",
+
+  "review_description": "Review the data below and edit any field before confirming if needed.",
+
+  "store": "Store",
+  "date": "Date",
+  "suggested_category": "Suggested category",
+
+  "auto_ai": "Auto AI",
+
+  "extracted_items": "Extracted items ({count})",
+
+  "total": "Total",
+
+  "categories": {
+    "shopping": "Shopping",
+    "groceries": "Groceries",
+    "food": "Food",
+    "transport": "Transport",
+    "bills": "Bills",
+    "health": "Health",
+    "entertainment": "Entertainment",
+    "education": "Education",
+    "other": "Other"
+  }
+} ,
+
+"goal_date": {
+  "title": "Goal Date",
+  "description": "Choose a realistic target date for your goal.",
+  "year": "Year",
+  "selected_date": "Selected date",
+  "confirm_date": "Confirm Date",
+  "month": "Month"
+},
+
+"expense_date": {
+  "title": "Expense Date",
+  "description": "Choose the date when the expense happened.",
+  "year": "Year",
+  "selected_date": "Selected date",
+  "confirm_date": "Confirm Date",
+  "month": "Month"
+} ,
+
+"birth_date": {
+  "title": "Date of Birth",
+  "description": "Select your date of birth. You must be at least 18 years old.",
+  "year": "Year",
+  "selected_date": "Selected date",
+  "confirm_date": "Confirm Date",
+  "month": "Month"
+} ,
+"priority_card": {
+  "importance": "How important is this goal?"
+} ,
+
+"onboarding": {
+  "smart_financial_advisor": "SMART FINANCIAL ADVISOR",
+  "get_started": "Get Started",
+  "skip": "Skip",
+  "next": "Next",
+  "page_one": {
+    "title": "We Understand Your Behavior",
+    "description": "Alpha automatically tracks your spending patterns and uncovers the habits shaping your finances — with zero extra effort from you."
+  },
+  "page_two": {
+    "title": "Ask Before You Buy",
+    "description": "Before any purchase, ask Alpha: \"Does this fit my budget?\" and get an instant analysis of its impact on your financial goals."
+  },
+  "page_three": {
+    "title": "Reach Your Goals, Smartly",
+    "description": "Track your goals, compete with friends through fun challenges, and rest assured that your financial data stays fully protected and is never shared."
+  }
+},
+"smart_financial_advisor": "SMART FINANCIAL ADVISOR" ,
+"personal_info": {
+  "step": "Step {current} of {total}",
+  "title": "Personal Information",
+  "description": "Accurate data means sharper advice from Alpha",
+
+  "gender": "Gender",
+  "male": "Male",
+  "female": "Female",
+
+  "marital_status": "Marital Status",
+  "single": "Single",
+  "married": "Married",
+  "other": "Other",
+
+  "head_of_household": "Are you head of household?",
+  "contribute_expenses": "Do you contribute to family expenses?",
+  "university_student": "Are you university student?",
+
+  "yes": "Yes",
+  "no": "No",
+
+  "family_members": "Family members",
+
+  "next": "Next"
+},
+"setup_goal": {
+  "step": "Step {current} of {total}",
+  "title": "Set your first goal",
+  "description": "You can add more anytime later",
+
+  "choose_goal": "Choose your goal",
+  "goal_name": "Goal name",
+  "enter_goal_name": "Enter goal name",
+
+  "monthly_saving_amount": "Monthly saving amount",
+  "amount_per_month": "Amount per month",
+
+  "priority": "Priority",
+
+  "target_date": "Target date",
+  "select_target_date": "Select your target date",
+
+  "alpha_suggestion": "Alpha suggests",
+  "alpha_suggestion_description": "Choose a realistic monthly amount to reach your goal comfortably.",
+
+  "finish": "Finish"
+} ,
+"otp": {
+  "title": "Verification Code",
+  "subtitle": "We sent a 6-digit verification code to your email",
+
+  "invalid_code": "Please enter the full 6-digit code",
+  "verification_failed": "Verification failed",
+
+  "verified": "Verified successfully",
+  "account_verified": "Account verified successfully",
+
+  "dev_mode": "Dev Mode - Your OTP Code",
+  "tap_to_fill": "Tap to auto-fill",
+
+  "didnt_receive": "Didn't receive the code?",
+  "sending": "Sending...",
+  "resend_in": "Resend in 0:{seconds}",
+  "resend": "Resend Code",
+  "resend_unavailable": "Resend OTP is not available yet",
+
+  "verify": "Verify"
+} ,
+
+"create_account": {
+  "welcome": "LET'S GET STARTED",
+  "title": "Create your account",
+  "description": "One minute stands between you and real insight into your money",
+
+  "full_name": "Full name",
+  "enter_full_name": "Enter your full name",
+
+  "phone_number": "Phone number",
+  "phone_required": "Phone number is required",
+  "phone_invalid": "Enter a valid phone number",
+
+  "email": "Email",
+  "enter_email": "Enter your email",
+
+  "birth_date": "Date of birth",
+  "select_birth_date": "Select your birth date",
+  "birth_date_required": "Date of birth is required",
+
+  "password": "Password",
+  "password_hint": "8+ chars, upper, lower, number",
+
+  "password_length": "Password must be at least 8 characters",
+  "password_lower": "Password must contain a lowercase letter",
+  "password_upper": "Password must contain an uppercase letter",
+  "password_number": "Password must contain a number",
+
+  "agree": "I agree to the ",
+  "terms": "Terms of Service",
+  "and": " and ",
+  "privacy": "Privacy Policy",
+
+  "terms_required": "You must agree to the Terms of Service and Privacy Policy",
+
+  "create_account": "Create Account",
+
+  "verification_sent": "Verification code was sent to your email",
+  "account_failed": "Could not create account",
+
+  "already_have_account": "Already have an account?",
+  "sign_in": "Sign in" ,
+  
+  "name_required": "Full name is required",
+  "name_invalid": "Enter a valid full name",
+  "email_required": "Email is required",
+  "email_invalid": "Enter a valid email address"
+
+
+
+}
+,
+"login": {
+    "welcome_back": "Welcome back",
+    "description": "Log in to continue your financial journey",
+    "phone_number": "Phone number",
+    "phone_required": "Phone number is required",
+    "phone_invalid": "Enter a valid phone number",
+    "password": "Password",
+    "password_hint": "Minimum 6 characters",
+    "login": "Log In",
+    "invalid_credentials": "Invalid phone number or password"
+  } ,
+  "terms": {
+    "title": "Terms of Use, Privacy & General Provisions",
+    "last_updated": "Last updated: July 2026",
+    "commitment_title": "Our commitment to you",
+    "commitment_description": "Your financial data is protected using strong security controls. Alpha does not sell or share your private data with third parties for marketing purposes.",
+    "section_general": "General Framework and Definition",
+    "introduction_title": "1. Introduction and Definition",
+    "introduction_body": "Alpha is an independent technical system designed to support financial awareness and professional empowerment through smart analytical tools. These terms govern the relationship between Alpha and its users, define the rights and obligations of both parties, and are interpreted in accordance with the laws and regulations in force in the Hashemite Kingdom of Jordan and relevant international standards for data protection and digital innovation.",
+    "service_title": "2. Nature of Service and Responsibility",
+    "service_body": "Technical Advisory Services: Alpha provides financial insights and analyses based on data entered by the user. Alpha is not a financial intermediary, a licensed investment advisor, or a payment platform.\n\nDecision Autonomy: Alpha's analytical outputs are non-binding technical guidance. The user remains solely and finally responsible for all financial decisions.",
+    "section_data": "Data Sovereignty and Accountability",
+    "privacy_title": "3. Digital Sovereignty and Privacy",
+    "privacy_body": "Encryption and Privacy: Sensitive financial data is protected using appropriate encryption and security measures.\n\nMetadata: Alpha may process usage patterns and technical metadata solely for security, performance, and compliance purposes without compromising the content of protected financial data.\n\nNon-Disclosure: Alpha does not sell or share users' private data with third parties for marketing purposes.",
+    "accuracy_title": "4. Responsibility for Data Accuracy",
+    "accuracy_body": "Exclusive Responsibility: The user is solely responsible for the accuracy, adequacy, and completeness of the information they enter. Alpha processes submitted data as provided and is not required to independently verify its financial context or accuracy.\n\nDisclaimer: Alpha is not responsible for losses or damages resulting from inaccurate, incomplete, or misleading information entered by the user.",
+    "section_compliance": "Compliance and System Protection",
+    "property_title": "5. Intellectual Property and Legal Compliance",
+    "property_body": "Intellectual Property: All system components, including algorithms, code, interfaces, and designs, are the exclusive property of Alpha or its licensors. Copying, reverse engineering, tampering, or unauthorized use is prohibited.\n\nLegal Compliance: Users must use Alpha in accordance with applicable laws. Users bear full responsibility for unlawful activity, including fraud, money laundering, or terrorist financing. Alpha may report suspected violations to competent authorities where legally required.",
+    "disclaimer_title": "6. Disclaimer and Indemnification",
+    "disclaimer_body": "Third Parties: Alpha is not responsible for external fraud, indirect damages, third-party services, or loss of commercial opportunities resulting from use of the system.\n\nIndemnification: The user agrees to indemnify Alpha against legal claims, losses, or expenses arising from misuse of the system or breach of these terms.",
+    "section_contract": "Contractual Relationship Management",
+    "account_title": "7. Account Management and Withdrawal",
+    "account_body": "Data Updates: Users are responsible for keeping their contact and account information current. Alpha is not responsible for notices that are not received because of outdated or incorrect information.\n\nWithdrawal: Where applicable, users may terminate paid services after settling outstanding obligations and providing any legally required notice.\n\nContinuing Obligations: Account termination does not remove legal responsibility for actions taken before termination.\n\nPrice Changes: Alpha may adjust fees where permitted by law after providing prior notice. Continued use after the effective date constitutes acceptance, while the user retains the right to stop using the service before the change takes effect.",
+    "section_disputes": "Dispute Resolution",
+    "disputes_title": "8. Transparency and Disputes",
+    "disputes_body": "Transparency: Where an account is suspended, Alpha may provide a technical explanation and an appropriate grievance channel.\n\nResolution: Disputes should first be addressed through amicable mediation and may then proceed to independent technical arbitration where applicable.\n\nJurisdiction: The courts of the Hashemite Kingdom of Jordan have jurisdiction over disputes involving Alpha, subject to applicable laws.",
+    "section_governance": "Governance, Compliance and Technical Audit",
+    "audit_title": "9. Audit Trail and Compliance",
+    "audit_body": "Alpha may maintain a protected technical audit trail for interactive operations and system activities. The audit trail is used to verify system integrity, security, and compliance and is not intended to expose protected financial content. It may be made available to competent authorities when legally required.",
+    "kyc_title": "10. Identity Verification Protocols",
+    "kyc_body": "If Alpha later connects to financial wallets or processes highly sensitive financial data, it may apply legally approved Know Your Customer procedures. Users may be required to provide documents needed to verify identity and comply with anti-money-laundering and counter-terrorist-financing requirements before accessing advanced services.",
+    "dpia_title": "11. Data Protection Impact Assessment",
+    "dpia_body": "Alpha follows a privacy-by-design approach and may maintain an internal Data Protection Impact Assessment documenting cybersecurity and financial risks, safeguards, and mitigation measures. This assessment supports technical audits, compliance activities, and the protection of user rights.",
+    "development_title": "12. System Continuity and Development",
+    "development_body": "Alpha may periodically update its algorithms, security controls, interfaces, and operating methods to maintain performance and comply with evolving technical and regulatory standards. Continued use of the system after an update becomes effective constitutes acceptance of the updated technical specifications.",
+    "acceptance_title": "Acceptance and Updates",
+    "acceptance_body": "Using Alpha constitutes explicit acceptance of these terms. Alpha may update the terms periodically and will provide notice when required by applicable law. Users should review this page from time to time to remain informed of changes.",
+    "signature": "With sincere appreciation,\nAlpha Team",
+    "back_button": "Got it, go back"
+  } ,
+
+  "financial_setup": {
+  "step": "Step {current} of {total}",
+  "title": "Financial Information",
+  "description": "Accurate data means sharper advice from Alpha",
+  "money_relationship": "How do you describe your relationship with money?",
+  "saving_target": "Extra monthly saving target",
+  "enter_amount": "Enter amount",
+  "main_goal": "Main financial goal",
+  "household_income": "Average household income",
+  "enter_income": "Enter income",
+  "income_sources": "Income Sources",
+  "total_income": "Total Income: ",
+  "fixed_expenses": "Fixed Expenses",
+  "flexible_expenses": "Flexible Expenses",
+  "surplus": "Surplus: {amount} {currency}",
+  "deficit": "Deficit: {amount} {currency}",
+  "next": "Next",
+  "other_goal_name": "Other goal name",
+"enter_goal_name": "Enter goal name",
+"balanced": "Your income and expenses are balanced",
+  "options": {
+    "careful_spending": "Careful spending",
+    "balanced_spending": "Balanced spending",
+    "emotional_spending": "Emotional spending",
+    "saving": "Saving",
+    "debt_payment": "Debt payment",
+    "daily_budget": "Daily budget",
+    "regular_salary": "Regular Salary",
+    "temporary_job": "Temporary Job",
+    "family_support": "Family Support",
+    "external_support": "External Support",
+    "rent_income": "Rent Income",
+    "education": "Education",
+    "house_rent": "House Rent",
+    "loan": "Loan",
+    "bills": "Bills",
+    "treatment": "Treatment",
+    "food": "Food",
+    "transport": "Transport",
+    "clothes": "Clothes",
+    "entertainment": "Entertainment",
+    "personal_care": "Personal Care",
+    "other": "Other"
+  }
+}
+,
+ "complete_profile": "Complete your financial profile",
   "completion_message": "Your profile is {percentage}% complete. Complete the missing information to receive more accurate financial analysis.",
   "missing_personal_information": "Missing Personal Information",
   "missing_financial_information": "Missing Financial Information",
@@ -26,4 +621,5 @@
   "analysis_limited": "Limited",
   "analysis_estimated": "Estimated",
   "analysis_reliable": "Reliable"
+
 }
