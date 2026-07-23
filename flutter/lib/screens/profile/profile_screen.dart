@@ -12,6 +12,7 @@ import 'package:alpha_app/screens/profile/change_password_dialog.dart';
 import 'package:alpha_app/screens/profile/components/profile_completion_card.dart';
 import 'package:alpha_app/screens/profile/personal_info_screen.dart';
 import 'package:alpha_app/screens/profile/financial_profile_screen.dart';
+import 'package:alpha_app/screens/rating/rating_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -362,6 +363,23 @@ class ProfileScreen extends StatelessWidget {
                                     MaterialPageRoute(
                                       builder: (_) =>
                                           const FinancialAnalysisScreen(),
+                                    ),
+                                  );
+                                },
+                              ),
+                              _ProfileDivider(
+                                isDark: isDark,
+                              ),
+                              _ProfileMenuTile(
+                                icon: Icons.star_outline_rounded,
+                                title: 'Rate Us',
+                                isDark: isDark,
+                                screenW: screenW,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => const RatingScreen(),
                                     ),
                                   );
                                 },
