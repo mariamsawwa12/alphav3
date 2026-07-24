@@ -847,6 +847,111 @@
   "total": "الإجمالي",
   "edit": "تعديل",
   "no_receipt_data": "لم يتم العثور على بيانات للإيصال",
-  "go_back": "رجوع"
+  "go_back": "رجوع" ,
+
+  "review_transaction": "مراجعة المعاملة",
+  "transaction_progress": "المعاملة {current} من {total}",
+
+  "review_error": "خطأ في المراجعة",
+  "unable_to_open_transaction_review": "تعذر فتح صفحة مراجعة المعاملة.",
+  "back": "رجوع",
+
+  "start_financial_cycle_first": "ابدأ دورة مالية قبل إضافة المعاملات.",
+  "authentication_failed": "فشلت المصادقة. يرجى تسجيل الدخول مرة أخرى.",
+  "unable_to_save_transaction": "تعذر حفظ المعاملة. يرجى المحاولة مرة أخرى.",
+  "server_connection_failed": "تعذر الاتصال بالخادم. تحقق من الاتصال وحاول مرة أخرى.",
+
+  "movement_type": "نوع الحركة",
+  "occasional": "مرة واحدة",
+  "recurring": "متكررة",
+
+  "expense_type": "نوع المصروف",
+  "need": "احتياج",
+  "want": "رغبة",
+
+  "category": "الفئة",
+  "select_expense_type_first": "اختر نوع المصروف لعرض الفئات.",
+
+  "expense_name": "اسم المصروف",
+  "enter_expense_name": "أدخل اسم المصروف",
+
+ 
+  "enter_amount": "أدخل المبلغ",
+
+  "coverage_period": "فترة التكرار",
+  "weekly": "أسبوعي",
+  "monthly": "شهري",
+  "quarterly": "ربع سنوي",
+  "yearly": "سنوي",
+
+  "flexibility": "المرونة",
+  "fixed": "ثابت",
+  "flexible": "مرن",
+
+  "next_due_date": "تاريخ الاستحقاق القادم",
+  "select_due_date": "اختر تاريخ الاستحقاق",
+
+  "payment_method": "طريقة الدفع",
+
+  "transaction_date": "تاريخ المعاملة",
+  "select_transaction_date": "اختر تاريخ المعاملة",
+
+  "transaction_date_future_error": "التاريخ المستخرج في المستقبل. يرجى اختيار تاريخ معاملة صحيح.",
+
+  "transaction_type": "نوع المعاملة",
+  "expense": "مصروف",
+
+
+  "income_type_source": "نوع أو مصدر الدخل",
+  "enter_source": "أدخل المصدر",
+
+  "description": "الوصف",
+  "enter_description": "أدخل الوصف",
+
+  "income_date": "تاريخ الدخل",
+  "select_income_date": "اختر تاريخ الدخل",
+
+  "note_optional": "ملاحظة (اختياري)",
+  "add_note": "أضف ملاحظة",
+
+  "confirm_and_save": "تأكيد وحفظ",
+
+  "ai_analysis": "تحليل الذكاء الاصطناعي",
+  "confidence": "مستوى الثقة",
+
+  "status": "الحالة",
+
+  
+  "image": "صورة",
+  "manual": "يدوي",
+
+  "review_required": "تحتاج إلى مراجعة",
+  "ready_to_save": "جاهزة للحفظ",
+
+  "review_required_before_save": "المراجعة مطلوبة قبل الحفظ",
+
+  "expense_type_required": "نوع المصروف",
+  "expense_name_required": "اسم المصروف",
+  "payment_method_required": "طريقة الدفع",
+  "transaction_date_required": "تاريخ المعاملة",
+  "income_date_required": "تاريخ الدخل",
+  "coverage_period_required": "فترة التكرار",
+  "next_due_date_required": "تاريخ الاستحقاق القادم",
+  "currency_profile_missing": "عملة الملف المالي غير محددة",
+
+  "movement_type_required_message": "اختر نوع الحركة.",
+  "transaction_type_required_message": "اختر نوع المعاملة.",
+  "expense_type_required_message": "اختر نوع المصروف.",
+  "category_required_message": "اختر الفئة.",
+  "expense_name_required_message": "أدخل اسم المصروف.",
+  "enter_valid_amount": "أدخل مبلغًا صحيحًا.",
+  "payment_method_required_message": "اختر طريقة الدفع.",
+  "valid_transaction_date_required": "اختر تاريخ معاملة صحيح.",
+  "source_required_message": "اختر المصدر.",
+  "description_required_message": "أدخل الوصف.",
+  "coverage_period_required_message": "اختر فترة التكرار.",
+  "flexibility_required_message": "اختر مستوى المرونة.",
+  "valid_next_due_date_required": "اختر تاريخ استحقاق صحيح."
+
 
 }

@@ -855,6 +855,110 @@
   "total": "Total",
   "edit": "Edit",
   "no_receipt_data": "No receipt data found",
-  "go_back": "Go Back"
+  "go_back": "Go Back" ,
+ 
+  "review_transaction": "Review Transaction",
+  "transaction_progress": "Transaction {current} of {total}",
+
+  "review_error": "Review Error",
+  "unable_to_open_transaction_review": "Unable to open the transaction review.",
+  "back": "Back",
+
+  "start_financial_cycle_first": "Start a financial cycle before adding transactions.",
+  "authentication_failed": "Authentication failed. Please log in again.",
+  "unable_to_save_transaction": "Unable to save the transaction. Please try again.",
+  "server_connection_failed": "Unable to connect to the server. Check your connection and try again.",
+
+  "movement_type": "Movement Type",
+  "occasional": "Occasional",
+  "recurring": "Recurring",
+
+  "expense_type": "Expense Type",
+  "need": "Need",
+  "want": "Want",
+
+  "category": "Category",
+  "select_expense_type_first": "Select an expense type to view categories.",
+
+  "expense_name": "Expense Name",
+  "enter_expense_name": "Enter expense name",
+
+
+  "enter_amount": "Enter amount",
+
+  "coverage_period": "Coverage Period",
+  "weekly": "Weekly",
+  "monthly": "Monthly",
+  "quarterly": "Quarterly",
+  "yearly": "Yearly",
+
+  "flexibility": "Flexibility",
+  "fixed": "Fixed",
+  "flexible": "Flexible",
+
+  "next_due_date": "Next Due Date",
+  "select_due_date": "Select due date",
+
+  "payment_method": "Payment Method",
+
+  "transaction_date": "Transaction Date",
+  "select_transaction_date": "Select transaction date",
+
+  "transaction_date_future_error": "The extracted date is in the future. Please select a valid transaction date.",
+
+  "transaction_type": "Transaction Type",
+  "expense": "Expense",
+
+
+  "income_type_source": "Income Type or Source",
+  "enter_source": "Enter source",
+
+  "description": "Description",
+  "enter_description": "Enter description",
+
+  "income_date": "Income Date",
+  "select_income_date": "Select income date",
+
+  "note_optional": "Note (optional)",
+  "add_note": "Add a note",
+
+  "confirm_and_save": "Confirm and Save",
+
+  "ai_analysis": "AI Analysis",
+  "confidence": "Confidence",
+
+  "status": "Status",
+
+ 
+  "image": "Image",
+  "manual": "Manual",
+
+  "review_required": "Review required",
+  "ready_to_save": "Ready to save",
+
+  "review_required_before_save": "Review required before saving",
+
+  "expense_type_required": "Expense Type",
+  "expense_name_required": "Expense Name",
+  "payment_method_required": "Payment Method",
+  "transaction_date_required": "Transaction Date",
+  "income_date_required": "Income Date",
+  "coverage_period_required": "Coverage Period",
+  "next_due_date_required": "Next Due Date",
+  "currency_profile_missing": "Currency profile missing",
+
+  "movement_type_required_message": "Select a movement type.",
+  "transaction_type_required_message": "Select a transaction type.",
+  "expense_type_required_message": "Select an expense type.",
+  "category_required_message": "Select a category.",
+  "expense_name_required_message": "Enter an expense name.",
+  "enter_valid_amount": "Enter a valid amount.",
+  "payment_method_required_message": "Select a payment method.",
+  "valid_transaction_date_required": "Select a valid transaction date.",
+  "source_required_message": "Select a source.",
+  "description_required_message": "Enter a description.",
+  "coverage_period_required_message": "Select a coverage period.",
+  "flexibility_required_message": "Select flexibility.",
+  "valid_next_due_date_required": "Select a valid next due date."
 
 }
