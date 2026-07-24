@@ -76,9 +76,13 @@ class _AllocationReviewScreenState
           provider.previewData?['allocation'] ?? {};
     }
 
-    _needsBps = alloc['needsBps'] ?? 5000;
-    _wantsBps = alloc['wantsBps'] ?? 3000;
-    _savingsBps = alloc['savingsBps'] ?? 2000;
+    _needsBps = (alloc['needsBps'] ?? 5000).clamp(0, 10000);
+    _wantsBps = (alloc['wantsBps'] ?? 3000).clamp(
+      0,
+      10000 - _needsBps,
+    );
+
+    _updateSavingsAutomatically();
 
     _originalNeedsBps = _needsBps;
     _originalWantsBps = _wantsBps;
@@ -89,12 +93,35 @@ class _AllocationReviewScreenState
     setState(() {
       _needsBps = _originalNeedsBps;
       _wantsBps = _originalWantsBps;
-      _savingsBps = _originalSavingsBps;
+      _updateSavingsAutomatically();
     });
   }
 
   int get _totalBps =>
       _needsBps + _wantsBps + _savingsBps;
+
+  void _updateSavingsAutomatically() {
+    _savingsBps =
+        (10000 - _needsBps - _wantsBps).clamp(0, 10000);
+  }
+
+  void _updateNeeds(double value) {
+    final maxNeeds = 10000 - _wantsBps;
+
+    setState(() {
+      _needsBps = value.toInt().clamp(0, maxNeeds);
+      _updateSavingsAutomatically();
+    });
+  }
+
+  void _updateWants(double value) {
+    final maxWants = 10000 - _needsBps;
+
+    setState(() {
+      _wantsBps = value.toInt().clamp(0, maxWants);
+      _updateSavingsAutomatically();
+    });
+  }
 
   Future<void> _submit() async {
     if (_totalBps != 10000) {
@@ -449,6 +476,43 @@ class _AllocationReviewScreenState
                       height: screenH * 0.022,
                     ),
 
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: primaryColor.withOpacity(0.08),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: primaryColor.withOpacity(0.25),
+                        ),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.tune_rounded,
+                            color: primaryColor,
+                            size: 22,
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Text(
+                              'allocation_adjust_hint'.tr(),
+                              style: GoogleFonts.ibmPlexSansArabic(
+                                fontSize: 13,
+                                height: 1.5,
+                                color: subTextColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(
+                      height: screenH * 0.02,
+                    ),
+
                     _AllocationSliderCard(
                       label: 'needs'.tr(),
                       description:
@@ -459,12 +523,7 @@ class _AllocationReviewScreenState
                       isDark: isDark,
                       onChanged: buttonLoading
                           ? null
-                          : (value) {
-                              setState(() {
-                                _needsBps =
-                                    value.toInt();
-                              });
-                            },
+                          : _updateNeeds,
                     ),
 
                     SizedBox(
@@ -483,12 +542,7 @@ class _AllocationReviewScreenState
                       isDark: isDark,
                       onChanged: buttonLoading
                           ? null
-                          : (value) {
-                              setState(() {
-                                _wantsBps =
-                                    value.toInt();
-                              });
-                            },
+                          : _updateWants,
                     ),
 
                     SizedBox(
@@ -505,14 +559,8 @@ class _AllocationReviewScreenState
                           ? AppColors.darkSecondary
                           : AppColors.lightSecondary,
                       isDark: isDark,
-                      onChanged: buttonLoading
-                          ? null
-                          : (value) {
-                              setState(() {
-                                _savingsBps =
-                                    value.toInt();
-                              });
-                            },
+                      onChanged: null,
+                      isAutomatic: true,
                     ),
 
                     SizedBox(
@@ -663,6 +711,7 @@ class _AllocationSliderCard
   final Color color;
   final bool isDark;
   final ValueChanged<double>? onChanged;
+  final bool isAutomatic;
 
   const _AllocationSliderCard({
     required this.label,
@@ -672,6 +721,7 @@ class _AllocationSliderCard
     required this.color,
     required this.isDark,
     required this.onChanged,
+    this.isAutomatic = false,
   });
 
   @override
@@ -732,6 +782,28 @@ class _AllocationSliderCard
                   ),
                 ),
               ),
+              if (isAutomatic)
+                Container(
+                  margin: const EdgeInsetsDirectional.only(
+                    end: 8,
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: color.withOpacity(0.10),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    'automatic'.tr(),
+                    style: GoogleFonts.ibmPlexSansArabic(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w600,
+                      color: color,
+                    ),
+                  ),
+                ),
               Text(
                 '${(bpsValue / 100).toStringAsFixed(1)}%',
                 style:
@@ -770,7 +842,11 @@ class _AllocationSliderCard
               activeTrackColor: color,
               inactiveTrackColor:
                   borderColor.withOpacity(0.8),
+              disabledActiveTrackColor: color,
+              disabledInactiveTrackColor:
+                  borderColor.withOpacity(0.8),
               thumbColor: color,
+              disabledThumbColor: color,
               overlayColor:
                   color.withOpacity(0.12),
               trackHeight: 5,

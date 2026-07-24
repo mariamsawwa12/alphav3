@@ -1,5 +1,6 @@
 import 'package:alpha_app/core/utils/app_colors.dart';
 import 'package:alpha_app/models/home_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -24,7 +25,7 @@ class BucketCardsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildBucketCard(
-          title: 'Needs',
+          title: 'bucket_cards.needs'.tr(),
           bucket: buckets!.needs,
           icon: Icons.shopping_cart_outlined,
           color: isDark
@@ -33,7 +34,7 @@ class BucketCardsSection extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         _buildBucketCard(
-          title: 'Wants',
+          title: 'bucket_cards.wants'.tr(),
           bucket: buckets!.wants,
           icon: Icons.favorite_outline_rounded,
           color: isDark
@@ -42,7 +43,7 @@ class BucketCardsSection extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         _buildBucketCard(
-          title: 'Savings',
+          title: 'bucket_cards.savings'.tr(),
           bucket: buckets!.savings,
           icon: Icons.savings_outlined,
           color: isDark
@@ -81,12 +82,12 @@ class BucketCardsSection extends StatelessWidget {
         isDark ? AppColors.darkBorder : AppColors.lightBorder;
 
     final targetText = bucket.target != null
-        ? '${bucket.target!.toStringAsFixed(2)} JOD'
-        : 'Unavailable';
+        ? "${bucket.target!.toStringAsFixed(2)} ${'common.jod'.tr()}"
+        : 'common.not_available'.tr();
 
     final actualText = bucket.actual != null
-        ? '${bucket.actual!.toStringAsFixed(2)} JOD'
-        : 'Unavailable';
+        ? "${bucket.actual!.toStringAsFixed(2)} ${'common.jod'.tr()}"
+        : 'common.not_available'.tr();
 
     double progress = 0;
 
@@ -153,7 +154,7 @@ class BucketCardsSection extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
-                    bucket.status!.toUpperCase(),
+                    _translatedStatus(bucket.status!),
                     style: GoogleFonts.ibmPlexSansArabic(
                       color: statusColor,
                       fontSize: 9,
@@ -168,7 +169,7 @@ class BucketCardsSection extends StatelessWidget {
             children: [
               Expanded(
                 child: _buildMainDetail(
-                  label: 'Actual',
+                  label: 'bucket_cards.actual'.tr(),
                   value: actualText,
                   textColor: textColor,
                   subTextColor: subTextColor,
@@ -182,7 +183,7 @@ class BucketCardsSection extends StatelessWidget {
               const SizedBox(width: 16),
               Expanded(
                 child: _buildMainDetail(
-                  label: 'Target',
+                  label: 'bucket_cards.target'.tr(),
                   value: targetText,
                   textColor: textColor,
                   subTextColor: subTextColor,
@@ -194,7 +195,7 @@ class BucketCardsSection extends StatelessWidget {
           Row(
             children: [
               Text(
-                'Progress',
+                'bucket_cards.progress'.tr(),
                 style: GoogleFonts.ibmPlexSansArabic(
                   color: subTextColor,
                   fontSize: 11,
@@ -246,16 +247,16 @@ class BucketCardsSection extends StatelessWidget {
               bucket.reserved != null &&
               bucket.reserved! > 0)
             _buildSmallDetail(
-              'Reserved for commitments',
-              '${bucket.reserved!.toStringAsFixed(2)} JOD',
+              'bucket_cards.reserved'.tr(),
+              "${bucket.reserved!.toStringAsFixed(2)} ${'common.jod'.tr()}",
               subTextColor,
               textColor,
             ),
           if (!isSavings &&
               bucket.availableVariable != null)
             _buildSmallDetail(
-              'Available for variable',
-              '${bucket.availableVariable!.toStringAsFixed(2)} JOD',
+              'bucket_cards.available_variable'.tr(),
+              "${bucket.availableVariable!.toStringAsFixed(2)} ${'common.jod'.tr()}",
               subTextColor,
               textColor,
             ),
@@ -263,8 +264,8 @@ class BucketCardsSection extends StatelessWidget {
               bucket.plannedEmergencyFund != null &&
               bucket.plannedEmergencyFund! > 0)
             _buildSmallDetail(
-              'Emergency Fund',
-              '${bucket.plannedEmergencyFund!.toStringAsFixed(2)} JOD',
+              'bucket_cards.emergency_fund'.tr(),
+              "${bucket.plannedEmergencyFund!.toStringAsFixed(2)} ${'common.jod'.tr()}",
               subTextColor,
               textColor,
             ),
@@ -272,8 +273,8 @@ class BucketCardsSection extends StatelessWidget {
               bucket.plannedGoalAllocations != null &&
               bucket.plannedGoalAllocations! > 0)
             _buildSmallDetail(
-              'Goal Allocations',
-              '${bucket.plannedGoalAllocations!.toStringAsFixed(2)} JOD',
+              'bucket_cards.goal_allocations'.tr(),
+              "${bucket.plannedGoalAllocations!.toStringAsFixed(2)} ${'common.jod'.tr()}",
               subTextColor,
               textColor,
             ),
@@ -281,8 +282,8 @@ class BucketCardsSection extends StatelessWidget {
               bucket.unallocatedSavings != null &&
               bucket.unallocatedSavings! > 0)
             _buildSmallDetail(
-              'Unallocated Savings',
-              '${bucket.unallocatedSavings!.toStringAsFixed(2)} JOD',
+              'bucket_cards.unallocated_savings'.tr(),
+              "${bucket.unallocatedSavings!.toStringAsFixed(2)} ${'common.jod'.tr()}",
               subTextColor,
               textColor,
             ),
@@ -302,7 +303,7 @@ class BucketCardsSection extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      'Remaining',
+                      'bucket_cards.remaining'.tr(),
                       style: GoogleFonts.ibmPlexSansArabic(
                         color: subTextColor,
                         fontSize: 12,
@@ -310,7 +311,7 @@ class BucketCardsSection extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${bucket.remaining!.toStringAsFixed(2)} JOD',
+                    "${bucket.remaining!.toStringAsFixed(2)} ${'common.jod'.tr()}",
                     style: GoogleFonts.ibmPlexSansArabic(
                       color: color,
                       fontWeight: FontWeight.bold,
@@ -388,6 +389,23 @@ class BucketCardsSection extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _translatedStatus(String status) {
+    switch (status) {
+      case 'healthy':
+        return 'bucket_cards.status.healthy'.tr();
+      case 'moderate':
+        return 'bucket_cards.status.moderate'.tr();
+      case 'warning':
+        return 'bucket_cards.status.warning'.tr();
+      case 'critical':
+        return 'bucket_cards.status.critical'.tr();
+      case 'exceeded':
+        return 'bucket_cards.status.exceeded'.tr();
+      default:
+        return status;
+    }
   }
 
   Color _getStatusColor(

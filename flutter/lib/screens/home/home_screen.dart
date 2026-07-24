@@ -169,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
     if (onboardingProvider.errorMessage != null) {
       return _HomeErrorView(
         message:
-            onboardingProvider.errorMessage ?? "تعذر تحميل بيانات الملف المالي",
+            onboardingProvider.errorMessage ?? "home_extra.financial_profile_load_failed".tr(),
         isDark: isDark,
         onRetry: () => onboardingProvider.checkOnboardingStatus(),
       );
@@ -289,7 +289,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (approved == true && context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text("تم بدء دورتك المالية بنجاح",
+                          content: Text("home_extra.cycle_started_successfully".tr(),
                               style: GoogleFonts.ibmPlexSansArabic()),
                           backgroundColor: isDark
                               ? AppColors.darkPrimary
@@ -328,7 +328,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // 8. Home Error
     if (homeProvider.hasError) {
       return _HomeErrorView(
-        message: homeProvider.errorMessage ?? "تعذر تحميل لوحة التحكم",
+        message: homeProvider.errorMessage ?? "home_extra.dashboard_load_failed".tr(),
         isDark: isDark,
         onRetry: () => context.read<HomeProvider>().loadHomeData(),
       );
@@ -337,7 +337,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // 9. Dashboard data is ready
     if (homeData == null) {
       return _HomeErrorView(
-        message: "حدث خطأ غير متوقع",
+        message: "common.something_went_wrong".tr(),
         isDark: isDark,
         onRetry: () => context.read<HomeProvider>().loadHomeData(),
       );
@@ -382,7 +382,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(height: screenHeight * 0.03),
 
           // 5. Buckets (Needs, Wants, Savings)
-          SectionTitle(title: "Budgets & Savings", isDark: isDark),
+          SectionTitle(title: "home_extra.budgets_savings".tr(), isDark: isDark),
           SizedBox(height: screenHeight * 0.015),
           BucketCardsSection(buckets: homeData.buckets, isDark: isDark),
           SizedBox(height: screenHeight * 0.03),
@@ -416,7 +416,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: screenHeight * 0.03),
 
           // 8. Quick Actions Grid
-          SectionTitle(title: "Quick Actions", isDark: isDark),
+          SectionTitle(title: "home.quick_actions".tr(), isDark: isDark),
           SizedBox(height: screenHeight * 0.015),
           Consumer<ChallengeProvider>(
             builder: (context, challengeProvider, child) {
@@ -535,7 +535,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          "ابدأ دورة مالية أولًا.",
+          "home_extra.start_cycle_first".tr(),
           style: GoogleFonts.ibmPlexSansArabic(),
         ),
         backgroundColor: isDark ? AppColors.darkError : AppColors.lightError,
@@ -633,7 +633,7 @@ class _StartCycleCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "ابدأ دورتك المالية",
+                      "home_extra.start_cycle_title".tr(),
                       style: GoogleFonts.ibmPlexSansArabic(
                         color: textColor,
                         fontSize: 19,
@@ -642,7 +642,7 @@ class _StartCycleCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      "الملف المالي مكتمل. ابدأ دورة جديدة لتنظيم ميزانيتك وتتبع تقدمك.",
+                      "home_extra.start_cycle_description".tr(),
                       style: GoogleFonts.ibmPlexSansArabic(
                         color: subTextColor,
                         fontSize: 13,
@@ -659,21 +659,21 @@ class _StartCycleCard extends StatelessWidget {
             children: [
               _MiniFeature(
                 icon: Icons.account_balance_wallet_outlined,
-                label: "ميزانية أوضح",
+                label: "home_extra.clearer_budget".tr(),
                 color: primaryColor,
                 isDark: isDark,
               ),
               const SizedBox(width: 10),
               _MiniFeature(
                 icon: Icons.insights_outlined,
-                label: "متابعة ذكية",
+                label: "home_extra.smart_tracking".tr(),
                 color: secondaryColor,
                 isDark: isDark,
               ),
               const SizedBox(width: 10),
               _MiniFeature(
                 icon: Icons.emoji_events_outlined,
-                label: "تقدم مستمر",
+                label: "home_extra.continuous_progress".tr(),
                 color: accentColor,
                 isDark: isDark,
               ),
@@ -681,7 +681,7 @@ class _StartCycleCard extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           AppButton(
-            text: "بدء الدورة الآن",
+            text: "home_extra.start_cycle_now".tr(),
             onPressed: onStart,
             isLoading: isLoading,
             isDark: isDark,
@@ -769,7 +769,7 @@ class _BirthdayGreetingCard extends StatelessWidget {
     }
 
     final name = profileProvider.firstName.isEmpty
-        ? 'صديقنا'
+        ? 'home_extra.friend'.tr()
         : profileProvider.firstName;
 
     return Container(
@@ -820,7 +820,7 @@ class _BirthdayGreetingCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'عيد ميلاد سعيد يا $name',
+                  'home_extra.happy_birthday'.tr(namedArgs: {'name': name}),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.ibmPlexSansArabic(
@@ -831,7 +831,7 @@ class _BirthdayGreetingCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'نتمنى لك سنة جميلة ومليانة راحة ونجاحات صغيرة تكبر مع الوقت.',
+                  'home_extra.birthday_message'.tr(),
                   style: GoogleFonts.ibmPlexSansArabic(
                     color:
                         isDark ? AppColors.darkSubText : AppColors.lightSubText,
@@ -862,7 +862,7 @@ class _HomeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final displayName =
-        userName.trim().isEmpty ? "User" : userName.trim();
+        userName.trim().isEmpty ? "common.user".tr() : userName.trim();
 
     final firstLetter = displayName[0].toUpperCase();
 
@@ -959,7 +959,7 @@ class _HomeHeader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Hello, $displayName 👋",
+                  "home.hello_user".tr(namedArgs: {'name': displayName}),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.ibmPlexSansArabic(
@@ -970,7 +970,7 @@ class _HomeHeader extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  "Let's improve your finances today",
+                  "home.improve_finances_today".tr(),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.ibmPlexSansArabic(
@@ -1102,7 +1102,7 @@ class _HomeErrorView extends StatelessWidget {
             ),
             const SizedBox(height: 18),
             Text(
-              "Unable to load home data",
+              "home.unable_to_load".tr(),
               textAlign: TextAlign.center,
               style: GoogleFonts.ibmPlexSansArabic(
                 color: isDark ? AppColors.darkText : AppColors.lightText,
@@ -1123,7 +1123,7 @@ class _HomeErrorView extends StatelessWidget {
             SizedBox(
               width: 190,
               child: AppButton(
-                text: "Try Again",
+                text: "common.try_again".tr(),
                 onPressed: onRetry,
                 isDark: isDark,
                 height: 50,
@@ -1152,24 +1152,24 @@ class _FinancialProfileNeedsAttentionCard
 
   String _formatMissingFields() {
     if (missingFields.isEmpty) {
-      return "يرجى مراجعة ملفك المالي.";
+      return "home_extra.review_financial_profile".tr();
     }
 
     final map = {
-      'expectedMonthlyIncome': 'الدخل الشهري المتوقع',
-      'paymentDay': 'يوم استلام الدخل',
-      'currency': 'العملة',
+      'expectedMonthlyIncome': 'home_extra.missing_expected_income'.tr(),
+      'paymentDay': 'home_extra.missing_payment_day'.tr(),
+      'currency': 'home_extra.missing_currency'.tr(),
       'allocation_preferences':
-          'تفضيلات التوزيع (Allocation)',
+          'home_extra.missing_allocation_preferences'.tr(),
       'valid_allocation_bps':
-          'صحة التوزيع المئوي للنسب',
-      'financial_profiles': 'الملف المالي الأساسي',
+          'home_extra.missing_valid_allocation'.tr(),
+      'financial_profiles': 'home_extra.missing_financial_profile'.tr(),
     };
 
     final names =
         missingFields.map((f) => map[f] ?? f).join('، ');
 
-    return "البيانات الناقصة أو غير الصالحة: $names";
+    return "home_extra.missing_or_invalid_fields".tr(namedArgs: {'fields': names});
   }
 
   @override
@@ -1236,7 +1236,7 @@ class _FinancialProfileNeedsAttentionCard
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "الملف المالي غير مكتمل",
+                      "home_extra.financial_profile_incomplete".tr(),
                       style: GoogleFonts.ibmPlexSansArabic(
                         color: textColor,
                         fontSize: 19,
@@ -1275,7 +1275,7 @@ class _FinancialProfileNeedsAttentionCard
                 const SizedBox(width: 9),
                 Expanded(
                   child: Text(
-                    "إكمال البيانات يساعد ألفا على تقديم تحليل وتوصيات أدق.",
+                    "home_extra.complete_data_benefit".tr(),
                     style: GoogleFonts.ibmPlexSansArabic(
                       color: subTextColor,
                       fontSize: 12,
@@ -1288,7 +1288,7 @@ class _FinancialProfileNeedsAttentionCard
           ),
           const SizedBox(height: 18),
           AppButton(
-            text: "أكمل ملفك المالي",
+            text: "complete_profile".tr(),
             onPressed: onCompleteTap,
             isLoading: false,
             isDark: isDark,

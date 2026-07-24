@@ -583,10 +583,10 @@
   "additional_income_description": "Enter only income that is separate from your regular salary and expected every month.",
   "additional_monthly_amount": "Additional monthly amount",
 
-  "expected_monthly_income": "Expected Monthly Income",
+  "expected_monthly_income": "Expected Income",
   "expected_income_note": "This total includes your salary and separate recurring monthly income only.",
 
-  "salary_payment_day": "Salary Payment Day",
+  "salary_payment_day": "periodic Payment Day",
   "select_salary_payment_day": "Select Salary Payment Day",
   "salary_payment_day_description": "Choose the day you usually receive your salary.",
   "salary_payment_day_semantics": "Salary payment day",
@@ -621,9 +621,60 @@
   "income_sources": {
     "recurring_side_income": "Recurring Side Income"
   }
+,
 
+"cycle": {
+  "current_cycle": "Current Cycle",
+  "unavailable": "Unavailable",
+  "ends_today": "Ends today",
+  "days_left": "{days} days left" ,
+  "bucket_cards": {
+  "needs": "Needs",
+  "wants": "Wants",
+  "savings": "Savings",
+  "actual": "Actual",
+  "target": "Target",
+  "progress": "Progress",
+  "reserved": "Reserved for commitments",
+  "available_variable": "Available for variable",
+  "emergency_fund": "Emergency Fund",
+  "goal_allocations": "Goal Allocations",
+  "unallocated_savings": "Unallocated Savings",
+  "remaining": "Remaining"
+} ,
 
-
+"commitments": {
+  "summary": "Commitments Summary",
+  "total_reserved": "Total Reserved",
+  "upcoming": "Upcoming",
+  "overdue": "Overdue"
+} ,
+"dashboard_warnings": {
+  "title": "Important Notices",
+  "overdue_commitments": "You have overdue commitments that require your attention.",
+  "no_income": "No income has been recorded yet for the current cycle.",
+  "unexpected_expense": "Unexpected expenses may impact your planned savings.",
+  "notice": "Notice: {code}"
+} ,
+"goals_summary": {
+  "title": "Goals Summary",
+  "active_goals": "Active Goals",
+  "ready_to_complete": "Ready to Complete"
+} ,
+"income_overview": {
+  "title": "Income Overview",
+  "expected_income": "Expected Income",
+  "recorded_income": "Recorded Income",
+  "unexpected_income": "Includes {amount} {currency} unexpected income."
+} ,
+"safe_daily_spending": {
+  "title": "Safe to Spend Daily",
+  "no_data": "There is not enough data to calculate your safe daily spending.",
+  "no_cycle": "There is no active financial cycle.",
+  "no_income": "No income has been recorded."
+} ,
+"allocation_adjust_hint": "Drag the Needs and Wants sliders to adjust your allocation. Savings updates automatically so the total always remains 100%."
+}
 
 
 
@@ -748,5 +799,20 @@
     "missing_or_invalid_fields": "Missing or invalid information: {fields}",
     "financial_profile_incomplete": "Financial Profile Incomplete",
     "complete_data_benefit": "Completing your data helps Alpha provide more accurate analysis and recommendations."
-  }
+  } ,
+  "bucket_cards": {
+  "needs": "Needs",
+  "wants": "Wants",
+  "savings": "Savings",
+  "actual": "Actual",
+  "target": "Target",
+  "progress": "Progress",
+  "reserved": "Reserved for commitments",
+  "available_variable": "Available for variable",
+  "emergency_fund": "Emergency Fund",
+  "goal_allocations": "Goal Allocations",
+  "unallocated_savings": "Unallocated Savings",
+  "remaining": "Remaining"
+} ,
+"allocation_adjust_hint": "Drag the Needs and Wants sliders to adjust your allocation. Savings updates automatically so the total always remains 100%."
 }

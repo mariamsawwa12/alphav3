@@ -578,10 +578,10 @@
   "additional_income_description": "أدخل فقط مصادر الدخل المنفصلة عن راتبك الأساسي والمتوقعة بشكل شهري.",
   "additional_monthly_amount": "المبلغ الشهري الإضافي",
 
-  "expected_monthly_income": "إجمالي الدخل الشهري المتوقع",
+  "expected_monthly_income": "إجمالي الدخل المتوقع",
   "expected_income_note": "يشمل هذا الإجمالي الراتب الأساسي ومصادر الدخل الشهرية الإضافية فقط.",
 
-  "salary_payment_day": "يوم استلام الراتب",
+  "salary_payment_day": "دورية استلام الراتب",
   "select_salary_payment_day": "اختر يوم استلام الراتب",
   "salary_payment_day_description": "اختر اليوم الذي تستلم فيه راتبك عادةً.",
   "salary_payment_day_semantics": "يوم استلام الراتب",
@@ -737,5 +737,74 @@
     "missing_or_invalid_fields": "البيانات الناقصة أو غير الصالحة: {fields}",
     "financial_profile_incomplete": "الملف المالي غير مكتمل",
     "complete_data_benefit": "إكمال البيانات يساعد ألفا على تقديم تحليل وتوصيات أدق."
-  }
+  } ,
+
+  "cycle": {
+  "current_cycle": "الدورة الحالية",
+  "unavailable": "غير متوفر",
+  "ends_today": "تنتهي اليوم",
+  "days_left": "متبقي {days} يوم"
+} ,
+
+"bucket_cards": {
+  "needs": "الاحتياجات",
+  "wants": "الرغبات",
+  "savings": "المدخرات",
+  "actual": "الفعلي",
+  "target": "المستهدف",
+  "progress": "التقدم",
+  "reserved": "محجوز للالتزامات",
+  "available_variable": "المتاح للإنفاق المتغير",
+  "emergency_fund": "صندوق الطوارئ",
+  "goal_allocations": "تخصيص الأهداف",
+  "unallocated_savings": "مدخرات غير مخصصة",
+  "remaining": "المتبقي"
+} ,
+
+"commitments": {
+  "summary": "ملخص الالتزامات",
+  "total_reserved": "إجمالي المبلغ المحجوز",
+  "upcoming": "القادمة",
+  "overdue": "المتأخرة"
+} ,
+
+"dashboard_warnings": {
+  "title": "تنبيهات مهمة",
+  "overdue_commitments": "لديك التزامات متأخرة تحتاج إلى اهتمامك.",
+  "no_income": "لم يتم تسجيل أي دخل خلال الدورة المالية الحالية.",
+  "unexpected_expense": "قد تؤثر المصروفات غير المتوقعة على خطة الادخار الخاصة بك.",
+  "notice": "تنبيه: {code}"
+} ,
+"goals_summary": {
+  "title": "ملخص الأهداف",
+  "active_goals": "الأهداف النشطة",
+  "ready_to_complete": "جاهزة للإكمال"
+} ,
+"income_overview": {
+  "title": "ملخص الدخل",
+  "expected_income": "الدخل المتوقع",
+  "recorded_income": "الدخل المسجل",
+  "unexpected_income": "يتضمن {amount} {currency} كدخل غير متوقع."
+} ,
+"safe_daily_spending": {
+  "title": "الإنفاق الآمن اليومي",
+  "no_data": "لا تتوفر بيانات كافية لحساب الإنفاق اليومي الآمن.",
+  "no_cycle": "لا توجد دورة مالية نشطة.",
+  "no_income": "لم يتم تسجيل أي دخل."
+} ,
+"allocation_adjust_hint": "حرّك مؤشري الاحتياجات والرغبات لتعديل التوزيع، وسيتم تحديث الادخار تلقائياً بحيث يبقى المجموع دائماً 100٪.",
+"bucket_cards": {
+  "needs": "الاحتياجات",
+  "wants": "الرغبات",
+  "savings": "المدخرات",
+  "actual": "الفعلي",
+  "target": "المستهدف",
+  "progress": "التقدم",
+  "reserved": "محجوز للالتزامات",
+  "available_variable": "المتاح للإنفاق المتغير",
+  "emergency_fund": "صندوق الطوارئ",
+  "goal_allocations": "تخصيص الأهداف",
+  "unallocated_savings": "مدخرات غير مخصصة",
+  "remaining": "المتبقي"
+}
 }
