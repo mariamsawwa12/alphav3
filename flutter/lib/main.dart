@@ -156,7 +156,7 @@ class _MyAppState extends State<MyApp> {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             navigatorKey: navigatorKey,
-            home: MainNavigationScreen());
+            home: SplashScreen());
       },
     );
   }
