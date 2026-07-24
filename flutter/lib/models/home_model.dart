@@ -53,6 +53,20 @@ class HomeIncome {
   }
 }
 
+class HomeGoalAllocation {
+  final String name;
+  final double amount;
+
+  HomeGoalAllocation({required this.name, required this.amount});
+
+  factory HomeGoalAllocation.fromJson(Map<String, dynamic> json) {
+    return HomeGoalAllocation(
+      name: json['name']?.toString() ?? '',
+      amount: _toDouble(json['amount']) ?? 0,
+    );
+  }
+}
+
 class HomeBucket {
   final double? target;
   final double? actual;
@@ -65,6 +79,7 @@ class HomeBucket {
   // Specific to savings bucket
   final double? plannedEmergencyFund;
   final double? plannedGoalAllocations;
+  final List<HomeGoalAllocation>? goalAllocationsList;
   final double? unallocatedSavings;
 
   const HomeBucket({
@@ -77,6 +92,7 @@ class HomeBucket {
     this.status,
     this.plannedEmergencyFund,
     this.plannedGoalAllocations,
+    this.goalAllocationsList,
     this.unallocatedSavings,
   });
 
@@ -91,6 +107,11 @@ class HomeBucket {
       status: json['status']?.toString() ?? 'unavailable',
       plannedEmergencyFund: _toDouble(json['plannedEmergencyFund']),
       plannedGoalAllocations: _toDouble(json['plannedGoalAllocations']),
+      goalAllocationsList: json['goalAllocationsList'] != null
+          ? (json['goalAllocationsList'] as List)
+              .map((e) => HomeGoalAllocation.fromJson(e as Map<String, dynamic>))
+              .toList()
+          : null,
       unallocatedSavings: _toDouble(json['unallocatedSavings']),
     );
   }

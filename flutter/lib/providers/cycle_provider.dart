@@ -163,7 +163,7 @@ class CycleProvider extends ChangeNotifier {
       if (response != null && (response.statusCode == 200 || response.statusCode == 201)) {
         return true;
       }
-      _error = await ApiService.getErrorMessage(response!, fallback: "فشل حفظ التخصيص");
+      _error = await _handleSavingsError(response, "فشل حفظ التخصيص");
       notifyListeners();
       return false;
     } catch (e) {
@@ -174,6 +174,57 @@ class CycleProvider extends ChangeNotifier {
       }
       notifyListeners();
       return false;
+    }
+  }
+
+  Future<bool> updateSavingsAllocation(String cycleId, double emergencyFundPercentage) async {
+    try {
+      final response = await ApiService.put(
+        '/financial-cycles/$cycleId/savings-allocation',
+        body: {'emergencyFundPercentage': emergencyFundPercentage},
+      );
+      if (response != null && (response.statusCode == 200 || response.statusCode == 201)) {
+        return true;
+      }
+      _error = await _handleSavingsError(response, "فشل تحديث التخصيص");
+      notifyListeners();
+      return false;
+    } catch (e) {
+      if (e is ApiException) {
+        _error = e.message;
+      } else {
+        _error = "تعذر الاتصال بالخادم";
+      }
+      notifyListeners();
+      return false;
+    }
+  }
+
+  Future<String> _handleSavingsError(dynamic response, String fallback) async {
+    if (response == null) return fallback;
+    try {
+      final body = await ApiService.parseJson(response);
+      final code = body['error']?['code'] ?? body['code'];
+      switch (code) {
+        case 'SYSTEM_EMERGENCY_FUND_NOT_FOUND':
+          return "لم يتم العثور على صندوق طوارئ مرتبط بحسابك. أكمل إعداد صندوق الطوارئ أولًا.";
+        case 'DUPLICATE_SYSTEM_EMERGENCY_FUND':
+          return "يوجد صندوق طوارئ مرتبط بالحساب مسبقًا.";
+        case 'SAVINGS_ALLOCATION_NOT_FOUND':
+          return "أعد تحميل الملخص، وإذا لم يعد هناك تخصيص استخدم POST بدل PUT عند المحاولة التالية.";
+        case 'INVALID_PERCENTAGE':
+          return "يجب أن تكون النسبة بين 0 و100.";
+        case 'SAVINGS_EXCEEDED':
+        case 'SAVINGS_INVARIANT_VIOLATION':
+          return "مجموع تخصيصات الادخار يتجاوز المدخرات المخططة.";
+        case 'CYCLE_NOT_ACTIVE':
+        case 'INVALID_CYCLE_STATE':
+          return "لا يمكن تعديل تخصيص الادخار بعد إغلاق الدورة.";
+        default:
+          return await ApiService.getErrorMessage(response, fallback: fallback);
+      }
+    } catch (_) {
+      return fallback;
     }
   }
 

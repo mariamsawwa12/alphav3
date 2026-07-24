@@ -24,8 +24,14 @@ class _SavingsAllocationScreenState extends State<SavingsAllocationScreen> {
   double _efTarget = 0;
   double _efBalance = 0;
   double _plannedGoalAllocations = 0;
+  bool _isUpdate = false;
 
   bool _isSaving = false;
+
+  double toDouble(dynamic value) {
+    if (value is num) return value.toDouble();
+    return double.tryParse(value?.toString() ?? '') ?? 0.0;
+  }
 
   @override
   void initState() {
@@ -41,21 +47,26 @@ class _SavingsAllocationScreenState extends State<SavingsAllocationScreen> {
     
     if (summary != null) {
       setState(() {
-        _plannedSavings = (summary['plannedSavings'] ?? 0).toDouble();
-        _efTarget = (summary['emergencyFundTarget'] ?? 0).toDouble();
-        _efBalance = (summary['emergencyFundBalance'] ?? 0).toDouble();
+        _plannedSavings = toDouble(summary['plannedSavings']);
+        _efTarget = toDouble(summary['emergencyFundTarget']);
+        _efBalance = toDouble(summary['emergencyFundBalance']);
         
         final goalAllocationsList = summary['goalAllocations'] as List?;
         _plannedGoalAllocations = 0;
         if (goalAllocationsList != null) {
           for (var g in goalAllocationsList) {
-            _plannedGoalAllocations += (g['planned_amount'] ?? 0);
+            if (g['goal_type'] != 'emergency_fund' && g['is_system_managed'] != true) {
+              _plannedGoalAllocations += toDouble(g['planned_amount']);
+            }
           }
         }
         
         final existingSavings = summary['savingsAllocation'];
         if (existingSavings != null) {
-          _efPercentage = (existingSavings['emergency_fund_rate'] ?? 10).toDouble();
+          _efPercentage = toDouble(existingSavings['emergency_fund_rate'] ?? 10.0);
+          _isUpdate = true;
+        } else {
+          _isUpdate = false;
         }
         
         _isLoading = false;
@@ -79,7 +90,13 @@ class _SavingsAllocationScreenState extends State<SavingsAllocationScreen> {
 
     try {
       final cycleProvider = Provider.of<CycleProvider>(context, listen: false);
-      final success = await cycleProvider.linkSavingsAllocation(widget.cycleId, _efPercentage);
+      
+      bool success = false;
+      if (_isUpdate) {
+        success = await cycleProvider.updateSavingsAllocation(widget.cycleId, _efPercentage);
+      } else {
+        success = await cycleProvider.linkSavingsAllocation(widget.cycleId, _efPercentage);
+      }
       
       if (!mounted) return;
 
@@ -274,7 +291,7 @@ class _SavingsAllocationScreenState extends State<SavingsAllocationScreen> {
   }
 
   Widget _buildSummaryRow(String label, double amount, bool isDark, {bool highlight = false}) {
-    final displayAmount = amount / 100; // Assuming amounts are in base units (piasters)
+    final displayAmount = amount; 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

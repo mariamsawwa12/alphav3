@@ -3,15 +3,18 @@ import 'package:alpha_app/core/utils/app_colors.dart';
 import 'package:alpha_app/models/home_model.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:alpha_app/screens/planning/savings_allocation_screen.dart' as import_savings_allocation;
 
 class BucketCardsSection extends StatelessWidget {
   final HomeBuckets? buckets;
   final bool isDark;
+  final String? cycleId;
 
   const BucketCardsSection({
     Key? key,
     required this.buckets,
     required this.isDark,
+    this.cycleId,
   }) : super(key: key);
 
   @override
@@ -21,46 +24,30 @@ class BucketCardsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildBucketCard(
-          "Needs",
-          buckets!.needs,
-          Icons.shopping_cart_outlined,
-          context,
-        ),
+        if (buckets?.needs != null)
+          _buildBucketCard(context, "Needs", buckets!.needs!,
+              isDark: isDark, isSavings: false),
         const SizedBox(height: 12),
-        _buildBucketCard(
-          "Wants",
-          buckets!.wants,
-          Icons.favorite_outline,
-          context,
-        ),
+        if (buckets?.wants != null)
+          _buildBucketCard(context, "Wants", buckets!.wants!,
+              isDark: isDark, isSavings: false),
         const SizedBox(height: 12),
-        _buildBucketCard(
-          "Savings",
-          buckets!.savings,
-          Icons.savings_outlined,
-          context,
-          isSavings: true,
-        ),
+        if (buckets?.savings != null)
+          _buildBucketCard(context, "Savings", buckets!.savings!,
+              isDark: isDark, isSavings: true, cycleId: cycleId),
       ],
     );
   }
 
-  Widget _buildBucketCard(
-      String title, HomeBucket? bucket, IconData icon, BuildContext context,
-      {bool isSavings = false}) {
-    if (bucket == null) return const SizedBox.shrink();
-
+  Widget _buildBucketCard(BuildContext context, String title, HomeBucket bucket,
+      {required bool isDark, required bool isSavings, String? cycleId}) {
     final statusColor = _getStatusColor(bucket.status, isDark);
-    final targetText = bucket.target != null
-        ? "${bucket.target!.toStringAsFixed(2)} JOD"
-        : "Unavailable";
-    final actualText = bucket.actual != null
-        ? "${bucket.actual!.toStringAsFixed(2)} JOD"
-        : "Unavailable";
 
     double progress = 0.0;
-    if (bucket.usagePercent != null) {
+    if (isSavings && bucket.target != null && bucket.target! > 0) {
+      final unallocated = bucket.unallocatedSavings ?? 0.0;
+      progress = unallocated / bucket.target!;
+    } else if (bucket.usagePercent != null) {
       progress = bucket.usagePercent! / 100.0;
     } else if (bucket.actual != null &&
         bucket.target != null &&
@@ -69,7 +56,10 @@ class BucketCardsSection extends StatelessWidget {
     }
     progress = progress.clamp(0.0, 1.0);
 
-    return Container(
+    final String actualText = "JOD ${_formatAmount(bucket.actual ?? 0)}";
+    final String targetText = "JOD ${_formatAmount(bucket.target ?? 0)}";
+
+    Widget card = Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: isDark ? AppColors.darkCard : AppColors.lightCard,
@@ -83,7 +73,7 @@ class BucketCardsSection extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(icon, color: statusColor),
+              Icon(_getIconForTitle(title), color: statusColor),
               const SizedBox(width: 8),
               Text(
                 title,
@@ -114,12 +104,15 @@ class BucketCardsSection extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildDetail("Actual", actualText),
-              _buildDetail("Target", targetText),
-            ],
+          Directionality(
+            textDirection: TextDirection.ltr,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildDetail("Target", targetText),
+                _buildDetail("Actual", actualText),
+              ],
+            ),
           ),
           const SizedBox(height: 12),
           LinearPercentIndicator(
@@ -134,29 +127,35 @@ class BucketCardsSection extends StatelessWidget {
           const SizedBox(height: 12),
           if (!isSavings && bucket.reserved != null && bucket.reserved! > 0)
             _buildSmallDetail("Reserved for commitments:",
-                "${bucket.reserved!.toStringAsFixed(2)} JOD"),
+                "${_formatAmount(bucket.reserved!)} JOD"),
           if (!isSavings && bucket.availableVariable != null)
             _buildSmallDetail("Available for variable:",
-                "${bucket.availableVariable!.toStringAsFixed(2)} JOD"),
+                "${_formatAmount(bucket.availableVariable!)} JOD"),
           if (isSavings &&
               bucket.plannedEmergencyFund != null &&
               bucket.plannedEmergencyFund! > 0)
             _buildSmallDetail("Emergency Fund:",
-                "${bucket.plannedEmergencyFund!.toStringAsFixed(2)} JOD"),
+                "${_formatAmount(bucket.plannedEmergencyFund!)} JOD"),
           if (isSavings &&
               bucket.plannedGoalAllocations != null &&
-              bucket.plannedGoalAllocations! > 0)
+              bucket.plannedGoalAllocations! > 0) ...[
             _buildSmallDetail("Goal Allocations:",
-                "${bucket.plannedGoalAllocations!.toStringAsFixed(2)} JOD"),
+                "${_formatAmount(bucket.plannedGoalAllocations!)} JOD"),
+            if (bucket.goalAllocationsList != null && bucket.goalAllocationsList!.isNotEmpty)
+              ...bucket.goalAllocationsList!.map((g) => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: _buildSmallDetail("- ${g.name}", "${_formatAmount(g.amount)} JOD"),
+              )),
+          ],
           if (isSavings &&
               bucket.unallocatedSavings != null &&
               bucket.unallocatedSavings! > 0)
             _buildSmallDetail("Unallocated Savings:",
-                "${bucket.unallocatedSavings!.toStringAsFixed(2)} JOD"),
+                "${_formatAmount(bucket.unallocatedSavings!)} JOD"),
           const SizedBox(height: 8),
-          if (bucket.remaining != null)
+          if (!isSavings && bucket.remaining != null)
             Text(
-              "Remaining: ${bucket.remaining!.toStringAsFixed(2)} JOD",
+              "Remaining: ${_formatAmount(bucket.remaining!)} JOD",
               style: GoogleFonts.ibmPlexSansArabic(
                 color: isDark ? AppColors.darkText : AppColors.lightText,
                 fontWeight: FontWeight.bold,
@@ -166,6 +165,23 @@ class BucketCardsSection extends StatelessWidget {
         ],
       ),
     );
+
+    if (isSavings && cycleId != null && cycleId.isNotEmpty) {
+      return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) =>
+                  import_savings_allocation.SavingsAllocationScreen(cycleId: cycleId),
+            ),
+          );
+        },
+        child: card,
+      );
+    }
+
+    return card;
   }
 
   Widget _buildDetail(String label, String value) {
@@ -195,27 +211,37 @@ class BucketCardsSection extends StatelessWidget {
   Widget _buildSmallDetail(String label, String value) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 4.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            label,
-            style: GoogleFonts.ibmPlexSansArabic(
-              color: isDark ? AppColors.darkSubText : AppColors.lightSubText,
-              fontSize: 12,
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              label,
+              style: GoogleFonts.ibmPlexSansArabic(
+                color: isDark ? AppColors.darkSubText : AppColors.lightSubText,
+                fontSize: 12,
+              ),
             ),
-          ),
-          Text(
-            value,
-            style: GoogleFonts.ibmPlexSansArabic(
-              color: isDark ? AppColors.darkSubText : AppColors.lightSubText,
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
+            Text(
+              value,
+              style: GoogleFonts.ibmPlexSansArabic(
+                color: isDark ? AppColors.darkSubText : AppColors.lightSubText,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
+  }
+
+  String _formatAmount(double amount) {
+    if (amount == amount.toInt()) {
+      return amount.toInt().toString();
+    }
+    return amount.toStringAsFixed(2);
   }
 
   Color _getStatusColor(String? status, bool isDark) {
@@ -231,6 +257,18 @@ class BucketCardsSection extends StatelessWidget {
       case 'unavailable':
       default:
         return isDark ? Colors.grey[600]! : Colors.grey[400]!;
+    }
+  }
+
+  IconData _getIconForTitle(String title) {
+    switch (title.toLowerCase()) {
+      case 'needs':
+        return Icons.shopping_cart_outlined;
+      case 'wants':
+        return Icons.favorite_outline;
+      case 'savings':
+      default:
+        return Icons.savings_outlined;
     }
   }
 }

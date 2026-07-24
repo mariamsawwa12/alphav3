@@ -25,7 +25,6 @@ class GoalProvider extends ChangeNotifier {
   DateTime? targetDate;
 
   int priority = 5;
-  double emergencyPercentage = 10;
 
   // ================= STATE =================
 
@@ -89,7 +88,6 @@ class GoalProvider extends ChangeNotifier {
   // ================= CATEGORIES =================
 
   final List<String> goalCategories = [
-    "Emergency Fund",
     "Laptop",
     "Travel",
     "Car",
@@ -128,7 +126,7 @@ class GoalProvider extends ChangeNotifier {
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         final data = body['data'];
-        final items = data['items'] ?? data;
+        final items = (data is Map) ? (data['items'] ?? data) : data;
 
         if (items is List) {
           final loadedGoals = items
@@ -204,14 +202,7 @@ class GoalProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setEmergencyPercentage(
-    double value,
-  ) {
-    emergencyPercentage = value;
-    _errorMessage = null;
 
-    notifyListeners();
-  }
 
   void setDate(DateTime date) {
     targetDate = DateTime(
@@ -832,7 +823,6 @@ class GoalProvider extends ChangeNotifier {
     selectedCategory = null;
     targetDate = null;
     priority = 5;
-    emergencyPercentage = 10;
     _errorMessage = null;
     _isContributionManuallyEdited = false;
 

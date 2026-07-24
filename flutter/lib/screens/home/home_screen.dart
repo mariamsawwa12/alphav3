@@ -368,7 +368,11 @@ class _HomeScreenState extends State<HomeScreen> {
           // 5. Buckets (Needs, Wants, Savings)
           SectionTitle(title: "Budgets & Savings", isDark: isDark),
           SizedBox(height: screenHeight * 0.015),
-          BucketCardsSection(buckets: homeData.buckets, isDark: isDark),
+          BucketCardsSection(
+            buckets: homeData.buckets,
+            isDark: isDark,
+            cycleId: homeData.cycle?.id,
+          ),
           SizedBox(height: screenHeight * 0.03),
 
           // 6. Commitments Summary
@@ -475,6 +479,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (_) => const ChallengesScreen(),
+                ),
+              );
+            },
+            onEmergencyFund: () {
+              if (!requireOnboarding(context)) return;
+              if (!cycleProvider.hasActiveCycle || homeData.cycle?.id == null) {
+                _showNoCycleMessage(context, isDark);
+                return;
+              }
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => SavingsAllocationScreen(
+                    cycleId: homeData.cycle!.id!,
+                  ),
                 ),
               );
             },

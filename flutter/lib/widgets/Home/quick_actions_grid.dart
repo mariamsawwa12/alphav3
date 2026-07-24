@@ -9,6 +9,7 @@ class QuickActionsGrid extends StatelessWidget {
   final VoidCallback onAnalytics;
   final VoidCallback onScanReceipt;
   final VoidCallback onChallenges;
+  final VoidCallback onEmergencyFund;
 
   const QuickActionsGrid({
     super.key,
@@ -17,6 +18,7 @@ class QuickActionsGrid extends StatelessWidget {
     required this.onAnalytics,
     required this.onScanReceipt,
     required this.onChallenges,
+    required this.onEmergencyFund,
   });
 
   @override
@@ -61,6 +63,14 @@ class QuickActionsGrid extends StatelessWidget {
           iconColor: isDark ? AppColors.darkAccent : AppColors.lightAccent,
           isDark: isDark,
           onTap: onChallenges,
+        ),
+        QuickActionCard(
+          title: 'Emergency Fund',
+          subtitle: 'Manage safety net',
+          icon: Icons.health_and_safety_outlined,
+          iconColor: isDark ? Colors.tealAccent : Colors.teal,
+          isDark: isDark,
+          onTap: onEmergencyFund,
         ),
       ],
     );
