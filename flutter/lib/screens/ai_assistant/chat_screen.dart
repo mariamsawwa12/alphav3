@@ -50,6 +50,27 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
+  String _translateSuggestion(
+    String suggestion,
+  ) {
+    switch (suggestion) {
+      case 'How can I save money?':
+        return 'suggestions.save_money'.tr();
+
+      case 'Analyze my expenses':
+        return 'suggestions.analyze_expenses'.tr();
+
+      case 'Create saving plan':
+        return 'suggestions.create_plan'.tr();
+
+      case 'Reduce my spending':
+        return 'suggestions.reduce_spending'.tr();
+
+      default:
+        return suggestion;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final chatbotProvider =
@@ -175,16 +196,21 @@ class _ChatScreenState extends State<ChatScreen> {
                     context,
                     index,
                   ) {
-                    final suggestion =
+                    final String originalSuggestion =
                         chatbotProvider
                             .suggestions[index];
 
+                    final String displayedSuggestion =
+                        _translateSuggestion(
+                      originalSuggestion,
+                    );
+
                     return SuggestionChipWidget(
-                      text: suggestion,
+                      text: displayedSuggestion,
                       onTap: () {
                         chatbotProvider
                             .sendSuggestion(
-                          suggestion,
+                          originalSuggestion,
                         );
 
                         scrollToBottom();

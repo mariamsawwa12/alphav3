@@ -843,8 +843,8 @@
   "remove": "Remove",
   "expense_recognized": "Expense recognized ✓",
   "receipt_recognized": "Receipt recognized ✓",
-  "via_speech_ai": "via Speech Recognition + BASIRA AI",
-  "via_ocr_ai": "via OCR + BASIRA AI",
+  "via_speech_ai": "via Speech Recognition + Alpha AI",
+  "via_ocr_ai": "via OCR + Alpha AI",
   "auto_extracted_confidence": "Auto-extracted at {percentage}% confidence",
   "review_before_confirm": "Review the data below and edit any field before confirming if needed.",
   "store": "Store",
@@ -960,7 +960,34 @@
   "coverage_period_required_message": "Select a coverage period.",
   "flexibility_required_message": "Select flexibility.",
   "valid_next_due_date_required": "Select a valid next due date." ,
-  "expense_date.recurring_description": "Select the date for this recurring expense." 
+  "expense_date.recurring_description": "Select the date for this recurring expense." ,
+  "suggestions": {
+  "save_money": "How can I save money?",
+  "analyze_expenses": "Analyze my expenses",
+  "create_plan": "Create a saving plan",
+  "reduce_spending": "Reduce my spending"
+} ,
+"voice_record": {
+  "title": "Voice Transaction",
+  "description": "Describe your expense and Alpha will prepare it for review.",
+  "microphone_permission_required": "Microphone permission is required to record a transaction.",
+  "microphone_permission_denied": "Microphone permission was permanently denied. Open Settings to enable it.",
+  "open_settings": "Open Settings",
+  "unable_start_recording": "Unable to start voice recording.",
+  "empty_recording": "The recording is empty or too short. Please record again.",
+  "unable_analyze": "Unable to analyze the voice recording. Please try again.",
+  "recording": "Recording in progress",
+  "ready": "Ready to record",
+  "tip": "Mention the amount, category, and a short description for a more accurate result.",
+  "starting": "Starting...",
+  "start_recording": "Start Recording",
+  "cancel": "Cancel",
+  "stopping": "Stopping...",
+  "stop_analyze": "Stop and Analyze",
+  "analyzing": "Analyzing your voice...",
+  "analyzing_description": "Alpha is preparing the transaction details for review.",
+  "processing_failed": "The voice analysis response could not be processed."
+}
 
   
 

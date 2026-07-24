@@ -835,8 +835,8 @@
   "remove": "حذف",
   "expense_recognized": "تم التعرف على المصروف ✓",
   "receipt_recognized": "تم التعرف على الإيصال ✓",
-  "via_speech_ai": "باستخدام التعرف على الصوت + BASIRA AI",
-  "via_ocr_ai": "باستخدام OCR + BASIRA AI",
+  "via_speech_ai": "باستخدام التعرف على الصوت + Alpha AI",
+  "via_ocr_ai": "باستخدام OCR + Alpha AI",
   "auto_extracted_confidence": "تم الاستخراج تلقائياً بدقة {percentage}%",
   "review_before_confirm": "راجع البيانات أدناه وعدّل أي حقل قبل التأكيد إذا لزم الأمر.",
   "store": "المتجر",
@@ -952,7 +952,34 @@
   "coverage_period_required_message": "اختر فترة التكرار.",
   "flexibility_required_message": "اختر مستوى المرونة.",
   "valid_next_due_date_required": "اختر تاريخ استحقاق صحيح." ,
-  "expense_date.recurring_description": "اختر تاريخ هذا المصروف المتكرر."
+  "expense_date.recurring_description": "اختر تاريخ هذا المصروف المتكرر." ,
+  "suggestions": {
+  "save_money": "كيف يمكنني توفير المال؟",
+  "analyze_expenses": "حلّل مصروفاتي",
+  "create_plan": "أنشئ خطة ادخار",
+  "reduce_spending": "ساعدني على تقليل الإنفاق"
+} ,
+"voice_record": {
+  "title": "إضافة مصروف بالصوت",
+  "description": "صف المصروف وسيتولى ألفا تجهيزه للمراجعة.",
+  "microphone_permission_required": "يلزم السماح بالوصول إلى الميكروفون لتسجيل المصروف.",
+  "microphone_permission_denied": "تم رفض إذن الميكروفون بشكل دائم. افتح الإعدادات لتفعيله.",
+  "open_settings": "فتح الإعدادات",
+  "unable_start_recording": "تعذر بدء التسجيل الصوتي.",
+  "empty_recording": "التسجيل فارغ أو قصير جدًا، يرجى إعادة التسجيل.",
+  "unable_analyze": "تعذر تحليل التسجيل الصوتي، حاول مرة أخرى.",
+  "recording": "جاري التسجيل",
+  "ready": "جاهز للتسجيل",
+  "tip": "اذكر المبلغ والفئة ووصفًا مختصرًا للحصول على نتيجة أدق.",
+  "starting": "جارٍ البدء...",
+  "start_recording": "بدء التسجيل",
+  "cancel": "إلغاء",
+  "stopping": "جارٍ الإيقاف...",
+  "stop_analyze": "إيقاف وتحليل",
+  "analyzing": "جارٍ تحليل الصوت...",
+  "analyzing_description": "يقوم ألفا بتحضير تفاصيل العملية للمراجعة.",
+  "processing_failed": "تعذر معالجة نتيجة تحليل الصوت."
+}
 
 
 }
