@@ -522,16 +522,16 @@
   "balanced_spending": "إنفاق متوازن",
   "emotional_spending": "إنفاق عاطفي",
 
-  "regular_monthly_salary": "الراتب الشهري الأساسي",
-  "regular_salary_description": "أدخل الراتب الثابت المتوقع استلامه كل شهر.",
-  "enter_monthly_salary": "أدخل الراتب الشهري",
+  "regular_monthly_salary": "الراتب الأساسي",
+  "regular_salary_description": "أدخل الراتب الثابت المتوقع استلامه",
+  "enter_monthly_salary": "أدخل الراتب",
 
-  "additional_monthly_income": "الدخل الشهري الإضافي المتوقع",
-  "additional_income_description": "أدخل فقط مصادر الدخل المنفصلة عن راتبك الأساسي والمتوقعة بشكل شهري.",
-  "additional_monthly_amount": "المبلغ الشهري الإضافي",
+  "additional_monthly_income": "الدخل الإضافي المتوقع",
+  "additional_income_description": "أدخل فقط مصادر الدخل المنفصلة عن راتبك الأساسي والمتوقعة .",
+  "additional_monthly_amount": "المبلغ الإضافي",
 
   "expected_monthly_income": "إجمالي الدخل المتوقع",
-  "expected_income_note": "يشمل هذا الإجمالي الراتب الأساسي ومصادر الدخل الشهرية الإضافية فقط.",
+  "expected_income_note": "يشمل هذا الإجمالي الراتب الأساسي ومصادر الدخل الإضافية فقط.",
 
   "salary_payment_day": "دورية استلام الراتب",
   "select_salary_payment_day": "اختر يوم استلام الراتب",
