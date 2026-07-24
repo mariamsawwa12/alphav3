@@ -13,6 +13,7 @@ import 'package:alpha_app/screens/receipts/receipt_input_screen.dart';
 import 'package:alpha_app/screens/notifications/notifications_screen.dart';
 import 'package:alpha_app/providers/notification_provider.dart';
 import 'package:alpha_app/providers/challenge_provider.dart';
+import 'package:alpha_app/widgets/Home/birthday_dialog.dart';
 import 'package:alpha_app/widgets/Home/progress_card.dart';
 import 'package:alpha_app/widgets/Home/quick_actions_grid.dart';
 import 'package:alpha_app/providers/cycle_provider.dart';
@@ -47,6 +48,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool _didLoadDashboard = false;
+  bool _hasShownBirthdayDialog = false;
 
   @override
   void initState() {
@@ -141,6 +143,19 @@ class _HomeScreenState extends State<HomeScreen> {
     final cycleProvider = context.watch<CycleProvider>();
     final onboardingProvider = context.watch<OnboardingProvider>();
     final profileProvider = context.watch<ProfileProvider>();
+
+    if (profileProvider.hasProfile && profileProvider.isBirthdayToday && !_hasShownBirthdayDialog) {
+      _hasShownBirthdayDialog = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+          context: context,
+          builder: (_) => BirthdayDialog(
+            name: profileProvider.firstName.isEmpty ? 'صديقنا' : profileProvider.firstName,
+            isDark: isDark,
+          ),
+        );
+      });
+    }
 
     // 1. Onboarding Loading
     if (onboardingProvider.isLoading) {
