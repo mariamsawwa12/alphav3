@@ -9,7 +9,7 @@ class CyclePlanningRepository {
     const [rows] = await conn.execute(
       `SELECT id, user_id, name, goal_type, target_amount, current_balance, priority, status
          FROM goals
-        WHERE user_id = ? AND status = 'active' AND id IN (${placeholders})
+        WHERE user_id = ? AND status = 'active' AND is_system_managed = FALSE AND goal_type != 'emergency_fund' AND id IN (${placeholders})
         ORDER BY id ASC
           FOR UPDATE`,
       params
@@ -43,7 +43,17 @@ class CyclePlanningRepository {
         WHERE gca.cycle_id = ? AND fc.user_id = ? AND g.user_id = ? AND g.is_system_managed = FALSE AND g.goal_type != 'emergency_fund'`,
       [cycleId, userId, userId]
     );
-    return Number(rows[0].total);
+    let total = Number(rows[0].total);
+    if (total === 0) {
+      const [goalRows] = await exec.execute(
+        `SELECT COALESCE(SUM(planned_contribution), 0) AS total 
+         FROM goals 
+         WHERE user_id = ? AND status = 'active' AND is_system_managed = FALSE AND goal_type != 'emergency_fund'`,
+        [userId]
+      );
+      total = Number(goalRows[0].total);
+    }
+    return total;
   }
 
   static async getGoalCycleAllocations(connOrNull, userId, cycleId) {
@@ -59,6 +69,27 @@ class CyclePlanningRepository {
         ORDER BY gca.priority_snapshot ASC, gca.id ASC`,
       [cycleId, userId, userId]
     );
+    if (rows.length === 0) {
+      const [goalRows] = await exec.execute(
+        `SELECT g.id as goal_id, g.planned_contribution as planned_amount,
+                0 as actual_amount, g.priority as priority_snapshot,
+                g.name AS goal_name, g.goal_type
+         FROM goals g
+         WHERE g.user_id = ? AND g.status = 'active' AND g.is_system_managed = FALSE AND g.goal_type != 'emergency_fund'
+         ORDER BY g.priority ASC, g.id ASC`,
+        [userId]
+      );
+      return goalRows.map(r => ({
+        id: null,
+        cycle_id: cycleId,
+        goal_id: r.goal_id,
+        planned_amount: r.planned_amount,
+        actual_amount: r.actual_amount,
+        priority_snapshot: r.priority_snapshot,
+        goal_name: r.goal_name,
+        goal_type: r.goal_type
+      }));
+    }
     return rows;
   }
 
@@ -107,6 +138,28 @@ class CyclePlanningRepository {
       [cycleId, userId]
     );
     return rows[0] || null;
+  }
+
+  static async updateCycleSavingsAllocation(conn, userId, cycleId, savingsData) {
+    const {
+      savingsAmount,
+      emergencyFundAmount,
+      emergencyFundRate,
+      totalGoalAllocations,
+      unallocatedSavingsAmount
+    } = savingsData;
+    await conn.execute(
+      `UPDATE cycle_savings_allocations csa
+         JOIN financial_cycles fc ON fc.id = csa.cycle_id
+       SET csa.savings_amount = ?,
+           csa.emergency_fund_amount = ?,
+           csa.emergency_fund_rate = ?,
+           csa.total_goal_allocations = ?,
+           csa.unallocated_savings_amount = ?
+       WHERE csa.cycle_id = ? AND fc.user_id = ?`,
+      [savingsAmount, emergencyFundAmount, emergencyFundRate,
+       totalGoalAllocations, unallocatedSavingsAmount, cycleId, userId]
+    );
   }
 
   static async verifyGoalOwnership(conn, userId, goalId) {

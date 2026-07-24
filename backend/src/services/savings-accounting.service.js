@@ -24,12 +24,30 @@ class SavingsAccountingService {
     }
 
     const plan = rows[0];
+    let plannedGoalAllocations = Number(plan.total_goal_allocations || 0);
+    let unallocatedSavings = Number(plan.unallocated_savings_amount || 0);
+
+    if (plannedGoalAllocations === 0) {
+      const [goalsRows] = await db.execute(
+        `SELECT COALESCE(SUM(planned_contribution), 0) AS total 
+         FROM goals 
+         WHERE user_id = ? AND status = 'active' AND is_system_managed = FALSE AND goal_type != 'emergency_fund'`,
+        [userId]
+      );
+      const goalsTotal = Number(goalsRows[0].total);
+      if (goalsTotal > 0 && unallocatedSavings > 0) {
+        const effectiveAllocation = Math.min(goalsTotal, unallocatedSavings);
+        plannedGoalAllocations = effectiveAllocation;
+        unallocatedSavings -= effectiveAllocation;
+      }
+    }
+
     return {
       plannedSavings: Number(plan.savings_amount || 0),
       emergencyFundPercentage: Number(plan.emergency_fund_rate ?? 10),
       plannedEmergencyFund: Number(plan.emergency_fund_amount || 0),
-      plannedGoalAllocations: Number(plan.total_goal_allocations || 0),
-      unallocatedSavings: Number(plan.unallocated_savings_amount || 0)
+      plannedGoalAllocations,
+      unallocatedSavings
     };
   }
 
@@ -38,9 +56,9 @@ class SavingsAccountingService {
       `SELECT COALESCE(SUM(gt.amount), 0) AS total
        FROM goal_transactions gt
        JOIN goals g ON g.id = gt.goal_id
-       WHERE gt.user_id = ? AND gt.cycle_id = ? AND gt.transaction_type = 'contribution'
+       WHERE gt.user_id = ? AND ? = ? AND gt.transaction_type = 'contribution'
          AND (g.goal_type != 'emergency_fund' OR g.is_system_managed = FALSE)`,
-      [userId, cycleId]
+      [userId, cycleId, cycleId]
     );
     return Number(rows[0].total);
   }
@@ -50,9 +68,9 @@ class SavingsAccountingService {
       `SELECT COALESCE(SUM(gt.amount), 0) AS total
        FROM goal_transactions gt
        JOIN goals g ON g.id = gt.goal_id
-       WHERE gt.user_id = ? AND gt.cycle_id = ? AND gt.transaction_type = 'contribution'
+       WHERE gt.user_id = ? AND ? = ? AND gt.transaction_type = 'contribution'
          AND g.goal_type = 'emergency_fund' AND g.is_system_managed = TRUE`,
-      [userId, cycleId]
+      [userId, cycleId, cycleId]
     );
     return Number(rows[0].total);
   }

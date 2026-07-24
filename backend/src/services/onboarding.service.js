@@ -516,6 +516,18 @@ class OnboardingService {
       if (!user) {
         throw new AppError('User not found', 404, 'USER_NOT_FOUND');
       }
+      
+      if (goalTypeStr === 'emergency_fund') {
+        const [existingEF] = await conn.execute(
+          `SELECT id FROM goals WHERE user_id = ? AND goal_type = 'emergency_fund'`,
+          [userId]
+        );
+        if (existingEF.length > 0) {
+          throw new AppError('User already has an emergency fund', 409, 'DUPLICATE_SYSTEM_EMERGENCY_FUND');
+        }
+        normalizedGoal.isSystemManaged = true;
+      }
+      
       goalId = await OnboardingRepository.saveGoal(conn, userId, normalizedGoal);
       await conn.commit();
       trx = false;

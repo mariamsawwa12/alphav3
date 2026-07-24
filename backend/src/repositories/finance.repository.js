@@ -186,9 +186,9 @@ class FinanceRepository {
     try {
       const [result] = await connection.execute(
         `INSERT INTO goal_transactions
-         (user_id, goal_id, amount, transaction_type, related_goal_id, idempotency_key, request_hash, description, cycle_id, source_type, source_id, settlement_id)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [userId, goalId, amount, transactionType, relatedGoalId || null, idempotencyKey || null, requestHash || null, description || null, cycleId || null, sourceType || null, sourceId || null, settlementId || null]
+         (user_id, goal_id, amount, transaction_type, related_goal_id, idempotency_key, request_hash, description)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        [userId, goalId, amount, transactionType, relatedGoalId || null, idempotencyKey || null, requestHash || null, description || null]
       );
       const [rows] = await connection.execute(
         `SELECT id, goal_id, amount, transaction_type FROM goal_transactions WHERE id = ?`,

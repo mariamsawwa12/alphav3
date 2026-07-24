@@ -137,19 +137,50 @@ class CyclePlanningService {
       const actualGoalAllocationsTotal = await CyclePlanningRepository.getGoalCycleAllocationsTotal(conn, userId, cycleId);
 
       // System EF Capacity
-      const { SavingsAccountingService } = require('./savings-accounting.service');
-      const { emergencyFundBalance, emergencyFundTarget } = await SavingsAccountingService.getEmergencyFundBalance(userId);
+      const [efRows] = await conn.execute(
+        `SELECT current_balance, target_amount FROM goals 
+         WHERE user_id = ? AND goal_type = 'emergency_fund' AND is_system_managed = TRUE`,
+        [userId]
+      );
+
+      if (emergencyFundPercentage > 0 && efRows.length === 0) {
+        throw new AppError('System managed emergency fund not found.', 422, 'SYSTEM_EMERGENCY_FUND_NOT_FOUND');
+      }
+
+      const emergencyFundBalance = efRows.length > 0 ? Number(efRows[0].current_balance) : 0;
+      const emergencyFundTarget = efRows.length > 0 ? Number(efRows[0].target_amount) : 0;
+      
       const remainingEmergencyCapacity = Math.max(emergencyFundTarget - emergencyFundBalance, 0);
 
       // Calculation
-      const calculatedEmergencyFundAmount = Math.round(plannedSavings * (emergencyFundPercentage / 100));
-      const effectiveEmergencyFundAmount = Math.min(calculatedEmergencyFundAmount, remainingEmergencyCapacity);
+      const requestedEmergencyFundAmount = Math.round(plannedSavings * (emergencyFundPercentage / 100));
+      const effectiveEmergencyFundAmount = Math.min(requestedEmergencyFundAmount, remainingEmergencyCapacity);
 
       if (effectiveEmergencyFundAmount + actualGoalAllocationsTotal > plannedSavings) {
         throw new AppError('Emergency Fund and goal allocations exceed planned savings.', 422, 'SAVINGS_EXCEEDED');
       }
 
-      const unallocatedSavingsAmount = plannedSavings - effectiveEmergencyFundAmount - actualGoalAllocationsTotal;
+      const calculatedUnallocated = plannedSavings - effectiveEmergencyFundAmount - actualGoalAllocationsTotal;
+
+      if (savingsData.totalGoalAllocations !== undefined && Number(savingsData.totalGoalAllocations) !== actualGoalAllocationsTotal) {
+        throw new AppError(`Goal allocation total mismatch. Expected ${actualGoalAllocationsTotal}`, 422, 'GOAL_ALLOCATION_TOTAL_MISMATCH');
+      }
+
+      const clientSavingsAmount = savingsData.savingsAmount !== undefined ? Number(savingsData.savingsAmount) : plannedSavings;
+      const clientEmergencyFundAmount = savingsData.emergencyFundAmount !== undefined ? Number(savingsData.emergencyFundAmount) : effectiveEmergencyFundAmount;
+      const clientTotalGoalAllocations = savingsData.totalGoalAllocations !== undefined ? Number(savingsData.totalGoalAllocations) : actualGoalAllocationsTotal;
+      const clientUnallocated = savingsData.unallocatedSavingsAmount !== undefined ? Number(savingsData.unallocatedSavingsAmount) : calculatedUnallocated;
+
+      const calculatedTotal = clientEmergencyFundAmount + clientTotalGoalAllocations + clientUnallocated;
+      if (calculatedTotal !== clientSavingsAmount) {
+        throw new AppError(
+          'Savings allocation invariant violation: emergency_fund_amount + total_goal_allocations + unallocated_savings_amount must equal savings_amount',
+          422,
+          'SAVINGS_INVARIANT_VIOLATION'
+        );
+      }
+
+      const unallocatedSavingsAmount = calculatedUnallocated;
 
       const normalizedData = {
         savingsAmount: plannedSavings,
@@ -214,6 +245,123 @@ class CyclePlanningService {
       goalAllocations,
       savingsAllocation
     };
+  }
+
+  static async updateSavingsAllocation(userId, cycleId, savingsData) {
+    if (savingsData.userId !== undefined) {
+      throw new AppError('userId must not be provided in request payload', 400, 'INVALID_PAYLOAD');
+    }
+
+    const emergencyFundPercentage = savingsData.emergencyFundPercentage !== undefined ? Number(savingsData.emergencyFundPercentage) : 10;
+    if (isNaN(emergencyFundPercentage) || emergencyFundPercentage < 0 || emergencyFundPercentage > 100) {
+      throw new AppError('Invalid emergency fund percentage', 422, 'INVALID_PERCENTAGE');
+    }
+
+    const conn = await db.getConnection();
+    let transactionCommitted = false;
+    try {
+      await conn.beginTransaction();
+
+      const cycle = await CycleRepository.lockCycleById(conn, userId, cycleId);
+      if (!cycle) {
+        throw new AppError('Cycle not found or access denied.', 404, 'CYCLE_NOT_FOUND');
+      }
+      if (cycle.status !== 'open') {
+        throw new AppError('Cannot update savings in a closed cycle.', 409, 'CYCLE_NOT_OPEN');
+      }
+
+      const existingSavings = await CyclePlanningRepository.findCycleSavingsAllocationForUpdate(conn, userId, cycleId);
+      if (!existingSavings) {
+        throw new AppError('Savings allocation not found.', 404, 'SAVINGS_ALLOCATION_NOT_FOUND');
+      }
+
+      // Fetch snapshot to get planned savings
+      const snapshot = await CycleRepository.findSnapshotByCycleId(conn, userId, cycleId);
+      if (!snapshot) {
+        throw new AppError('Cycle allocation snapshot not found.', 404, 'SNAPSHOT_NOT_FOUND');
+      }
+      const plannedSavings = Number(snapshot.savings_target);
+
+      // Goal allocations
+      const actualGoalAllocationsTotal = await CyclePlanningRepository.getGoalCycleAllocationsTotal(conn, userId, cycleId);
+
+      // System EF Capacity
+      const [efRows] = await conn.execute(
+        `SELECT current_balance, target_amount FROM goals 
+         WHERE user_id = ? AND goal_type = 'emergency_fund' AND is_system_managed = TRUE`,
+        [userId]
+      );
+
+      if (emergencyFundPercentage > 0 && efRows.length === 0) {
+        throw new AppError('System managed emergency fund not found.', 422, 'SYSTEM_EMERGENCY_FUND_NOT_FOUND');
+      }
+
+      const emergencyFundBalance = efRows.length > 0 ? Number(efRows[0].current_balance) : 0;
+      const emergencyFundTarget = efRows.length > 0 ? Number(efRows[0].target_amount) : 0;
+      
+      const remainingEmergencyCapacity = Math.max(emergencyFundTarget - emergencyFundBalance, 0);
+
+      // Calculation
+      const requestedEmergencyFundAmount = Math.round(plannedSavings * (emergencyFundPercentage / 100));
+      const effectiveEmergencyFundAmount = Math.min(requestedEmergencyFundAmount, remainingEmergencyCapacity);
+
+      if (effectiveEmergencyFundAmount + actualGoalAllocationsTotal > plannedSavings) {
+        throw new AppError('Emergency Fund and goal allocations exceed planned savings.', 422, 'SAVINGS_EXCEEDED');
+      }
+
+      const calculatedUnallocated = plannedSavings - effectiveEmergencyFundAmount - actualGoalAllocationsTotal;
+
+      if (savingsData.totalGoalAllocations !== undefined && Number(savingsData.totalGoalAllocations) !== actualGoalAllocationsTotal) {
+        throw new AppError(`Goal allocation total mismatch. Expected ${actualGoalAllocationsTotal}`, 422, 'GOAL_ALLOCATION_TOTAL_MISMATCH');
+      }
+
+      const clientSavingsAmount = savingsData.savingsAmount !== undefined ? Number(savingsData.savingsAmount) : plannedSavings;
+      const clientEmergencyFundAmount = savingsData.emergencyFundAmount !== undefined ? Number(savingsData.emergencyFundAmount) : effectiveEmergencyFundAmount;
+      const clientTotalGoalAllocations = savingsData.totalGoalAllocations !== undefined ? Number(savingsData.totalGoalAllocations) : actualGoalAllocationsTotal;
+      const clientUnallocated = savingsData.unallocatedSavingsAmount !== undefined ? Number(savingsData.unallocatedSavingsAmount) : calculatedUnallocated;
+
+      const calculatedTotal = clientEmergencyFundAmount + clientTotalGoalAllocations + clientUnallocated;
+      if (calculatedTotal !== clientSavingsAmount) {
+        throw new AppError(
+          'Savings allocation invariant violation: emergency_fund_amount + total_goal_allocations + unallocated_savings_amount must equal savings_amount',
+          422,
+          'SAVINGS_INVARIANT_VIOLATION'
+        );
+      }
+
+      const unallocatedSavingsAmount = calculatedUnallocated;
+
+      const normalizedData = {
+        savingsAmount: plannedSavings,
+        emergencyFundAmount: effectiveEmergencyFundAmount,
+        emergencyFundRate: emergencyFundPercentage,
+        totalGoalAllocations: actualGoalAllocationsTotal,
+        unallocatedSavingsAmount
+      };
+
+      await CyclePlanningRepository.updateCycleSavingsAllocation(conn, userId, cycleId, normalizedData);
+
+      await conn.commit();
+      transactionCommitted = true;
+      
+      return { 
+        plannedSavings,
+        emergencyFundPercentage,
+        emergencyFundAmount: effectiveEmergencyFundAmount,
+        plannedGoalAllocations: actualGoalAllocationsTotal,
+        unallocatedSavingsAmount,
+        emergencyFundBalance,
+        emergencyFundTarget,
+        remainingEmergencyCapacity
+      };
+    } catch (err) {
+      if (!transactionCommitted) {
+        await conn.rollback();
+      }
+      throw err;
+    } finally {
+      conn.release();
+    }
   }
 }
 

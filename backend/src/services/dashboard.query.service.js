@@ -164,6 +164,14 @@ class DashboardQueryService {
 
     const emergencyFundBalance = savingsState.ef.emergencyFundBalance;
     const emergencyFundTarget = savingsState.ef.emergencyFundTarget;
+    
+    const { CyclePlanningRepository } = require('../repositories/cycle-planning.repository');
+    const rawGoalAllocations = await CyclePlanningRepository.getGoalCycleAllocations(null, userId, cycleId);
+    const goalAllocationsList = rawGoalAllocations.map(a => ({
+      name: a.goal_name,
+      amount: Number(a.planned_amount)
+    }));
+
     // Goals
     const [goalsList] = await db.execute(
       `SELECT id, name, target_amount as targetAmount, current_balance as currentBalance, status
@@ -240,23 +248,24 @@ class DashboardQueryService {
             status: calculateBucketStatus(wantsActual, wantsTarget, elapsedRatio)
           },
           savings: {
-            target: savingsTarget,
-            targetBps: savingsBps,
-            plannedSavings,
-            actual: savingsActual,
-            actualGoalContributions,
-            emergencyFundFundedThisCycle,
-            unallocatedSavingsActual,
-            plannedEmergencyFund,
-            plannedEmergencyFundRate,
-            plannedGoalAllocations,
-            unallocatedSavings,
-            emergencyFundBalance,
-            emergencyFundTarget,
-            remaining: savingsTarget - savingsActual,
-            usagePercent: savingsTarget > 0 ? (savingsActual / savingsTarget) * 100 : null,
-            status: calculateBucketStatus(savingsActual, savingsTarget, elapsedRatio)
-          }
+          target: savingsTarget,
+          targetBps: savingsBps,
+          plannedSavings: plannedSavings,
+          actual: savingsActual,
+          actualGoalContributions: actualGoalContributions,
+          emergencyFundFundedThisCycle: emergencyFundFundedThisCycle,
+          unallocatedSavingsActual: unallocatedSavingsActual,
+          plannedEmergencyFund: plannedEmergencyFund,
+          plannedEmergencyFundRate: plannedEmergencyFundRate,
+          plannedGoalAllocations: plannedGoalAllocations,
+          goalAllocationsList: goalAllocationsList,
+          unallocatedSavings: unallocatedSavings,
+          emergencyFundBalance: emergencyFundBalance,
+          emergencyFundTarget: emergencyFundTarget,
+          remaining: (savingsTarget !== null && savingsActual !== null) ? savingsTarget - savingsActual : null,
+          usagePercent: savingsTarget ? (savingsActual / savingsTarget) : 0,
+          status: savingsTarget === 0 ? 'unavailable' : 'healthy'
+        }
       },
       goals: {
         activeCount: activeCount,

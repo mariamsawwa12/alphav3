@@ -46,6 +46,12 @@ router.post(
   asyncHandler(CyclePlanningController.linkSavingsAllocation)
 );
 
+router.put(
+  '/:cycleId/savings-allocation',
+  authenticate,
+  asyncHandler(CyclePlanningController.updateSavingsAllocation)
+);
+
 router.get(
   '/:cycleId/planning-summary',
   authenticate,
