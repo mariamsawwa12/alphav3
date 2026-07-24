@@ -31,6 +31,7 @@ import 'package:alpha_app/widgets/dashboard/commitments_summary.dart';
 import 'package:alpha_app/widgets/dashboard/goals_summary.dart';
 import 'package:alpha_app/widgets/dashboard/dashboard_warnings.dart';
 import 'package:alpha_app/widgets/dashboard/section_title.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -505,10 +506,10 @@ class _HomeScreenState extends State<HomeScreen> {
           parent: BouncingScrollPhysics(),
         ),
         padding: EdgeInsets.fromLTRB(
-          screenWidth * 0.055,
-          20,
-          screenWidth * 0.055,
-          125,
+          screenWidth * 0.05,
+          16,
+          screenWidth * 0.05,
+          132,
         ),
         child: child,
       ),
@@ -535,46 +536,83 @@ class _StartCycleCard extends StatelessWidget {
   final VoidCallback onStart;
 
   const _StartCycleCard({
-    Key? key,
+    super.key,
     required this.isDark,
     required this.isLoading,
     required this.onStart,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = isDark
+        ? AppColors.darkPrimary
+        : AppColors.lightPrimary;
+
+    final secondaryColor = isDark
+        ? AppColors.darkSecondary
+        : AppColors.lightSecondary;
+
+    final accentColor =
+        isDark ? AppColors.darkAccent : AppColors.lightAccent;
+
+    final textColor =
+        isDark ? AppColors.darkText : AppColors.lightText;
+
+    final subTextColor = isDark
+        ? AppColors.darkSubText
+        : AppColors.lightSubText;
+
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : AppColors.lightCard,
-        borderRadius: BorderRadius.circular(24),
+        gradient: LinearGradient(
+          begin: AlignmentDirectional.topStart,
+          end: AlignmentDirectional.bottomEnd,
+          colors: isDark
+              ? [
+                  AppColors.darkCard,
+                  primaryColor.withOpacity(0.11),
+                  accentColor.withOpacity(0.06),
+                ]
+              : [
+                  Colors.white,
+                  secondaryColor.withOpacity(0.08),
+                  accentColor.withOpacity(0.09),
+                ],
+        ),
+        borderRadius: BorderRadius.circular(22),
         border: Border.all(
-          color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
-          width: 1,
+          color: secondaryColor.withOpacity(0.34),
         ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: const EdgeInsets.all(12),
+                width: 52,
+                height: 52,
                 decoration: BoxDecoration(
-                  color: isDark
-                      ? AppColors.darkPrimary.withOpacity(0.1)
-                      : AppColors.lightPrimary.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(16),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      primaryColor,
+                      secondaryColor,
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(17),
                 ),
-                child: Icon(
-                  Icons.play_circle_fill_rounded,
-                  color:
-                      isDark ? AppColors.darkPrimary : AppColors.lightPrimary,
-                  size: 28,
+                child: const Icon(
+                  Icons.play_arrow_rounded,
+                  color: Colors.white,
+                  size: 30,
                 ),
               ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 14),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -582,20 +620,17 @@ class _StartCycleCard extends StatelessWidget {
                     Text(
                       "ابدأ دورتك المالية",
                       style: GoogleFonts.ibmPlexSansArabic(
-                        color:
-                            isDark ? AppColors.darkText : AppColors.lightText,
-                        fontSize: 20,
+                        color: textColor,
+                        fontSize: 19,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 5),
                     Text(
-                      "الملف المالي مكتمل. ابدأ دورة جديدة لتنظيم ميزانيتك.",
+                      "الملف المالي مكتمل. ابدأ دورة جديدة لتنظيم ميزانيتك وتتبع تقدمك.",
                       style: GoogleFonts.ibmPlexSansArabic(
-                        color: isDark
-                            ? AppColors.darkSubText
-                            : AppColors.lightSubText,
-                        fontSize: 14,
+                        color: subTextColor,
+                        fontSize: 13,
                         height: 1.5,
                       ),
                     ),
@@ -604,18 +639,96 @@ class _StartCycleCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 24),
-          SizedBox(
-            width: double.infinity,
+          const SizedBox(height: 18),
+          Row(
+            children: [
+              _MiniFeature(
+                icon: Icons.account_balance_wallet_outlined,
+                label: "ميزانية أوضح",
+                color: primaryColor,
+                isDark: isDark,
+              ),
+              const SizedBox(width: 10),
+              _MiniFeature(
+                icon: Icons.insights_outlined,
+                label: "متابعة ذكية",
+                color: secondaryColor,
+                isDark: isDark,
+              ),
+              const SizedBox(width: 10),
+              _MiniFeature(
+                icon: Icons.emoji_events_outlined,
+                label: "تقدم مستمر",
+                color: accentColor,
+                isDark: isDark,
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          AppButton(
+            text: "بدء الدورة الآن",
+            onPressed: onStart,
+            isLoading: isLoading,
+            isDark: isDark,
             height: 54,
-            child: AppButton(
-              text: "بدء الدورة الآن",
-              onPressed: onStart,
-              isLoading: isLoading,
-              isDark: isDark,
-            ),
+            borderRadius: 14,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _MiniFeature extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final Color color;
+  final bool isDark;
+
+  const _MiniFeature({
+    required this.icon,
+    required this.label,
+    required this.color,
+    required this.isDark,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 8,
+          vertical: 10,
+        ),
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.10),
+          borderRadius: BorderRadius.circular(13),
+          border: Border.all(
+            color: color.withOpacity(0.24),
+          ),
+        ),
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              color: color,
+              size: 20,
+            ),
+            const SizedBox(height: 5),
+            Text(
+              label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: GoogleFonts.ibmPlexSansArabic(
+                color: isDark
+                    ? AppColors.darkText
+                    : AppColors.lightText,
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -733,135 +846,199 @@ class _HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final displayName = userName.trim().isEmpty ? "User" : userName.trim();
+    final displayName =
+        userName.trim().isEmpty ? "User" : userName.trim();
 
     final firstLetter = displayName[0].toUpperCase();
 
-    return Row(
-      children: [
-        Container(
-          width: 49,
-          height: 49,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color(0xFF34D399),
-                Color(0xFF14B8A6),
+    final textColor =
+        isDark ? AppColors.darkText : AppColors.lightText;
+
+    final subTextColor = isDark
+        ? AppColors.darkSubText
+        : AppColors.lightSubText;
+
+    final primaryColor = isDark
+        ? AppColors.darkPrimary
+        : AppColors.lightPrimary;
+
+    final secondaryColor = isDark
+        ? AppColors.darkSecondary
+        : AppColors.lightSecondary;
+
+    final accentColor =
+        isDark ? AppColors.darkAccent : AppColors.lightAccent;
+
+    final borderColor =
+        isDark ? AppColors.darkBorder : AppColors.lightBorder;
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(16, 16, 14, 16),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: AlignmentDirectional.topStart,
+          end: AlignmentDirectional.bottomEnd,
+          colors: isDark
+              ? [
+                  AppColors.darkCard,
+                  secondaryColor.withOpacity(0.13),
+                  accentColor.withOpacity(0.07),
+                ]
+              : [
+                  Colors.white,
+                  secondaryColor.withOpacity(0.08),
+                  accentColor.withOpacity(0.08),
+                ],
+        ),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(
+          color: secondaryColor.withOpacity(0.30),
+        ),
+        boxShadow: isDark
+            ? null
+            : [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.045),
+                  blurRadius: 20,
+                  offset: const Offset(0, 8),
+                ),
               ],
-            ),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Text(
-            firstLetter,
-            style: GoogleFonts.ibmPlexSansArabic(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-
-        SizedBox(width: 13),
-
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Hello, $displayName 👋",
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.ibmPlexSansArabic(
-                  color: isDark ? AppColors.darkText : AppColors.lightText,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                "Let's improve your finances today",
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.ibmPlexSansArabic(
-                  color:
-                      isDark ? AppColors.darkSubText : AppColors.lightSubText,
-                  fontSize: 11,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(width: 10),
-
-        Consumer<NotificationProvider>(
-          builder: (context, notificationProvider, _) {
-            final unreadCount = notificationProvider.unreadCount;
-            return InkWell(
-              onTap: onNotificationTap,
-              borderRadius: BorderRadius.circular(15),
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Container(
-                    width: 46,
-                    height: 46,
-                    decoration: BoxDecoration(
-                      color: isDark ? const Color(0xFF172624) : Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(
-                        color: isDark
-                            ? Colors.white.withOpacity(0.05)
-                            : Colors.black.withOpacity(0.05),
-                      ),
-                      boxShadow: isDark
-                          ? null
-                          : [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.04),
-                                blurRadius: 12,
-                                offset: const Offset(0, 5),
-                              ),
-                            ],
-                    ),
-                    child: const Icon(
-                      Icons.notifications_none_rounded,
-                      color: Color(0xFFF4C95D),
-                      size: 26,
-                    ),
-                  ),
-                  if (unreadCount > 0)
-                    Positioned(
-                      top: -2,
-                      right: -2,
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: isDark ? AppColors.darkBackground : AppColors.lightBackground,
-                            width: 2,
-                          ),
-                        ),
-                        child: Text(
-                          unreadCount > 9 ? '9+' : unreadCount.toString(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 52,
+            height: 52,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  primaryColor,
+                  secondaryColor,
                 ],
               ),
-            );
-          },
-        ),
-      ],
+              borderRadius: BorderRadius.circular(17),
+              boxShadow: [
+                BoxShadow(
+                  color: secondaryColor.withOpacity(0.22),
+                  blurRadius: 12,
+                  offset: const Offset(0, 5),
+                ),
+              ],
+            ),
+            child: Text(
+              firstLetter,
+              style: GoogleFonts.ibmPlexSansArabic(
+                color: Colors.white,
+                fontSize: 21,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const SizedBox(width: 13),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Hello, $displayName 👋",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.ibmPlexSansArabic(
+                    color: textColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  "Let's improve your finances today",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.ibmPlexSansArabic(
+                    color: subTextColor,
+                    fontSize: 11.5,
+                    height: 1.3,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 10),
+          Consumer<NotificationProvider>(
+            builder: (context, notificationProvider, _) {
+              final unreadCount =
+                  notificationProvider.unreadCount;
+
+              return InkWell(
+                onTap: onNotificationTap,
+                borderRadius: BorderRadius.circular(15),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Container(
+                      width: 46,
+                      height: 46,
+                      decoration: BoxDecoration(
+                        color: accentColor.withOpacity(0.13),
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(
+                          color: accentColor.withOpacity(0.34),
+                        ),
+                      ),
+                      child: Icon(
+                        Icons.notifications_none_rounded,
+                        color: accentColor,
+                        size: 25,
+                      ),
+                    ),
+                    if (unreadCount > 0)
+                      Positioned(
+                        top: -4,
+                        right: -4,
+                        child: Container(
+                          constraints: const BoxConstraints(
+                            minWidth: 20,
+                            minHeight: 20,
+                          ),
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: isDark
+                                ? AppColors.darkError
+                                : AppColors.lightError,
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: isDark
+                                  ? AppColors.darkCard
+                                  : Colors.white,
+                              width: 2,
+                            ),
+                          ),
+                          child: Text(
+                            unreadCount > 9
+                                ? '9+'
+                                : unreadCount.toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 9,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
@@ -928,25 +1105,14 @@ class _HomeErrorView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            ElevatedButton.icon(
-              onPressed: onRetry,
-              icon: const Icon(
-                Icons.refresh_rounded,
-              ),
-              label: const Text("Try Again"),
-              style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    isDark ? AppColors.darkPrimary : AppColors.lightPrimary,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 22,
-                  vertical: 13,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                    14,
-                  ),
-                ),
+            SizedBox(
+              width: 190,
+              child: AppButton(
+                text: "Try Again",
+                onPressed: onRetry,
+                isDark: isDark,
+                height: 50,
+                borderRadius: 14,
               ),
             ),
           ],
@@ -956,63 +1122,100 @@ class _HomeErrorView extends StatelessWidget {
   }
 }
 
-class _FinancialProfileNeedsAttentionCard extends StatelessWidget {
+class _FinancialProfileNeedsAttentionCard
+    extends StatelessWidget {
   final bool isDark;
   final List<String> missingFields;
   final VoidCallback onCompleteTap;
 
   const _FinancialProfileNeedsAttentionCard({
-    Key? key,
+    super.key,
     required this.isDark,
     required this.missingFields,
     required this.onCompleteTap,
-  }) : super(key: key);
+  });
 
   String _formatMissingFields() {
-    if (missingFields.isEmpty) return "يرجى مراجعة ملفك المالي.";
+    if (missingFields.isEmpty) {
+      return "يرجى مراجعة ملفك المالي.";
+    }
+
     final map = {
       'expectedMonthlyIncome': 'الدخل الشهري المتوقع',
       'paymentDay': 'يوم استلام الدخل',
       'currency': 'العملة',
-      'allocation_preferences': 'تفضيلات التوزيع (Allocation)',
-      'valid_allocation_bps': 'صحة التوزيع المئوي للنسب',
-      'financial_profiles': 'الملف المالي الأساسي'
+      'allocation_preferences':
+          'تفضيلات التوزيع (Allocation)',
+      'valid_allocation_bps':
+          'صحة التوزيع المئوي للنسب',
+      'financial_profiles': 'الملف المالي الأساسي',
     };
-    final names = missingFields.map((f) => map[f] ?? f).join('، ');
+
+    final names =
+        missingFields.map((f) => map[f] ?? f).join('، ');
+
     return "البيانات الناقصة أو غير الصالحة: $names";
   }
 
   @override
   Widget build(BuildContext context) {
+    final warningColor = isDark
+        ? AppColors.darkAccent
+        : AppColors.lightAccent;
+
+    final primaryColor = isDark
+        ? AppColors.darkPrimary
+        : AppColors.lightPrimary;
+
+    final textColor =
+        isDark ? AppColors.darkText : AppColors.lightText;
+
+    final subTextColor = isDark
+        ? AppColors.darkSubText
+        : AppColors.lightSubText;
+
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.darkCard : AppColors.lightCard,
-        borderRadius: BorderRadius.circular(24),
+        gradient: LinearGradient(
+          begin: AlignmentDirectional.topStart,
+          end: AlignmentDirectional.bottomEnd,
+          colors: isDark
+              ? [
+                  AppColors.darkCard,
+                  warningColor.withOpacity(0.09),
+                ]
+              : [
+                  Colors.white,
+                  warningColor.withOpacity(0.10),
+                ],
+        ),
+        borderRadius: BorderRadius.circular(22),
         border: Border.all(
-          color: Colors.orange.withOpacity(0.5),
-          width: 1,
+          color: warningColor.withOpacity(0.40),
         ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: const EdgeInsets.all(12),
+                width: 52,
+                height: 52,
                 decoration: BoxDecoration(
-                  color: Colors.orange.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(16),
+                  color: warningColor.withOpacity(0.14),
+                  borderRadius: BorderRadius.circular(17),
                 ),
-                child: const Icon(
-                  Icons.warning_rounded,
-                  color: Colors.orange,
-                  size: 28,
+                child: Icon(
+                  Icons.warning_amber_rounded,
+                  color: warningColor,
+                  size: 29,
                 ),
               ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 14),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1020,20 +1223,17 @@ class _FinancialProfileNeedsAttentionCard extends StatelessWidget {
                     Text(
                       "الملف المالي غير مكتمل",
                       style: GoogleFonts.ibmPlexSansArabic(
-                        color:
-                            isDark ? AppColors.darkText : AppColors.lightText,
-                        fontSize: 20,
+                        color: textColor,
+                        fontSize: 19,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 5),
                     Text(
                       _formatMissingFields(),
                       style: GoogleFonts.ibmPlexSansArabic(
-                        color: isDark
-                            ? AppColors.darkSubText
-                            : AppColors.lightSubText,
-                        fontSize: 14,
+                        color: subTextColor,
+                        fontSize: 13,
                         height: 1.5,
                       ),
                     ),
@@ -1042,16 +1242,43 @@ class _FinancialProfileNeedsAttentionCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 24),
-          SizedBox(
+          const SizedBox(height: 18),
+          Container(
             width: double.infinity,
-            height: 54,
-            child: AppButton(
-              text: "أكمل ملفك المالي",
-              onPressed: onCompleteTap,
-              isLoading: false,
-              isDark: isDark,
+            padding: const EdgeInsets.all(13),
+            decoration: BoxDecoration(
+              color: primaryColor.withOpacity(0.07),
+              borderRadius: BorderRadius.circular(14),
             ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.lightbulb_outline_rounded,
+                  color: primaryColor,
+                  size: 20,
+                ),
+                const SizedBox(width: 9),
+                Expanded(
+                  child: Text(
+                    "إكمال البيانات يساعد ألفا على تقديم تحليل وتوصيات أدق.",
+                    style: GoogleFonts.ibmPlexSansArabic(
+                      color: subTextColor,
+                      fontSize: 12,
+                      height: 1.4,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 18),
+          AppButton(
+            text: "أكمل ملفك المالي",
+            onPressed: onCompleteTap,
+            isLoading: false,
+            isDark: isDark,
+            height: 54,
+            borderRadius: 14,
           ),
         ],
       ),

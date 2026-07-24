@@ -29,6 +29,10 @@ import 'package:alpha_app/screens/home/home_screen.dart';
 
 import 'package:alpha_app/screens/main_screen.dart';
 import 'package:alpha_app/screens/onboarding/splash_screen.dart';
+import 'package:alpha_app/screens/profile/allocation_review_screen.dart';
+import 'package:alpha_app/screens/profile/financial_profile_screen.dart';
+import 'package:alpha_app/screens/profile/financial_setup_screen.dart';
+import 'package:alpha_app/screens/profile/onboarding_personal_info_screen.dart';
 import 'package:alpha_app/screens/profile/personal_info_screen.dart';
 import 'package:alpha_app/screens/receipts/receipt_review_screen.dart';
 
@@ -152,7 +156,7 @@ class _MyAppState extends State<MyApp> {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             navigatorKey: navigatorKey,
-            home: Login());
+            home: MainNavigationScreen());
       },
     );
   }

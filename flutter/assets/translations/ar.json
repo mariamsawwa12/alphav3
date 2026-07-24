@@ -439,26 +439,24 @@
 } ,
 "otp": {
   "title": "رمز التحقق",
-  "subtitle": "لقد أرسلنا رمز تحقق مكونًا من 6 أرقام إلى بريدك الإلكتروني",
-
-  "invalid_code": "يرجى إدخال رمز التحقق المكون من 6 أرقام",
-  "verification_failed": "فشل التحقق",
-
-  "verified": "تم التحقق بنجاح",
+  "description": "أرسلنا رمز تحقق مكوّنًا من 6 أرقام إلى بريدك الإلكتروني",
+  "enter_full_code": "يرجى إدخال رمز التحقق المكوّن من 6 أرقام كاملًا",
+  "verification_failed": "فشل التحقق من الرمز",
   "account_verified": "تم التحقق من الحساب بنجاح",
-
-  "dev_mode": "وضع المطور - رمز التحقق",
-  "tap_to_fill": "اضغط للتعبئة تلقائيًا",
-
-  "didnt_receive": "لم تستلم الرمز؟",
+  "verified": "تم التحقق بنجاح",
+  "onboarding_failed": "تعذر تحميل حالة إعداد الحساب",
+  "didnt_receive": "لم يصلك الرمز؟",
   "sending": "جارٍ الإرسال...",
-  "resend_in": "إعادة الإرسال خلال 0:{seconds}",
+  "resend_in": "إعادة الإرسال خلال",
   "resend": "إعادة إرسال الرمز",
   "resend_unavailable": "إعادة إرسال الرمز غير متاحة حاليًا",
-
-  "verify": "تحقق"
-} ,
+  "verify": "تحقق",
+  "dev_mode": "وضع التطوير - رمز التحقق",
+  "tap_to_fill": "اضغط لتعبئة الرمز تلقائيًا"
+},
 "create_account": {
+  "sanad_login": "تسجيل الدخول بواسطة سند",
+"sanad_coming_soon": "سيكون تسجيل الدخول بواسطة سند متاحًا قريبًا",
   "welcome": "لنبدأ",
   "title": "أنشئ حسابك",
   "description": "تفصلك دقيقة واحدة عن فهم أعمق لوضعك المالي",
@@ -507,13 +505,15 @@
 
 } ,
 "login": {
+  "or": "أو",
+"could_not_load_onboarding": "تعذر تحميل حالة الإعداد الأولي",
     "welcome_back": "مرحبًا بعودتك",
     "description": "سجّل الدخول لمتابعة رحلتك المالية",
     "phone_number": "رقم الهاتف",
     "phone_required": "رقم الهاتف مطلوب",
     "phone_invalid": "يرجى إدخال رقم هاتف صحيح",
     "password": "كلمة المرور",
-    "password_hint": "6 أحرف على الأقل",
+    "password_hint": "8 أحرف أو أكثر، حرف كبير، حرف صغير، ورقم",
     "login": "تسجيل الدخول",
     "invalid_credentials": "رقم الهاتف أو كلمة المرور غير صحيحة"
   } ,
@@ -559,51 +559,70 @@
     "back_button": "حسنًا، العودة"
   } ,
 
-  "financial_setup": {
-  "step": "الخطوة {current} من {total}",
-  "title": "المعلومات المالية",
-  "description": "كلما كانت بياناتك أدق، كانت نصائح ألفا أفضل",
-  "money_relationship": "كيف تصف علاقتك بالمال؟",
-  "saving_target": "هدف الادخار الشهري الإضافي",
-  "enter_amount": "أدخل المبلغ",
-  "main_goal": "الهدف المالي الرئيسي",
-  "household_income": "متوسط دخل الأسرة",
-  "enter_income": "أدخل الدخل",
-  "income_sources": "مصادر الدخل",
-  "total_income": "إجمالي الدخل: ",
+  
+
+"financial_step": "الخطوة 2 من 3",
+  "financial_information": "المعلومات المالية",
+  "financial_information_subtitle": "كلما كانت بياناتك أدق، كانت نصائح Alpha أكثر دقة",
+
+  "relationship_with_money": "كيف تصف علاقتك بالمال؟",
+  "careful_spending": "إنفاق بحذر",
+  "balanced_spending": "إنفاق متوازن",
+  "emotional_spending": "إنفاق عاطفي",
+
+  "regular_monthly_salary": "الراتب الشهري الأساسي",
+  "regular_salary_description": "أدخل الراتب الثابت المتوقع استلامه كل شهر.",
+  "enter_monthly_salary": "أدخل الراتب الشهري",
+
+  "additional_monthly_income": "الدخل الشهري الإضافي المتوقع",
+  "additional_income_description": "أدخل فقط مصادر الدخل المنفصلة عن راتبك الأساسي والمتوقعة بشكل شهري.",
+  "additional_monthly_amount": "المبلغ الشهري الإضافي",
+
+  "expected_monthly_income": "إجمالي الدخل الشهري المتوقع",
+  "expected_income_note": "يشمل هذا الإجمالي الراتب الأساسي ومصادر الدخل الشهرية الإضافية فقط.",
+
+  "salary_payment_day": "يوم استلام الراتب",
+  "select_salary_payment_day": "اختر يوم استلام الراتب",
+  "salary_payment_day_description": "اختر اليوم الذي تستلم فيه راتبك عادةً.",
+  "salary_payment_day_semantics": "يوم استلام الراتب",
+  "day": "اليوم",
+  "select_salary_day": "اختر يوم الراتب",
+
+  "fixed_monthly_expenses": "المصاريف الشهرية الثابتة",
+  "flexible_monthly_expenses": "المصاريف الشهرية المتغيرة",
+  "enter_monthly_amount_for": "أدخل المبلغ الشهري لـ {}",
+
+  "estimated_financial_summary": "الملخص المالي التقديري",
+  "estimated_summary_note": "ملاحظة: هذه القيم تقديرية ولا تمثل معاملات مالية فعلية.",
   "fixed_expenses": "المصاريف الثابتة",
-  "flexible_expenses": "المصاريف المرنة",
-  "surplus": "الفائض: {amount} {currency}",
-  "deficit": "العجز: {amount} {currency}",
+  "flexible_expenses": "المصاريف المتغيرة",
+  "total_estimated_expenses": "إجمالي المصاريف التقديرية",
+  "estimated_surplus": "الفائض التقديري",
+  "estimated_deficit": "العجز التقديري",
+
+  "main_financial_goal": "الهدف المالي الرئيسي",
+  "saving": "الادخار",
+  "debt_payment": "سداد الديون",
+  "daily_budget": "الميزانية اليومية",
+  "emergency_fund": "صندوق الطوارئ",
+  "other": "أخرى",
+
+  "optional_saving_target": "هدف ادخار شهري إضافي (اختياري)",
+  "saving_target_description": "هذا هدف شخصي ولا يُحتسب ضمن الدخل الشهري.",
+  "enter_optional_saving": "أدخل مبلغ الادخار الاختياري",
+
   "next": "التالي",
-  "other_goal_name": "اسم الهدف الآخر",
-"enter_goal_name": "أدخل اسم الهدف",
-"balanced": "الدخل والمصروفات متوازنة",
-  "options": {
-    "careful_spending": "إنفاق حذر",
-    "balanced_spending": "إنفاق متوازن",
-    "emotional_spending": "إنفاق عاطفي",
-    "saving": "الادخار",
-    "debt_payment": "سداد الديون",
-    "daily_budget": "الميزانية اليومية",
-    "regular_salary": "راتب منتظم",
-    "temporary_job": "عمل مؤقت",
-    "family_support": "دعم عائلي",
-    "external_support": "دعم خارجي",
-    "rent_income": "دخل من الإيجار",
-    "education": "التعليم",
-    "house_rent": "إيجار المنزل",
-    "loan": "قرض",
-    "bills": "الفواتير",
-    "treatment": "العلاج",
-    "food": "الطعام",
-    "transport": "المواصلات",
-    "clothes": "الملابس",
-    "entertainment": "الترفيه",
-    "personal_care": "العناية الشخصية",
-    "other": "أخرى"
+
+  "income_sources": {
+    "recurring_side_income": "دخل جانبي متكرر"
   }
-} ,
+,
+
+
+
+
+
+  
 "complete_profile": "أكمل ملفك المالي",
 "completion_message": "ملفك الشخصي مكتمل بنسبة {percentage}%. أكمل المعلومات الناقصة للحصول على تحليل مالي أكثر دقة.",
 "missing_personal_information": "معلومات شخصية ناقصة",
@@ -614,6 +633,83 @@
 "profile_complete": "الملف مكتمل",
 "analysis_limited": "محدود",
 "analysis_estimated": "مُقدَّر",
-"analysis_reliable": "موثوق"
+"analysis_reliable": "موثوق" ,
+"forgot_password": {
+  "title": "نسيت كلمة المرور؟",
+  "description": "أدخل بريدك الإلكتروني لاستلام رمز التحقق وإعادة تعيين كلمة المرور.",
+  "email": "البريد الإلكتروني",
+  "email_hint": "أدخل بريدك الإلكتروني",
+  "email_required": "البريد الإلكتروني مطلوب",
+  "email_invalid": "أدخل بريدًا إلكترونيًا صحيحًا",
+  "send_code": "إرسال الرمز",
+  "code_sent": "إذا كان الحساب موجودًا، فقد تم إرسال رمز التحقق."
+} ,
+"forgot_password_otp": {
+  "title": "رمز التحقق",
+  "description": "يرجى إدخال رمز التحقق المكون من 6 أرقام الذي أُرسل إلى {email}",
+  "verify": "تحقق"
+},
+"reset_password": {
+  "title": "إعادة تعيين كلمة المرور",
+  "description": "أنشئ كلمة مرور جديدة وقوية لحسابك.",
+  "new_password": "كلمة المرور الجديدة",
+  "enter_new_password": "أدخل كلمة المرور الجديدة",
+  "confirm_password": "تأكيد كلمة المرور الجديدة",
+  "confirm_new_password": "أعد إدخال كلمة المرور الجديدة",
+  "password_hint": "استخدم 8 أحرف على الأقل، تتضمن حرفًا كبيرًا وحرفًا صغيرًا ورقمًا.",
+  "both_required": "يجب تعبئة حقلي كلمة المرور",
+  "passwords_not_match": "كلمتا المرور غير متطابقتين",
+  "password_invalid": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل، وأن تحتوي على حرف كبير وحرف صغير ورقم",
+  "reset_success": "تمت إعادة تعيين كلمة المرور بنجاح",
+  "button": "إعادة تعيين كلمة المرور"
+}
+,
+"allocation_review": "مراجعة توزيع الدخل",
+  "allocation_review_subtitle": "راجع وعدّل طريقة توزيع دخلك.",
+  "allocation_total_must_equal_100": "يجب أن يساوي إجمالي التوزيع 100% تمامًا.",
+  "income": "الدخل",
+  "tier": "الفئة",
+  "source": "المصدر",
+  "customized": "مخصص",
+  "yes": "نعم",
+  "no": "لا",
+  "not_available": "غير متوفر",
+  "needs": "الاحتياجات",
+  "needs_description": "المصاريف الشهرية الأساسية",
+  "wants": "الرغبات",
+  "wants_description": "نفقات نمط الحياة والمصاريف الاختيارية",
+  "savings": "الادخار",
+  "savings_description": "المدخرات والأهداف المستقبلية",
+  "total_allocation": "إجمالي التوزيع",
+  "reset": "إعادة ضبط",
+  "approve": "اعتماد",
+  "jod": "د.أ" ,
+  "main_navigation": {
+  "image_recovery_failed": "تعذر استعادة الصورة: {message}",
+  "start_cycle_first": "ابدأ دورة مالية قبل إضافة الفواتير."
+} ,
 
+"navigation": {
+  "home": "الرئيسية",
+  "expenses": "المصروفات",
+  "ai": "ألفا",
+  "goals": "الأهداف",
+  "profile": "حسابي"
+} ,
+"savings_allocation": {
+  "load_failed": "تعذر تحميل بيانات التخطيط",
+  "title": "تخطيط المدخرات",
+  "description": "وزّع مدخرات هذه الدورة بطريقة تناسب أهدافك.",
+  "emergency_fund_rate": "نسبة صندوق الطوارئ",
+  "emergency_fund_description": "حدد النسبة من إجمالي المدخرات التي تريد تخصيصها لصندوق الطوارئ.",
+  "selected_rate": "النسبة المختارة",
+  "allocation_summary": "ملخص التوزيع",
+  "planned_savings": "إجمالي المدخرات المتوقعة",
+  "emergency_fund": "صندوق الطوارئ",
+  "other_goals": "أهداف أخرى",
+  "unallocated": "المدخرات غير المخصصة",
+  "fund_limit": "تم تحديد الحد الأقصى لصندوق الطوارئ لأنه سيصل إلى هدفه النهائي.",
+  "invalid_allocation": "النسبة الحالية أكبر من المدخرات المتاحة بعد تخصيص الأهداف الأخرى.",
+  "confirm": "اعتماد والبدء"
+}
 }

@@ -441,27 +441,24 @@
 } ,
 "otp": {
   "title": "Verification Code",
-  "subtitle": "We sent a 6-digit verification code to your email",
-
-  "invalid_code": "Please enter the full 6-digit code",
+  "description": "We sent a 6-digit verification code to your email",
+  "enter_full_code": "Please enter the full 6-digit code",
   "verification_failed": "Verification failed",
-
-  "verified": "Verified successfully",
   "account_verified": "Account verified successfully",
-
-  "dev_mode": "Dev Mode - Your OTP Code",
-  "tap_to_fill": "Tap to auto-fill",
-
+  "verified": "Verified successfully",
+  "onboarding_failed": "Could not load onboarding status",
   "didnt_receive": "Didn't receive the code?",
   "sending": "Sending...",
-  "resend_in": "Resend in 0:{seconds}",
+  "resend_in": "Resend in",
   "resend": "Resend Code",
   "resend_unavailable": "Resend OTP is not available yet",
-
-  "verify": "Verify"
-} ,
-
+  "verify": "Verify",
+  "dev_mode": "Dev Mode - Your OTP Code",
+  "tap_to_fill": "Tap to auto-fill"
+},
 "create_account": {
+  "sanad_login": "Sign in with Sanad",
+"sanad_coming_soon": "Sign in with Sanad will be available soon",
   "welcome": "LET'S GET STARTED",
   "title": "Create your account",
   "description": "One minute stands between you and real insight into your money",
@@ -513,13 +510,15 @@
 }
 ,
 "login": {
+  "or": "OR",
+"could_not_load_onboarding": "Could not load onboarding status",
     "welcome_back": "Welcome back",
     "description": "Log in to continue your financial journey",
     "phone_number": "Phone number",
     "phone_required": "Phone number is required",
     "phone_invalid": "Enter a valid phone number",
     "password": "Password",
-    "password_hint": "Minimum 6 characters",
+    "password_hint": "8+ chars, upper, lower, number",
     "login": "Log In",
     "invalid_credentials": "Invalid phone number or password"
   } ,
@@ -564,51 +563,74 @@
     "back_button": "Got it, go back"
   } ,
 
-  "financial_setup": {
-  "step": "Step {current} of {total}",
-  "title": "Financial Information",
-  "description": "Accurate data means sharper advice from Alpha",
-  "money_relationship": "How do you describe your relationship with money?",
-  "saving_target": "Extra monthly saving target",
-  "enter_amount": "Enter amount",
-  "main_goal": "Main financial goal",
-  "household_income": "Average household income",
-  "enter_income": "Enter income",
-  "income_sources": "Income Sources",
-  "total_income": "Total Income: ",
+ 
+
+
+  "financial_step": "Step 2 of 3",
+  "financial_information": "Financial Information",
+  "financial_information_subtitle": "Accurate data means sharper advice from Alpha",
+
+  "relationship_with_money": "How do you describe your relationship with money?",
+  "careful_spending": "Careful spending",
+  "balanced_spending": "Balanced spending",
+  "emotional_spending": "Emotional spending",
+
+  "regular_monthly_salary": "Regular Monthly Salary",
+  "regular_salary_description": "Enter the fixed salary you expect to receive each month.",
+  "enter_monthly_salary": "Enter monthly salary",
+
+  "additional_monthly_income": "Additional Expected Monthly Income",
+  "additional_income_description": "Enter only income that is separate from your regular salary and expected every month.",
+  "additional_monthly_amount": "Additional monthly amount",
+
+  "expected_monthly_income": "Expected Monthly Income",
+  "expected_income_note": "This total includes your salary and separate recurring monthly income only.",
+
+  "salary_payment_day": "Salary Payment Day",
+  "select_salary_payment_day": "Select Salary Payment Day",
+  "salary_payment_day_description": "Choose the day you usually receive your salary.",
+  "salary_payment_day_semantics": "Salary payment day",
+  "day": "Day",
+  "select_salary_day": "Select salary day",
+
+  "fixed_monthly_expenses": "Fixed Monthly Expenses",
+  "flexible_monthly_expenses": "Flexible Monthly Expenses",
+  "enter_monthly_amount_for": "Enter monthly amount for {}",
+
+  "estimated_financial_summary": "Estimated Financial Summary",
+  "estimated_summary_note": "Note: These are estimates and do not represent actual transactions.",
   "fixed_expenses": "Fixed Expenses",
   "flexible_expenses": "Flexible Expenses",
-  "surplus": "Surplus: {amount} {currency}",
-  "deficit": "Deficit: {amount} {currency}",
+  "total_estimated_expenses": "Total Estimated Expenses",
+  "estimated_surplus": "Estimated Surplus",
+  "estimated_deficit": "Estimated Deficit",
+
+  "main_financial_goal": "Main Financial Goal",
+  "saving": "Saving",
+  "debt_payment": "Debt payment",
+  "daily_budget": "Daily budget",
+  "emergency_fund": "Emergency fund",
+  "other": "Other",
+
+  "optional_saving_target": "Optional Extra Monthly Saving Target",
+  "saving_target_description": "This is a personal target and is not counted as part of your income.",
+  "enter_optional_saving": "Enter optional saving amount",
+
   "next": "Next",
-  "other_goal_name": "Other goal name",
-"enter_goal_name": "Enter goal name",
-"balanced": "Your income and expenses are balanced",
-  "options": {
-    "careful_spending": "Careful spending",
-    "balanced_spending": "Balanced spending",
-    "emotional_spending": "Emotional spending",
-    "saving": "Saving",
-    "debt_payment": "Debt payment",
-    "daily_budget": "Daily budget",
-    "regular_salary": "Regular Salary",
-    "temporary_job": "Temporary Job",
-    "family_support": "Family Support",
-    "external_support": "External Support",
-    "rent_income": "Rent Income",
-    "education": "Education",
-    "house_rent": "House Rent",
-    "loan": "Loan",
-    "bills": "Bills",
-    "treatment": "Treatment",
-    "food": "Food",
-    "transport": "Transport",
-    "clothes": "Clothes",
-    "entertainment": "Entertainment",
-    "personal_care": "Personal Care",
-    "other": "Other"
+
+  "income_sources": {
+    "recurring_side_income": "Recurring Side Income"
   }
-}
+
+
+
+
+
+
+
+
+
+  
 ,
  "complete_profile": "Complete your financial profile",
   "completion_message": "Your profile is {percentage}% complete. Complete the missing information to receive more accurate financial analysis.",
@@ -620,6 +642,85 @@
   "profile_complete": "Profile Complete",
   "analysis_limited": "Limited",
   "analysis_estimated": "Estimated",
-  "analysis_reliable": "Reliable"
+  "analysis_reliable": "Reliable" ,
 
+  "forgot_password": {
+  "title": "نسيت كلمة المرور؟",
+  "description": "أدخل بريدك الإلكتروني لاستلام رمز التحقق وإعادة تعيين كلمة المرور.",
+  "email": "البريد الإلكتروني",
+  "email_hint": "أدخل بريدك الإلكتروني",
+  "email_required": "البريد الإلكتروني مطلوب",
+  "email_invalid": "أدخل بريدًا إلكترونيًا صحيحًا",
+  "send_code": "إرسال الرمز",
+  "code_sent": "إذا كان الحساب موجودًا، فقد تم إرسال رمز التحقق."
+} ,
+"forgot_password_otp": {
+  "title": "Verify Code",
+  "description": "Please enter the 6-digit code sent to {email}",
+  "verify": "Verify"
+},
+"reset_password": {
+  "title": "Reset Password",
+  "description": "Create a strong new password for your account.",
+  "new_password": "New Password",
+  "enter_new_password": "Enter new password",
+  "confirm_password": "Confirm New Password",
+  "confirm_new_password": "Confirm new password",
+  "password_hint": "Use at least 8 characters with uppercase, lowercase, and a number.",
+  "both_required": "Both password fields are required",
+  "passwords_not_match": "Passwords do not match",
+  "password_invalid": "Password must be at least 8 characters and contain uppercase, lowercase, and numbers",
+  "reset_success": "Password reset successfully",
+  "button": "Reset Password"
+} ,
+
+ "allocation_review": "Allocation Review",
+  "allocation_review_subtitle": "Review and adjust how your income will be divided.",
+  "allocation_total_must_equal_100": "Total allocation must exactly equal 100%.",
+  "income": "Income",
+  "tier": "Tier",
+  "source": "Source",
+  "customized": "Customized",
+  "yes": "Yes",
+  "no": "No",
+  "not_available": "N/A",
+  "needs": "Needs",
+  "needs_description": "Essential monthly expenses",
+  "wants": "Wants",
+  "wants_description": "Lifestyle and optional spending",
+  "savings": "Savings",
+  "savings_description": "Savings and future goals",
+  "total_allocation": "Total allocation",
+  "reset": "Reset",
+  "approve": "Approve",
+  "jod": "JOD" ,
+  
+"main_navigation": {
+  "image_recovery_failed": "Failed to recover image: {message}",
+  "start_cycle_first": "Start a financial cycle before adding receipts."
+}
+,
+"navigation": {
+  "home": "Home",
+  "expenses": "Expenses",
+  "ai": "AI",
+  "goals": "Goals",
+  "profile": "Profile"
+} ,
+"savings_allocation": {
+  "load_failed": "Unable to load planning data",
+  "title": "Savings Allocation",
+  "description": "Distribute this cycle's savings according to your financial goals.",
+  "emergency_fund_rate": "Emergency Fund Rate",
+  "emergency_fund_description": "Choose the percentage of your planned savings that should be allocated to your emergency fund.",
+  "selected_rate": "Selected Rate",
+  "allocation_summary": "Allocation Summary",
+  "planned_savings": "Planned Savings",
+  "emergency_fund": "Emergency Fund",
+  "other_goals": "Other Goals",
+  "unallocated": "Unallocated Savings",
+  "fund_limit": "The emergency fund allocation has been capped because it will reach its target.",
+  "invalid_allocation": "The selected allocation exceeds the savings remaining after funding your other goals.",
+  "confirm": "Save & Continue"
+}
 }
