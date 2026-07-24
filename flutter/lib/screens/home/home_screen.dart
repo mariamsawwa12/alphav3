@@ -16,6 +16,8 @@ import 'package:alpha_app/providers/challenge_provider.dart';
 import 'package:alpha_app/widgets/Home/birthday_dialog.dart';
 import 'package:alpha_app/widgets/Home/progress_card.dart';
 import 'package:alpha_app/widgets/Home/quick_actions_grid.dart';
+import 'package:alpha_app/widgets/Home/open_banking_connect_card.dart';
+import 'package:alpha_app/screens/open_banking/accounts_screen.dart';
 import 'package:alpha_app/providers/cycle_provider.dart';
 import 'package:alpha_app/providers/onboarding_provider.dart';
 import 'package:alpha_app/widgets/app_button.dart';
@@ -415,7 +417,19 @@ class _HomeScreenState extends State<HomeScreen> {
               (homeData.goals?.readyCount ?? 0) > 0)
             SizedBox(height: screenHeight * 0.03),
 
-          // 8. Quick Actions Grid
+          // 8. Open Banking Connect
+          OpenBankingConnectCard(
+            isDark: isDark,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AccountsScreen()),
+              );
+            },
+          ),
+          SizedBox(height: screenHeight * 0.03),
+
+          // 9. Quick Actions Grid
           SectionTitle(title: "home.quick_actions".tr(), isDark: isDark),
           SizedBox(height: screenHeight * 0.015),
           Consumer<ChallengeProvider>(

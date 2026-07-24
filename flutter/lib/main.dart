@@ -14,6 +14,7 @@ import 'package:alpha_app/providers/leaderbord_provider.dart';
 import 'package:alpha_app/providers/onboarding_provider.dart';
 import 'package:alpha_app/providers/personal_provider.dart';
 import 'package:alpha_app/providers/profile_provider.dart';
+import 'package:alpha_app/providers/open_banking_provider.dart';
 import 'package:alpha_app/providers/receipt_provider.dart';
 import 'package:alpha_app/providers/income_provider.dart';
 import 'package:alpha_app/providers/cycle_provider.dart';
@@ -92,6 +93,9 @@ void main() async {
           ChangeNotifierProvider(create: (context) => CycleProvider()),
           ChangeNotifierProvider(
             create: (_) => ChallengeProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => OpenBankingProvider(),
           ),
           ChangeNotifierProvider(
             create: (_) => RewardProvider(),

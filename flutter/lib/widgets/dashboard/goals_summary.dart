@@ -88,13 +88,18 @@ class GoalsSummaryWidget extends StatelessWidget {
             mainAxisAlignment:
                 MainAxisAlignment.spaceBetween,
             children: [
-              _buildItem(
-                'goals_summary.active_goals'.tr(),
-                "${goals!.activeCount}",
+              Expanded(
+                child: _buildItem(
+                  'goals_summary.active_goals'.tr(),
+                  "${goals!.activeCount}",
+                ),
               ),
-              _buildItem(
-                'goals_summary.ready_to_complete'.tr(),
-                "${goals!.readyCount}",
+              const SizedBox(width: 8),
+              Expanded(
+                child: _buildItem(
+                  'goals_summary.ready_to_complete'.tr(),
+                  "${goals!.readyCount}",
+                ),
               ),
             ],
           ),

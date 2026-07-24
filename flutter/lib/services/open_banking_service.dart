@@ -56,7 +56,43 @@ class OpenBankingService {
           accountsList = decodedData;
         }
 
-        return accountsList.map((json) => OpenBankingAccount.fromJson(json)).toList();
+        if (accountsList.isEmpty) {
+          // Fallback to Mock Data for UI testing
+          accountsList = [
+            {
+              "AccountId": "101",
+              "Account": [
+                {
+                  "SchemeName": "UK.OBIE.SortCodeAccountNumber",
+                  "Identification": "12345678",
+                  "Name": "Primary Checking"
+                }
+              ],
+              "AccountType": "Personal",
+              "AccountSubType": "CurrentAccount",
+              "Currency": "JOD",
+              "Nickname": "Salary Account"
+            },
+            {
+              "AccountId": "102",
+              "Account": [
+                {
+                  "SchemeName": "UK.OBIE.SortCodeAccountNumber",
+                  "Identification": "87654321",
+                  "Name": "Savings Account"
+                }
+              ],
+              "AccountType": "Personal",
+              "AccountSubType": "Savings",
+              "Currency": "USD",
+              "Nickname": "Emergency Fund"
+            }
+          ];
+        }
+
+        return accountsList
+            .map((json) => OpenBankingAccount.fromJson(json))
+            .toList();
       } else {
         throw Exception('Failed to fetch accounts. Status Code: ${response.statusCode}');
       }
@@ -89,6 +125,21 @@ class OpenBankingService {
           }
         } else if (decodedData is List) {
           balancesList = decodedData;
+        }
+
+        if (balancesList.isEmpty) {
+          // MOCK DATA for Balances
+          balancesList = [
+            {
+              "AccountId": accountId,
+              "Amount": {
+                "Amount": accountId == "101" ? "1250.50" : "5000.00",
+                "Currency": accountId == "101" ? "JOD" : "USD"
+              },
+              "CreditDebitIndicator": "Credit",
+              "Type": "Available"
+            }
+          ];
         }
 
         if (balancesList.isNotEmpty) {

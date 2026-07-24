@@ -60,14 +60,19 @@ class IncomeOverview extends StatelessWidget {
             mainAxisAlignment:
                 MainAxisAlignment.spaceBetween,
             children: [
-              _buildIncomeItem(
-                'income_overview.expected_income'.tr(),
-                income!.expected,
+              Expanded(
+                child: _buildIncomeItem(
+                  'income_overview.expected_income'.tr(),
+                  income!.expected,
+                ),
               ),
-              _buildIncomeItem(
-                'income_overview.recorded_income'.tr(),
-                income!.recorded,
-                isPrimary: true,
+              const SizedBox(width: 8),
+              Expanded(
+                child: _buildIncomeItem(
+                  'income_overview.recorded_income'.tr(),
+                  income!.recorded,
+                  isPrimary: true,
+                ),
               ),
             ],
           ),
