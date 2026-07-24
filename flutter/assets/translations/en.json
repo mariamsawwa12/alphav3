@@ -722,5 +722,31 @@
   "fund_limit": "The emergency fund allocation has been capped because it will reach its target.",
   "invalid_allocation": "The selected allocation exceeds the savings remaining after funding your other goals.",
   "confirm": "Save & Continue"
-}
+} ,
+"home_extra": {
+    "financial_profile_load_failed": "Unable to load financial profile data",
+    "cycle_started_successfully": "Your financial cycle started successfully",
+    "dashboard_load_failed": "Unable to load the dashboard",
+    "budgets_savings": "Budgets & Savings",
+    "start_cycle_first": "Start a financial cycle first.",
+    "start_cycle_title": "Start Your Financial Cycle",
+    "start_cycle_description": "Your financial profile is complete. Start a new cycle to organize your budget and track your progress.",
+    "clearer_budget": "Clearer Budget",
+    "smart_tracking": "Smart Tracking",
+    "continuous_progress": "Continuous Progress",
+    "start_cycle_now": "Start Cycle Now",
+    "friend": "our friend",
+    "happy_birthday": "Happy birthday, {name}",
+    "birthday_message": "Wishing you a wonderful year filled with comfort and small achievements that grow over time.",
+    "review_financial_profile": "Please review your financial profile.",
+    "missing_expected_income": "Expected monthly income",
+    "missing_payment_day": "Income payment day",
+    "missing_currency": "Currency",
+    "missing_allocation_preferences": "Allocation preferences",
+    "missing_valid_allocation": "Valid percentage allocation",
+    "missing_financial_profile": "Basic financial profile",
+    "missing_or_invalid_fields": "Missing or invalid information: {fields}",
+    "financial_profile_incomplete": "Financial Profile Incomplete",
+    "complete_data_benefit": "Completing your data helps Alpha provide more accurate analysis and recommendations."
+  }
 }

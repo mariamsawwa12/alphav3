@@ -711,5 +711,31 @@
   "fund_limit": "تم تحديد الحد الأقصى لصندوق الطوارئ لأنه سيصل إلى هدفه النهائي.",
   "invalid_allocation": "النسبة الحالية أكبر من المدخرات المتاحة بعد تخصيص الأهداف الأخرى.",
   "confirm": "اعتماد والبدء"
-}
+},
+ "home_extra": {
+    "financial_profile_load_failed": "تعذر تحميل بيانات الملف المالي",
+    "cycle_started_successfully": "تم بدء دورتك المالية بنجاح",
+    "dashboard_load_failed": "تعذر تحميل لوحة التحكم",
+    "budgets_savings": "الميزانيات والمدخرات",
+    "start_cycle_first": "ابدأ دورة مالية أولًا.",
+    "start_cycle_title": "ابدأ دورتك المالية",
+    "start_cycle_description": "الملف المالي مكتمل. ابدأ دورة جديدة لتنظيم ميزانيتك وتتبع تقدمك.",
+    "clearer_budget": "ميزانية أوضح",
+    "smart_tracking": "متابعة ذكية",
+    "continuous_progress": "تقدم مستمر",
+    "start_cycle_now": "بدء الدورة الآن",
+    "friend": "صديقنا",
+    "happy_birthday": "عيد ميلاد سعيد يا {name}",
+    "birthday_message": "نتمنى لك سنة جميلة ومليئة بالراحة والنجاحات الصغيرة التي تكبر مع الوقت.",
+    "review_financial_profile": "يرجى مراجعة ملفك المالي.",
+    "missing_expected_income": "الدخل الشهري المتوقع",
+    "missing_payment_day": "يوم استلام الدخل",
+    "missing_currency": "العملة",
+    "missing_allocation_preferences": "تفضيلات التوزيع",
+    "missing_valid_allocation": "صحة التوزيع المئوي للنسب",
+    "missing_financial_profile": "الملف المالي الأساسي",
+    "missing_or_invalid_fields": "البيانات الناقصة أو غير الصالحة: {fields}",
+    "financial_profile_incomplete": "الملف المالي غير مكتمل",
+    "complete_data_benefit": "إكمال البيانات يساعد ألفا على تقديم تحليل وتوصيات أدق."
+  }
 }
