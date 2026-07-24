@@ -951,7 +951,8 @@
   "description_required_message": "أدخل الوصف.",
   "coverage_period_required_message": "اختر فترة التكرار.",
   "flexibility_required_message": "اختر مستوى المرونة.",
-  "valid_next_due_date_required": "اختر تاريخ استحقاق صحيح."
+  "valid_next_due_date_required": "اختر تاريخ استحقاق صحيح." ,
+  "expense_date.recurring_description": "اختر تاريخ هذا المصروف المتكرر."
 
 
 }

@@ -7,24 +7,28 @@ import 'package:alpha_app/screens/ai_assistant/voice_chat_screen.dart';
 import 'package:alpha_app/widgets/chat/chat_bubble.dart';
 import 'package:alpha_app/widgets/chat/chat_input.dart';
 import 'package:alpha_app/widgets/chat/suggestion_chip.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
+  const ChatScreen({
+    super.key,
+  });
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  State<ChatScreen> createState() =>
+      _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final ScrollController scrollController = ScrollController();
+  final ScrollController scrollController =
+      ScrollController();
 
   @override
   void dispose() {
     scrollController.dispose();
-
     super.dispose();
   }
 
@@ -34,8 +38,11 @@ class _ChatScreenState extends State<ChatScreen> {
       () {
         if (scrollController.hasClients) {
           scrollController.animateTo(
-            scrollController.position.maxScrollExtent,
-            duration: const Duration(milliseconds: 300),
+            scrollController
+                .position
+                .maxScrollExtent,
+            duration:
+                const Duration(milliseconds: 300),
             curve: Curves.easeOut,
           );
         }
@@ -45,28 +52,37 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final chatbotProvider = context.watch<ChatbotProvider>();
+    final chatbotProvider =
+        context.watch<ChatbotProvider>();
 
     final screenW = Device.width(context);
     final screenH = Device.height(context);
-    final themeprovider = Provider.of<Themeprovider>(context);
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    final themeProvider =
+        context.watch<Themeprovider>();
+
+    final isDark = themeProvider.isDark;
+
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) {
       scrollToBottom();
     });
 
     return Scaffold(
-      backgroundColor: themeprovider.isDark
+      backgroundColor: isDark
           ? AppColors.darkBackground
           : AppColors.lightBackground,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenW * 0.05),
+          padding: EdgeInsets.symmetric(
+            horizontal: screenW * 0.05,
+          ),
           child: Column(
             children: [
               SizedBox(
                 height: screenH * 0.03,
               ),
+
               Row(
                 children: [
                   Image.asset(
@@ -74,64 +90,101 @@ class _ChatScreenState extends State<ChatScreen> {
                     height: screenH * 0.05,
                     width: screenW * 0.1,
                   ),
+
                   SizedBox(
                     width: screenW * 0.02,
                   ),
+
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment:
+                        CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Alpha",
-                        style: GoogleFonts.ibmPlexSansArabic(
-                          color: themeprovider.isDark
+                        'Alpha',
+                        style: GoogleFonts
+                            .ibmPlexSansArabic(
+                          color: isDark
                               ? AppColors.darkText
                               : AppColors.lightText,
-                          fontSize: screenW * 0.055,
-                          fontWeight: FontWeight.bold,
+                          fontSize:
+                              screenW * 0.055,
+                          fontWeight:
+                              FontWeight.bold,
                         ),
                       ),
+
                       Text(
-                        "Online now",
+                        'chat.online_now'.tr(),
                         style: TextStyle(
-                          color: themeprovider.isDark
-                              ? AppColors.darkSecondary
-                              : AppColors.lightSecondary,
-                          fontSize: screenW * 0.035,
-                          fontWeight: FontWeight.w400,
+                          color: isDark
+                              ? AppColors
+                                  .darkSecondary
+                              : AppColors
+                                  .lightSecondary,
+                          fontSize:
+                              screenW * 0.035,
+                          fontWeight:
+                              FontWeight.w400,
                         ),
                       ),
                     ],
                   ),
                 ],
               ),
+
               SizedBox(
                 height: screenH * 0.03,
               ),
+
               Expanded(
                 child: ListView.builder(
                   controller: scrollController,
-                  itemCount: chatbotProvider.messages.length,
-                  itemBuilder: (context, index) {
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior
+                          .onDrag,
+                  itemCount:
+                      chatbotProvider.messages.length,
+                  itemBuilder: (
+                    context,
+                    index,
+                  ) {
                     return ChatBubble(
-                      message: chatbotProvider.messages[index],
+                      message: chatbotProvider
+                          .messages[index],
                     );
                   },
                 ),
               ),
+
               SizedBox(
                 height: screenH * 0.02,
               ),
+
               SizedBox(
                 height: screenH * 0.06,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: chatbotProvider.suggestions.length,
-                  itemBuilder: (context, index) {
+                child: ListView.separated(
+                  scrollDirection:
+                      Axis.horizontal,
+                  physics:
+                      const BouncingScrollPhysics(),
+                  itemCount: chatbotProvider
+                      .suggestions.length,
+                  separatorBuilder: (_, __) =>
+                      const SizedBox(width: 10),
+                  itemBuilder: (
+                    context,
+                    index,
+                  ) {
+                    final suggestion =
+                        chatbotProvider
+                            .suggestions[index];
+
                     return SuggestionChipWidget(
-                      text: chatbotProvider.suggestions[index],
+                      text: suggestion,
                       onTap: () {
-                        chatbotProvider.sendSuggestion(
-                          chatbotProvider.suggestions[index],
+                        chatbotProvider
+                            .sendSuggestion(
+                          suggestion,
                         );
 
                         scrollToBottom();
@@ -140,24 +193,37 @@ class _ChatScreenState extends State<ChatScreen> {
                   },
                 ),
               ),
+
               SizedBox(
                 height: screenH * 0.02,
               ),
+
               Padding(
-                padding: EdgeInsets.only(bottom: screenH * 0.02),
+                padding: EdgeInsets.only(
+                  bottom: screenH * 0.02,
+                ),
                 child: ChatInput(
-                  controller: chatbotProvider.messageController,
-                  isLoading: chatbotProvider.isLoading,
+                  controller: chatbotProvider
+                      .messageController,
+
+                  isLoading:
+                      chatbotProvider.isLoading,
+
                   onSend: (value) {
-                    chatbotProvider.sendMessage(value);
+                    chatbotProvider
+                        .sendMessage(value);
 
                     scrollToBottom();
                   },
+
                   onVoice: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const VoiceChatScreen()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            const VoiceChatScreen(),
+                      ),
+                    );
                   },
                 ),
               ),

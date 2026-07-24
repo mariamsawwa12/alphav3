@@ -959,6 +959,9 @@
   "description_required_message": "Enter a description.",
   "coverage_period_required_message": "Select a coverage period.",
   "flexibility_required_message": "Select flexibility.",
-  "valid_next_due_date_required": "Select a valid next due date."
+  "valid_next_due_date_required": "Select a valid next due date." ,
+  "expense_date.recurring_description": "Select the date for this recurring expense." 
+
+  
 
 }
