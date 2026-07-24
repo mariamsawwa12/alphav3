@@ -11,7 +11,7 @@ class ApiConfig {
   );
 
   // Central static default switch
-  static const AppEnvironment environment = AppEnvironment.local;
+  static const AppEnvironment environment = AppEnvironment.production;
 
   // Derive environment respecting dart-define first, then default
   static AppEnvironment get _effectiveEnvironment {
