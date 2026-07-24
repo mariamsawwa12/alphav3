@@ -108,8 +108,9 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
 
                     Text(
                       _isEditing
-                          ? 'new_expense.update_description'.tr()
-                          : 'new_expense.add_description'.tr(),
+                        
+    ? 'new_expense.update_description'.tr()
+    : 'new_expense.description'.tr(),
                       style: GoogleFonts.ibmPlexSansArabic(
                         color: isDark
                             ? AppColors.darkSubText
