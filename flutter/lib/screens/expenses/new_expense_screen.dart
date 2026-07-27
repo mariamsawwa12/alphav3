@@ -907,9 +907,12 @@ String _translateExpenseOption(
     return value;
   }
 
-  final String translated = key.tr();
-
-  return translated == key ? value : translated;
+  try {
+    final String translated = key.tr();
+    return translated == key ? value : translated;
+  } catch (_) {
+    return value;
+  }
 }
 
 String _originalExpenseOption(

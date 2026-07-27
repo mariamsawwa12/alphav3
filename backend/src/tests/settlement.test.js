@@ -52,6 +52,11 @@ async function seedUser(conn, { income = 1000, paymentDay = 15 } = {}) {
     [userId, income, paymentDay]
   );
 
+  await conn.execute(
+    `INSERT INTO goals (user_id, name, target_amount, current_balance, status, goal_type, is_system_managed) VALUES (?, 'Emergency Fund', 1000, 0, 'active', 'emergency_fund', TRUE)`,
+    [userId]
+  );
+
   return userId;
 }
 

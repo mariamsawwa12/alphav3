@@ -20,11 +20,14 @@ class LanguageProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> loadSavedLanguage() async {
+  Future<void> loadSavedLanguage([BuildContext? context]) async {
     final prefs = await SharedPreferences.getInstance();
     final lang = prefs.getString('language_code') ?? 'en';
 
     _currentLocale = Locale(lang);
+    if (context != null) {
+      await context.setLocale(_currentLocale);
+    }
     notifyListeners();
   }
 }

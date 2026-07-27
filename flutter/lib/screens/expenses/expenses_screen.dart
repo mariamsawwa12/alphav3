@@ -1239,9 +1239,12 @@ String _translateAnalyticsValue(
     return value;
   }
 
-  final translated = key.tr();
-
-  return translated == key ? value : translated;
+  try {
+    final translated = key.tr();
+    return translated == key ? value : translated;
+  } catch (_) {
+    return value;
+  }
 }
 
 double _toDouble(

@@ -247,6 +247,9 @@ class _VoiceChatScreenState extends State<VoiceChatScreen>
                                 .voiceController,
                             minLines: 1,
                             maxLines: 5,
+                            onChanged: (val) {
+                              chatbotProvider.updateVoiceText(val);
+                            },
                             style: TextStyle(
                               color: isDark
                                   ? AppColors.darkText
@@ -285,14 +288,15 @@ class _VoiceChatScreenState extends State<VoiceChatScreen>
                   ),
                   child: ElevatedButton(
                     onPressed:
-                        chatbotProvider.voiceText.isEmpty
+                        chatbotProvider.voiceController.text.trim().isEmpty
                             ? null
                             : () {
                                 chatbotProvider
                                     .sendMessage(
                                   chatbotProvider
                                       .voiceController
-                                      .text,
+                                      .text
+                                      .trim(),
                                 );
 
                                 chatbotProvider

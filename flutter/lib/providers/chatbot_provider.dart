@@ -207,6 +207,11 @@ class ChatbotProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateVoiceText(String text) {
+    voiceText = text;
+    notifyListeners();
+  }
+
   void clearVoice() {
     voiceText = "";
 

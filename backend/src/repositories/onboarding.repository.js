@@ -175,11 +175,17 @@ class OnboardingRepository {
       targetDate,
       planningMode,
       plannedContribution,
-      priority
+      priority,
+      isSystemManaged
     } = data;
 
     const finalCols = ['user_id', 'goal_type', 'name', 'target_amount', 'planning_mode', 'status'];
     const finalVals = [userId, goalType, name, targetAmount, planningMode, 'active'];
+
+    if (isSystemManaged !== undefined) {
+      finalCols.push('is_system_managed');
+      finalVals.push(isSystemManaged ? true : false);
+    }
 
     if (customName !== undefined && customName !== null) {
       finalCols.push('custom_name');

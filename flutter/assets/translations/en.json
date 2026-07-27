@@ -178,7 +178,12 @@
     "coming_soon": "{feature} will be available soon.",
     "logout_question": "Are you sure you want to log out?",
     "english": "English",
-    "arabic": "arabic"
+    "arabic": "العربية",
+    "financial_profile": "Financial Profile",
+    "financial_analysis": "Financial Analysis",
+    "rate_us": "Rate Us",
+    "select_language": "Select Language",
+    "cancel": "Cancel"
   },
   "chat": {
     "welcome": "Hello, I'm Alpha. How can I help you today?",
@@ -724,7 +729,21 @@
   "unallocated": "Unallocated Savings",
   "fund_limit": "The emergency fund allocation has been capped because it will reach its target.",
   "invalid_allocation": "The selected allocation exceeds the savings remaining after funding your other goals.",
+  "zero_savings_hint": "Total planned savings for this cycle is 0 JOD. Increase your savings percentage in Allocation Review to fund the Emergency Fund.",
   "confirm": "Save & Continue"
+} ,
+"dashboard_buckets": {
+  "needs": "Needs",
+  "wants": "Wants",
+  "savings": "Savings",
+  "actual": "Actual",
+  "target": "Target",
+  "remaining": "Remaining",
+  "reserved_commitments": "Reserved for commitments",
+  "available_variable": "Available for variable",
+  "emergency_fund": "Emergency Fund",
+  "goal_allocations": "Goal Allocations",
+  "unallocated_savings": "Unallocated Savings"
 } ,
 "home_extra": {
     "financial_profile_load_failed": "Unable to load financial profile data",
@@ -750,8 +769,32 @@
     "missing_financial_profile": "Basic financial profile",
     "missing_or_invalid_fields": "Missing or invalid information: {fields}",
     "financial_profile_incomplete": "Financial Profile Incomplete",
-    "complete_data_benefit": "Completing your data helps Alpha provide more accurate analysis and recommendations."
-  } ,
+    "can_create_cycle_message": "Your profile contains all required details to start financial cycles.",
+    "incomplete_message": "Complete your missing financial fields to enable cycle creation and accurate analysis."
+  },
+  "financial_profile_screen": {
+    "title": "Financial Profile",
+    "edit": "Edit",
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "expected_income": "Expected Monthly Income",
+    "currency": "Currency",
+    "payment_day": "Income Payment Day",
+    "income_sources": "Income Sources",
+    "fixed_expenses": "Fixed Expenses",
+    "variable_expenses": "Variable Expenses",
+    "allocation_percentages": "Allocation Percentages",
+    "profile_complete": "Financial profile complete",
+    "profile_incomplete": "Financial profile incomplete",
+    "enter_valid_income": "Please enter a valid monthly income.",
+    "updated_successfully": "Financial profile updated successfully.",
+    "no_profile_found": "No financial profile was found.",
+    "salary": "Salary",
+    "freelance": "Freelance",
+    "business": "Business",
+    "investments": "Investments",
+    "other": "Other"
+  },
   "bucket_cards": {
   "needs": "Needs",
   "wants": "Wants",
@@ -770,6 +813,11 @@
 "receipt_input.scan_hint": "Place the full receipt inside the frame and keep the camera steady.",
 "receipt_input.capture_tip": "Use clear lighting and avoid shadows for more accurate receipt analysis.",
 "receipt_input.choose_gallery": "Choose from Gallery" ,
+"source_types": {
+  "voice": "Voice Recording",
+  "image": "Receipt Image",
+  "manual": "Manual Entry"
+},
 
   "confirm": "Confirm",
   "expense_added_successfully": "Expense added successfully",

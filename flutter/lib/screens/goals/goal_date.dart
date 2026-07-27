@@ -39,7 +39,7 @@ class _GoalDateScreenState extends State<GoalDateScreen> {
 
   DateTime get _lastAllowedDay {
     return DateTime(
-      DateTime.now().year + 20,
+      DateTime.now().year + 7,
       12,
       31,
     );

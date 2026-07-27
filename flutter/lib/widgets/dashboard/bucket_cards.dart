@@ -25,30 +25,28 @@ class BucketCardsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildBucketCard(
-          title: 'bucket_cards.needs'.tr(),
+          title: "dashboard_buckets.needs".tr(),
           bucket: buckets!.needs,
-          icon: Icons.shopping_cart_outlined,
-          color: isDark
-              ? AppColors.darkPrimary
-              : AppColors.lightPrimary,
+          icon: Icons.shopping_bag_outlined,
+          accentColor: isDark ? AppColors.darkPrimary : AppColors.lightPrimary,
+          context: context,
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 14),
         _buildBucketCard(
-          title: 'bucket_cards.wants'.tr(),
+          title: "dashboard_buckets.wants".tr(),
           bucket: buckets!.wants,
-          icon: Icons.favorite_outline_rounded,
-          color: isDark
-              ? AppColors.darkAccent
-              : AppColors.lightAccent,
+          icon: Icons.favorite_border_rounded,
+          accentColor: isDark ? AppColors.darkAccent : AppColors.lightAccent,
+          context: context,
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 14),
         _buildBucketCard(
-          title: 'bucket_cards.savings'.tr(),
+          title: "dashboard_buckets.savings".tr(),
           bucket: buckets!.savings,
           icon: Icons.savings_outlined,
-          color: isDark
-              ? AppColors.darkSecondary
-              : AppColors.lightSecondary,
+          accentColor:
+              isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
+          context: context,
           isSavings: true,
         ),
       ],
@@ -59,40 +57,37 @@ class BucketCardsSection extends StatelessWidget {
     required String title,
     required HomeBucket? bucket,
     required IconData icon,
-    required Color color,
+    required Color accentColor,
+    required BuildContext context,
     bool isSavings = false,
   }) {
     if (bucket == null) {
       return const SizedBox.shrink();
     }
 
-    final statusColor = _getStatusColor(
-      bucket.status,
-      isDark,
-    );
+    final statusColor = _getStatusColor(bucket.status, isDark);
 
-    final textColor =
-        isDark ? AppColors.darkText : AppColors.lightText;
+    final textColor = isDark ? AppColors.darkText : AppColors.lightText;
 
-    final subTextColor = isDark
-        ? AppColors.darkSubText
-        : AppColors.lightSubText;
+    final subTextColor =
+        isDark ? AppColors.darkSubText : AppColors.lightSubText;
 
-    final borderColor =
-        isDark ? AppColors.darkBorder : AppColors.lightBorder;
+    final borderColor = isDark ? AppColors.darkBorder : AppColors.lightBorder;
+
+    final cardColor = isDark ? AppColors.darkCard : AppColors.lightCard;
 
     final targetText = bucket.target != null
-        ? "${bucket.target!.toStringAsFixed(2)} ${'common.jod'.tr()}"
-        : 'common.not_available'.tr();
+        ? "${bucket.target!.toStringAsFixed(2)} JOD"
+        : "Unavailable";
 
     final actualText = bucket.actual != null
-        ? "${bucket.actual!.toStringAsFixed(2)} ${'common.jod'.tr()}"
-        : 'common.not_available'.tr();
+        ? "${bucket.actual!.toStringAsFixed(2)} JOD"
+        : "Unavailable";
 
-    double progress = 0;
+    double progress = 0.0;
 
     if (bucket.usagePercent != null) {
-      progress = bucket.usagePercent! / 100;
+      progress = bucket.usagePercent! / 100.0;
     } else if (bucket.actual != null &&
         bucket.target != null &&
         bucket.target! > 0) {
@@ -101,17 +96,40 @@ class BucketCardsSection extends StatelessWidget {
 
     progress = progress.clamp(0.0, 1.0);
 
+    final remainingText = bucket.remaining != null
+        ? "${bucket.remaining!.toStringAsFixed(2)} JOD"
+        : "Unavailable";
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(17),
       decoration: BoxDecoration(
-        color: color.withOpacity(
-          isDark ? 0.07 : 0.045,
+        gradient: LinearGradient(
+          begin: AlignmentDirectional.topStart,
+          end: AlignmentDirectional.bottomEnd,
+          colors: isDark
+              ? [
+                  cardColor,
+                  accentColor.withOpacity(0.08),
+                ]
+              : [
+                  cardColor,
+                  accentColor.withOpacity(0.055),
+                ],
         ),
-        borderRadius: BorderRadius.circular(22),
+        borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: color.withOpacity(0.55),
+          color: accentColor.withOpacity(0.30),
         ),
+        boxShadow: isDark
+            ? null
+            : [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.035),
+                  blurRadius: 16,
+                  offset: const Offset(0, 7),
+                ),
+              ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,102 +137,107 @@ class BucketCardsSection extends StatelessWidget {
           Row(
             children: [
               Container(
-                width: 40,
-                height: 40,
+                width: 45,
+                height: 45,
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.12),
-                  borderRadius: BorderRadius.circular(13),
+                  color: accentColor.withOpacity(0.13),
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(
+                    color: accentColor.withOpacity(0.22),
+                  ),
                 ),
                 child: Icon(
                   icon,
-                  color: color,
-                  size: 21,
+                  color: accentColor,
+                  size: 23,
                 ),
               ),
-              const SizedBox(width: 11),
+              const SizedBox(width: 12),
               Expanded(
                 child: Text(
                   title,
                   style: GoogleFonts.ibmPlexSansArabic(
                     color: textColor,
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontSize: 17,
                   ),
                 ),
               ),
-              if (bucket.status != null &&
-                  bucket.status != 'unavailable')
+              if (bucket.status != null && bucket.status != 'unavailable')
                 Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 9,
-                    vertical: 4,
+                    horizontal: 10,
+                    vertical: 5,
                   ),
                   decoration: BoxDecoration(
-                    color: statusColor.withOpacity(0.10),
+                    color: statusColor.withOpacity(0.11),
                     borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: statusColor.withOpacity(0.28),
+                    ),
                   ),
                   child: Text(
-                    _translatedStatus(bucket.status!),
+                    bucket.status!.toUpperCase(),
                     style: GoogleFonts.ibmPlexSansArabic(
                       color: statusColor,
-                      fontSize: 9,
+                      fontSize: 9.5,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
             ],
           ),
-          const SizedBox(height: 17),
+          const SizedBox(height: 18),
           Row(
             children: [
               Expanded(
-                child: _buildMainDetail(
-                  label: 'bucket_cards.actual'.tr(),
+                child: _buildAmountCard(
+                  label: "dashboard_buckets.actual".tr(),
                   value: actualText,
+                  icon: Icons.payments_outlined,
+                  color: accentColor,
                   textColor: textColor,
                   subTextColor: subTextColor,
                 ),
               ),
-              Container(
-                width: 1,
-                height: 35,
-                color: borderColor,
-              ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 10),
               Expanded(
-                child: _buildMainDetail(
-                  label: 'bucket_cards.target'.tr(),
+                child: _buildAmountCard(
+                  label: "dashboard_buckets.target".tr(),
                   value: targetText,
+                  icon: Icons.flag_outlined,
+                  color: statusColor,
                   textColor: textColor,
                   subTextColor: subTextColor,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 16),
           Row(
             children: [
               Text(
-                'bucket_cards.progress'.tr(),
+                "Usage",
                 style: GoogleFonts.ibmPlexSansArabic(
                   color: subTextColor,
                   fontSize: 11,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               const Spacer(),
               Text(
-                '${(progress * 100).toStringAsFixed(0)}%',
+                "${(progress * 100).toStringAsFixed(0)}%",
                 style: GoogleFonts.ibmPlexSansArabic(
                   color: statusColor,
-                  fontSize: 11,
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 7),
+          const SizedBox(height: 8),
           LinearPercentIndicator(
-            lineHeight: 7,
+            lineHeight: 8,
             percent: progress,
             backgroundColor: borderColor,
             progressColor: statusColor,
@@ -222,152 +245,171 @@ class BucketCardsSection extends StatelessWidget {
             padding: EdgeInsets.zero,
             animation: false,
           ),
-          if ((!isSavings &&
-                  bucket.reserved != null &&
-                  bucket.reserved! > 0) ||
-              (!isSavings &&
-                  bucket.availableVariable != null) ||
-              (isSavings &&
-                  bucket.plannedEmergencyFund != null &&
-                  bucket.plannedEmergencyFund! > 0) ||
-              (isSavings &&
-                  bucket.plannedGoalAllocations != null &&
-                  bucket.plannedGoalAllocations! > 0) ||
-              (isSavings &&
-                  bucket.unallocatedSavings != null &&
-                  bucket.unallocatedSavings! > 0)) ...[
-            const SizedBox(height: 15),
-            Divider(
-              color: borderColor,
-              height: 1,
+          const SizedBox(height: 16),
+          if (!isSavings && bucket.reserved != null && bucket.reserved! > 0)
+            _buildSmallDetail(
+              label: "dashboard_buckets.reserved_commitments".tr(),
+              value: "${bucket.reserved!.toStringAsFixed(2)} JOD",
+              icon: Icons.lock_outline_rounded,
+              color: isDark ? AppColors.darkAccent : AppColors.lightAccent,
             ),
-            const SizedBox(height: 13),
+          if (!isSavings && bucket.availableVariable != null)
+            _buildSmallDetail(
+              label: "dashboard_buckets.available_variable".tr(),
+              value: "${bucket.availableVariable!.toStringAsFixed(2)} JOD",
+              icon: Icons.account_balance_wallet_outlined,
+              color: accentColor,
+            ),
+          if (isSavings &&
+              bucket.target != null &&
+              bucket.target! > 0) ...[
+            _buildSmallDetail(
+              label: "dashboard_buckets.emergency_fund".tr(),
+              value: "${(bucket.plannedEmergencyFund ?? (bucket.target! * 0.10)).toStringAsFixed(2)} JOD",
+              icon: Icons.shield_outlined,
+              color:
+                  isDark ? AppColors.darkSecondary : AppColors.lightSecondary,
+            ),
+            if ((bucket.plannedGoalAllocations ?? 0) > 0)
+              _buildSmallDetail(
+                label: "dashboard_buckets.goal_allocations".tr(),
+                value: "${bucket.plannedGoalAllocations!.toStringAsFixed(2)} JOD",
+                icon: Icons.track_changes_outlined,
+                color: isDark ? AppColors.darkAccent : AppColors.lightAccent,
+              ),
+            _buildSmallDetail(
+              label: "dashboard_buckets.unallocated_savings".tr(),
+              value: "${(bucket.unallocatedSavings ?? (bucket.target! - (bucket.plannedEmergencyFund ?? (bucket.target! * 0.10)) - (bucket.plannedGoalAllocations ?? 0))).clamp(0, double.infinity).toStringAsFixed(2)} JOD",
+              icon: Icons.savings_outlined,
+              color: accentColor,
+            ),
           ],
-          if (!isSavings &&
-              bucket.reserved != null &&
-              bucket.reserved! > 0)
-            _buildSmallDetail(
-              'bucket_cards.reserved'.tr(),
-              "${bucket.reserved!.toStringAsFixed(2)} ${'common.jod'.tr()}",
-              subTextColor,
-              textColor,
+          const SizedBox(height: 12),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 13,
+              vertical: 11,
             ),
-          if (!isSavings &&
-              bucket.availableVariable != null)
-            _buildSmallDetail(
-              'bucket_cards.available_variable'.tr(),
-              "${bucket.availableVariable!.toStringAsFixed(2)} ${'common.jod'.tr()}",
-              subTextColor,
-              textColor,
-            ),
-          if (isSavings &&
-              bucket.plannedEmergencyFund != null &&
-              bucket.plannedEmergencyFund! > 0)
-            _buildSmallDetail(
-              'bucket_cards.emergency_fund'.tr(),
-              "${bucket.plannedEmergencyFund!.toStringAsFixed(2)} ${'common.jod'.tr()}",
-              subTextColor,
-              textColor,
-            ),
-          if (isSavings &&
-              bucket.plannedGoalAllocations != null &&
-              bucket.plannedGoalAllocations! > 0)
-            _buildSmallDetail(
-              'bucket_cards.goal_allocations'.tr(),
-              "${bucket.plannedGoalAllocations!.toStringAsFixed(2)} ${'common.jod'.tr()}",
-              subTextColor,
-              textColor,
-            ),
-          if (isSavings &&
-              bucket.unallocatedSavings != null &&
-              bucket.unallocatedSavings! > 0)
-            _buildSmallDetail(
-              'bucket_cards.unallocated_savings'.tr(),
-              "${bucket.unallocatedSavings!.toStringAsFixed(2)} ${'common.jod'.tr()}",
-              subTextColor,
-              textColor,
-            ),
-          if (bucket.remaining != null) ...[
-            const SizedBox(height: 8),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12,
-                vertical: 10,
+            decoration: BoxDecoration(
+              color: accentColor.withOpacity(0.08),
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(
+                color: accentColor.withOpacity(0.18),
               ),
-              decoration: BoxDecoration(
-                color: color.withOpacity(0.08),
-                borderRadius: BorderRadius.circular(13),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      'bucket_cards.remaining'.tr(),
-                      style: GoogleFonts.ibmPlexSansArabic(
-                        color: subTextColor,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    "${bucket.remaining!.toStringAsFixed(2)} ${'common.jod'.tr()}",
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.account_balance_wallet_outlined,
+                  color: accentColor,
+                  size: 19,
+                ),
+                const SizedBox(width: 9),
+                Expanded(
+                  child: Text(
+                    "Remaining",
                     style: GoogleFonts.ibmPlexSansArabic(
-                      color: color,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 13,
+                      color: subTextColor,
+                      fontSize: 12,
                     ),
                   ),
-                ],
-              ),
+                ),
+                Text(
+                  remainingText,
+                  style: GoogleFonts.ibmPlexSansArabic(
+                    color: accentColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildMainDetail({
+  Widget _buildAmountCard({
     required String label,
     required String value,
+    required IconData icon,
+    required Color color,
     required Color textColor,
     required Color subTextColor,
   }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: GoogleFonts.ibmPlexSansArabic(
-            color: subTextColor,
-            fontSize: 11,
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.08),
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                icon,
+                color: color,
+                size: 17,
+              ),
+              const SizedBox(width: 6),
+              Text(
+                label,
+                style: GoogleFonts.ibmPlexSansArabic(
+                  color: subTextColor,
+                  fontSize: 11,
+                ),
+              ),
+            ],
           ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          value,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: GoogleFonts.ibmPlexSansArabic(
-            color: textColor,
-            fontWeight: FontWeight.bold,
-            fontSize: 13,
+          const SizedBox(height: 7),
+          Text(
+            value,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: GoogleFonts.ibmPlexSansArabic(
+              color: textColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 13,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
-  Widget _buildSmallDetail(
-    String label,
-    String value,
-    Color subTextColor,
-    Color textColor,
-  ) {
+  Widget _buildSmallDetail({
+    required String label,
+    required String value,
+    required IconData icon,
+    required Color color,
+  }) {
+    final subTextColor =
+        isDark ? AppColors.darkSubText : AppColors.lightSubText;
+
+    final textColor = isDark ? AppColors.darkText : AppColors.lightText;
+
     return Padding(
-      padding: const EdgeInsets.only(bottom: 7),
+      padding: const EdgeInsets.only(bottom: 9),
       child: Row(
         children: [
+          Container(
+            width: 29,
+            height: 29,
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.10),
+              borderRadius: BorderRadius.circular(9),
+            ),
+            child: Icon(
+              icon,
+              color: color,
+              size: 16,
+            ),
+          ),
+          const SizedBox(width: 9),
           Expanded(
             child: Text(
               label,
@@ -377,7 +419,6 @@ class BucketCardsSection extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 10),
           Text(
             value,
             style: GoogleFonts.ibmPlexSansArabic(
@@ -391,50 +432,22 @@ class BucketCardsSection extends StatelessWidget {
     );
   }
 
-  String _translatedStatus(String status) {
-    switch (status) {
-      case 'healthy':
-        return 'bucket_cards.status.healthy'.tr();
-      case 'moderate':
-        return 'bucket_cards.status.moderate'.tr();
-      case 'warning':
-        return 'bucket_cards.status.warning'.tr();
-      case 'critical':
-        return 'bucket_cards.status.critical'.tr();
-      case 'exceeded':
-        return 'bucket_cards.status.exceeded'.tr();
-      default:
-        return status;
-    }
-  }
-
   Color _getStatusColor(
     String? status,
     bool isDark,
   ) {
     switch (status) {
       case 'healthy':
-        return isDark
-            ? AppColors.darkPrimary
-            : AppColors.lightPrimary;
-
+        return isDark ? AppColors.darkPrimary : AppColors.lightPrimary;
       case 'moderate':
       case 'warning':
-        return isDark
-            ? AppColors.darkAccent
-            : AppColors.lightAccent;
-
+        return isDark ? AppColors.darkAccent : AppColors.lightAccent;
       case 'critical':
       case 'exceeded':
-        return isDark
-            ? AppColors.darkError
-            : AppColors.lightError;
-
+        return isDark ? AppColors.darkError : AppColors.lightError;
       case 'unavailable':
       default:
-        return isDark
-            ? AppColors.darkSubText
-            : AppColors.lightSubText;
+        return isDark ? AppColors.darkSubText : AppColors.lightSubText;
     }
   }
 }

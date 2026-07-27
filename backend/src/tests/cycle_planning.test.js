@@ -61,6 +61,11 @@ async function seedUser(conn, { income = 1000, paymentDay = 15 } = {}) {
     [userId, income]
   );
 
+  await conn.execute(
+    `INSERT INTO goals (user_id, name, target_amount, current_balance, status, goal_type, is_system_managed) VALUES (?, 'Emergency Fund', 1000, 0, 'active', 'emergency_fund', TRUE)`,
+    [userId]
+  );
+
   return userId;
 }
 
@@ -284,7 +289,7 @@ describe('Phase 3A.3 – Cycle Planning and Dashboard Integration (integration)'
         .send({
           savingsAmount,
           emergencyFundAmount,
-          emergencyFundRate: 10.0,
+          emergencyFundPercentage: 25.0,
           totalGoalAllocations,
           unallocatedSavingsAmount
         })
@@ -308,7 +313,7 @@ describe('Phase 3A.3 – Cycle Planning and Dashboard Integration (integration)'
         .send({
           savingsAmount,
           emergencyFundAmount,
-          emergencyFundRate: 10.0,
+          emergencyFundPercentage: 25.0,
           totalGoalAllocations,
           unallocatedSavingsAmount: 100 // Deliberate mismatch
         })
@@ -333,10 +338,11 @@ describe('Phase 3A.3 – Cycle Planning and Dashboard Integration (integration)'
         [cycleId, tempGoalId]
       );
 
-      const savingsAmount = 300;
-      const emergencyFundAmount = 50;
-      const totalGoalAllocations = 0; // Deliberate mismatch with 100
-      const unallocatedSavingsAmount = 150;
+      const savingsAmount = 200;
+      const emergencyFundAmount = 20; // 10% of 200
+      const totalGoalAllocations = 50; // Deliberate mismatch from actual 100
+      const unallocatedSavingsAmount = 130; 
+      // 20 + 50 + 130 = 200 (invariant matches, but totalGoalAllocations mismatch)
 
       const res = await request(app)
         .post(`/api/v1/financial-cycles/${cycleId}/savings-allocation`)
@@ -344,7 +350,7 @@ describe('Phase 3A.3 – Cycle Planning and Dashboard Integration (integration)'
         .send({
           savingsAmount,
           emergencyFundAmount,
-          emergencyFundRate: 10.0,
+          emergencyFundPercentage: 10.0,
           totalGoalAllocations,
           unallocatedSavingsAmount
         })
@@ -354,8 +360,9 @@ describe('Phase 3A.3 – Cycle Planning and Dashboard Integration (integration)'
     });
 
     it('creates savings allocation successfully when all amounts match invariants', async () => {
-      // Use existing cycleId (already has 100 planned_amount from previous test)
-      // Add another 100, bringing actual total to 200
+      // First clean up goal_cycle_allocations from previous test
+      await conn.execute('DELETE FROM goal_cycle_allocations WHERE cycle_id = ?', [cycleId]);
+
       const goalId = await createGoal(conn, userId, { amount: 1000, name: 'Valid Goal' });
       await conn.execute(
         `INSERT INTO goal_cycle_allocations (cycle_id, goal_id, planned_amount, priority_snapshot)

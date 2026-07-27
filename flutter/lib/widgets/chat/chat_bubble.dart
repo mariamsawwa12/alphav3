@@ -88,7 +88,7 @@ class ChatBubble extends StatelessWidget {
               CrossAxisAlignment.start,
           children: [
             Text(
-              message.message.tr(),
+              _getDisplayMessage(message.message),
               textAlign: TextAlign.start,
               style: TextStyle(
                 color: message.isUser
@@ -159,6 +159,19 @@ class ChatBubble extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _getDisplayMessage(String rawMessage) {
+    if (rawMessage.isEmpty) return '';
+    if (rawMessage.contains(' ') || rawMessage.contains('\n')) {
+      return rawMessage;
+    }
+    try {
+      final String trValue = rawMessage.tr();
+      return trValue;
+    } catch (_) {
+      return rawMessage;
+    }
   }
 }
 

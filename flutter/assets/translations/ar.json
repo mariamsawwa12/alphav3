@@ -178,7 +178,12 @@
     "coming_soon": "ستتوفر ميزة {feature} قريبًا.",
     "logout_question": "هل أنت متأكد من تسجيل الخروج؟",
     "english": "English",
-    "arabic": "العربية"
+    "arabic": "العربية",
+    "financial_profile": "الملف المالي",
+    "financial_analysis": "التحليل المالي",
+    "rate_us": "تقييم التطبيق",
+    "select_language": "اختر اللغة",
+    "cancel": "إلغاء"
   },
   "chat": {
     "welcome": "مرحبًا، أنا ألفا. كيف يمكنني مساعدتك اليوم؟",
@@ -664,6 +669,19 @@
   "invalid_allocation": "النسبة الحالية أكبر من المدخرات المتاحة بعد تخصيص الأهداف الأخرى.",
   "confirm": "اعتماد والبدء"
 },
+"dashboard_buckets": {
+  "needs": "الاحتياجات",
+  "wants": "الرغبات",
+  "savings": "المدخرات",
+  "actual": "الفعلي",
+  "target": "المستهدف",
+  "remaining": "المتبقي",
+  "reserved_commitments": "محجوز للالتزامات",
+  "available_variable": "المتاح للمتغير",
+  "emergency_fund": "صندوق الطوارئ",
+  "goal_allocations": "تخصيصات الأهداف",
+  "unallocated_savings": "المدخرات غير المخصصة"
+},
  "home_extra": {
     "financial_profile_load_failed": "تعذر تحميل بيانات الملف المالي",
     "cycle_started_successfully": "تم بدء دورتك المالية بنجاح",
@@ -689,13 +707,59 @@
     "missing_or_invalid_fields": "البيانات الناقصة أو غير الصالحة: {fields}",
     "financial_profile_incomplete": "الملف المالي غير مكتمل",
     "complete_data_benefit": "إكمال البيانات يساعد ألفا على تقديم تحليل وتوصيات أدق."
-  } ,
+  },
+  "financial_profile_screen": {
+    "title": "الملف المالي",
+    "edit": "تعديل",
+    "save": "حفظ التغييرات",
+    "cancel": "إلغاء",
+    "expected_income": "الدخل الشهري المتوقع",
+    "currency": "العملة",
+    "payment_day": "يوم استلام الدخل",
+    "income_sources": "مصادر الدخل",
+    "fixed_expenses": "المصروفات الثابتة",
+    "variable_expenses": "المصروفات المتغيرة",
+    "allocation_percentages": "نسب التوزيع",
+    "profile_complete": "الملف المالي مكتمل",
+    "profile_incomplete": "الملف المالي غير مكتمل",
+    "enter_valid_income": "يرجى إدخال دخل شهري صحيح.",
+    "updated_successfully": "تم تحديث الملف المالي بنجاح.",
+    "no_profile_found": "لم يتم العثور على ملف مالي.",
+    "salary": "راتب شهري",
+    "freelance": "عمل حر",
+    "business": "تجارة / أعمال",
+    "investments": "استثمارات",
+    "other": "أخرى"
+  },
+  "source_types": {
+    "voice": "تسجيل صوتي",
+    "image": "صورة فاتورة",
+    "manual": "إدخال يدوي"
+  },
 
   "cycle": {
   "current_cycle": "الدورة الحالية",
   "unavailable": "غير متوفر",
   "ends_today": "تنتهي اليوم",
   "days_left": "متبقي {days} يوم"
+} ,
+
+"savings_allocation": {
+  "load_failed": "تعذر تحميل بيانات التخطيط",
+  "title": "توزيع الادخار",
+  "description": "قم بتوزيع ادخار هذه الدورة وفقاً لأهدافك المالية.",
+  "emergency_fund_rate": "نسبة صندوق الطوارئ",
+  "emergency_fund_description": "اختر نسبة الادخار المخطط التي سيتم تخصيصها لصندوق الطوارئ.",
+  "selected_rate": "النسبة المختارة",
+  "allocation_summary": "ملخص التوزيع",
+  "planned_savings": "الادخار المخطط",
+  "emergency_fund": "صندوق الطوارئ",
+  "other_goals": "الأهداف الأخرى",
+  "unallocated": "مدخرات غير مخصصة",
+  "fund_limit": "تم تحديد سقف اقتطاع صندوق الطوارئ للوصول إلى هدفه دون زيادات.",
+  "invalid_allocation": "التوزيع المحدد يتجاوز الادخار المتبقي بعد تمويل أهدافك الأخرى.",
+  "zero_savings_hint": "إجمالي الادخار المخطط لهذه الدورة هو 0 د.أ. يمكنك زيادة نسبة الادخار من شاشة مراجعة التوزيع لتغذية صندوق الطوارئ.",
+  "confirm": "حفظ ومتابعة"
 } ,
 
 "bucket_cards": {

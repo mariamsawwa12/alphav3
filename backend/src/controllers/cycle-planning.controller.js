@@ -24,6 +24,17 @@ class CyclePlanningController {
     });
   }
 
+  static async updateSavingsAllocation(req, res) {
+    const { cycleId } = req.params;
+    const result = await CyclePlanningService.updateSavingsAllocation(req.user.id, cycleId, req.body);
+    res.status(200).json({
+      success: true,
+      message: 'Savings allocation updated successfully',
+      data: result,
+      meta: null
+    });
+  }
+
   static async getCyclePlanningSummary(req, res) {
     const { cycleId } = req.params;
     const result = await CyclePlanningService.getCyclePlanningSummary(req.user.id, cycleId);

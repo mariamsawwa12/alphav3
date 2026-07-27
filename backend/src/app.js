@@ -7,6 +7,9 @@ const { errorMiddleware } = require('./middleware/error.middleware');
 
 const app = express();
 
+// Trust proxy required for express-rate-limit behind Render/Heroku reverse proxy
+app.set('trust proxy', 1);
+
 app.use(helmet());
 app.use(cors());
 app.use(express.json());

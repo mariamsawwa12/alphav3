@@ -83,7 +83,7 @@ class _TransactionReviewScreenState extends State<TransactionReviewScreen> {
       _draft = widget.transactions[index];
 
       _transactionType = _draft.transactionType;
-      if (_draft.sourceType == 'image' && _transactionType == null) {
+      if ((_draft.sourceType == 'image' || _draft.sourceType == 'voice') && _transactionType == null) {
         _transactionType = 'expense';
       }
 
@@ -96,13 +96,11 @@ class _TransactionReviewScreenState extends State<TransactionReviewScreen> {
       if (_bucket == 'needs' &&
           _category != null &&
           !FinanceMappings.needsCategories.values.contains(_category)) {
-        _category = null;
+        _category = 'other';
       } else if (_bucket == 'wants' &&
           _category != null &&
           !FinanceMappings.wantsCategories.values.contains(_category)) {
-        _category = null;
-      } else if (_bucket == null) {
-        _category = null;
+        _category = 'other';
       }
 
       if (_transactionType == 'income') {
@@ -1116,8 +1114,10 @@ class _TransactionReviewScreenState extends State<TransactionReviewScreen> {
   }) {
     final confidence = _draft.confidence ?? 0.0;
     final source = _draft.sourceType == 'voice'
-        ? 'voice'.tr()
-        : (_draft.sourceType == 'image' ? 'image'.tr() : 'manual'.tr());
+        ? 'source_types.voice'.tr()
+        : (_draft.sourceType == 'image'
+            ? 'source_types.image'.tr()
+            : 'source_types.manual'.tr());
 
     return Container(
       padding: EdgeInsets.all(screenW * 0.04),
