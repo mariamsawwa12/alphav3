@@ -2,6 +2,7 @@ import 'package:alpha_app/core/utils/app_colors.dart';
 import 'package:alpha_app/core/utils/device.dart';
 import 'package:alpha_app/models/home_model.dart';
 import 'package:alpha_app/providers/home_provider.dart';
+import 'package:alpha_app/providers/language_provider.dart';
 import 'package:alpha_app/providers/profile_provider.dart';
 import 'package:alpha_app/providers/themeprovider.dart';
 import 'package:alpha_app/providers/expense_provider.dart';
@@ -106,6 +107,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
+     final languageProvider = Provider.of<LanguageProvider>(context);
     final homeProvider = context.watch<HomeProvider>();
 
     final themeProvider = context.watch<Themeprovider>();

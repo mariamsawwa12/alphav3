@@ -2,6 +2,7 @@ import 'package:alpha_app/core/utils/app_colors.dart';
 import 'package:alpha_app/core/utils/device.dart';
 import 'package:alpha_app/models/expense_model.dart';
 import 'package:alpha_app/providers/expense_provider.dart';
+import 'package:alpha_app/providers/language_provider.dart';
 import 'package:alpha_app/providers/themeprovider.dart';
 import 'package:alpha_app/screens/expenses/new_expense_screen.dart';
 import 'package:alpha_app/widgets/dashed_action_button.dart';
@@ -40,6 +41,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
 
   @override
   Widget build(BuildContext context) {
+     final languageProvider = Provider.of<LanguageProvider>(context);
     final expenseProvider = context.watch<ExpenseProvider>();
 
     final themeProvider = context.watch<Themeprovider>();

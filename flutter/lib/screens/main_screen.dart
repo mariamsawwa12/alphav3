@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:alpha_app/core/utils/onboarding_guard.dart';
 import 'package:alpha_app/providers/auth_provider.dart';
 import 'package:alpha_app/providers/cycle_provider.dart';
+import 'package:alpha_app/providers/language_provider.dart';
 import 'package:alpha_app/providers/onboarding_provider.dart';
 import 'package:alpha_app/screens/ai_assistant/chat_screen.dart';
 import 'package:alpha_app/screens/auth/otp_screen.dart';
@@ -205,6 +206,7 @@ class _MainNavigationScreenState
 
   @override
   Widget build(BuildContext context) {
+     final languageProvider = Provider.of<LanguageProvider>(context);
     return Scaffold(
       extendBody: true,
       body: IndexedStack(

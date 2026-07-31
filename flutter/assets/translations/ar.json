@@ -57,7 +57,9 @@
     "scan_receipt": "مسح الفاتورة",
     "capture_expenses": "التقاط المصروفات",
     "challenges": "التحديات",
-    "build_good_habits": "كوّن عادات مالية جيدة"
+    "build_good_habits": "كوّن عادات مالية جيدة",
+    "emergency_fund": "صندوق الطوارئ",
+    "manage_safety_net": "إدارة شبكة الأمان المالي"
   },
   "expenses": {
     "title": "المصروفات",
@@ -87,7 +89,6 @@
       "category": "الفئة"
     }
   },
-  
   "expense_card": {
     "expense": "مصروف",
     "payment": "طريقة الدفع",
@@ -229,9 +230,8 @@
       "critical": "حرج",
       "unknown": "غير معروف"
     }
-  } ,
-
-   "receipt_input": {
+  },
+  "receipt_input": {
     "title": "مسح الفاتورة",
     "listening": "جاري الاستماع...",
     "place_receipt": "ضع الفاتورة داخل الإطار",
@@ -248,222 +248,182 @@
     "no_camera_found": "لم يتم العثور على كاميرا",
     "camera_not_initialized": "لم تتم تهيئة الكاميرا",
     "analyzing_expense": "جاري تحليل المصروف..."
-  }
-  ,
-"receipt_review": {
-  "empty_title": "لا توجد بيانات للفاتورة",
-  "empty_description": "امسح فاتورة أو استخدم الإدخال الصوتي لإضافة مصروف.",
-  "add_receipt": "إضافة فاتورة",
-  "confirm": "تأكيد",
-  "expense_added": "تمت إضافة المصروف بنجاح",
-
-  "edit_store": "تعديل المتجر",
-  "store_name": "اسم المتجر",
-  "save": "حفظ",
-
-  "select_category": "اختر الفئة",
-
-  "edit_item": "تعديل العنصر",
-  "item_name": "اسم العنصر",
-
-  "remove_item_title": "حذف العنصر؟",
-  "remove": "حذف",
-  "edit": "تعديل",
-
-  "expense_recognized": "تم التعرف على المصروف",
-  "receipt_recognized": "تم التعرف على الفاتورة",
-
-  "confidence": "تم الاستخراج تلقائيًا بنسبة دقة {percentage}%",
-
-  "review_description": "راجع البيانات أدناه وعدّل أي حقل قبل التأكيد إذا لزم الأمر.",
-
-  "store": "المتجر",
-  "date": "التاريخ",
-  "suggested_category": "الفئة المقترحة",
-
-  "auto_ai": "ذكاء اصطناعي",
-
-  "extracted_items": "العناصر المستخرجة ({count})",
-
-  "total": "الإجمالي",
-
-  "categories": {
-    "shopping": "التسوق",
-    "groceries": "البقالة",
-    "food": "الطعام",
-    "transport": "المواصلات",
-    "bills": "الفواتير",
-    "health": "الصحة",
-    "entertainment": "الترفيه",
-    "education": "التعليم",
-    "other": "أخرى"
-  }
-},
-
-"goal_date": {
-  "title": "تاريخ الهدف",
-  "description": "اختر تاريخًا مستهدفًا واقعيًا لتحقيق هدفك.",
-  "year": "السنة",
-  "selected_date": "التاريخ المحدد",
-  "confirm_date": "تأكيد التاريخ",
-  "month": "الشهر"
-} ,
-
-"expense_date": {
-  "title": "تاريخ المصروف",
-  "description": "اختر التاريخ الذي حدث فيه المصروف.",
-  "year": "السنة",
-  "selected_date": "التاريخ المحدد",
-  "confirm_date": "تأكيد التاريخ",
-  "month": "الشهر"
-} ,
-"birth_date": {
-  "title": "تاريخ الميلاد",
-  "description": "اختر تاريخ ميلادك. يجب أن يكون عمرك 18 سنة على الأقل.",
-  "year": "السنة",
-  "selected_date": "التاريخ المحدد",
-  "confirm_date": "تأكيد التاريخ",
-  "month": "الشهر"
-} ,
-"priority_card": {
-  "importance": "ما مدى أهمية هذا الهدف؟"
-} ,
-"onboarding": {
+  },
+  "receipt_review": {
+    "empty_title": "لا توجد بيانات للفاتورة",
+    "empty_description": "امسح فاتورة أو استخدم الإدخال الصوتي لإضافة مصروف.",
+    "add_receipt": "إضافة فاتورة",
+    "confirm": "تأكيد",
+    "expense_added": "تمت إضافة المصروف بنجاح",
+    "edit_store": "تعديل المتجر",
+    "store_name": "اسم المتجر",
+    "save": "حفظ",
+    "select_category": "اختر الفئة",
+    "edit_item": "تعديل العنصر",
+    "item_name": "اسم العنصر",
+    "remove_item_title": "حذف العنصر؟",
+    "remove": "حذف",
+    "edit": "تعديل",
+    "expense_recognized": "تم التعرف على المصروف",
+    "receipt_recognized": "تم التعرف على الفاتورة",
+    "confidence": "تم الاستخراج تلقائيًا بنسبة دقة {percentage}%",
+    "review_description": "راجع البيانات أدناه وعدّل أي حقل قبل التأكيد إذا لزم الأمر.",
+    "store": "المتجر",
+    "date": "التاريخ",
+    "suggested_category": "الفئة المقترحة",
+    "auto_ai": "ذكاء اصطناعي",
+    "extracted_items": "العناصر المستخرجة ({count})",
+    "total": "الإجمالي",
+    "categories": {
+      "shopping": "التسوق",
+      "groceries": "البقالة",
+      "food": "الطعام",
+      "transport": "المواصلات",
+      "bills": "الفواتير",
+      "health": "الصحة",
+      "entertainment": "الترفيه",
+      "education": "التعليم",
+      "other": "أخرى"
+    }
+  },
+  "goal_date": {
+    "title": "تاريخ الهدف",
+    "description": "اختر تاريخًا مستهدفًا واقعيًا لتحقيق هدفك.",
+    "year": "السنة",
+    "selected_date": "التاريخ المحدد",
+    "confirm_date": "تأكيد التاريخ",
+    "month": "الشهر"
+  },
+  "expense_date": {
+    "title": "تاريخ المصروف",
+    "description": "اختر التاريخ الذي حدث فيه المصروف.",
+    "year": "السنة",
+    "selected_date": "التاريخ المحدد",
+    "confirm_date": "تأكيد التاريخ",
+    "month": "الشهر"
+  },
+  "birth_date": {
+    "title": "تاريخ الميلاد",
+    "description": "اختر تاريخ ميلادك. يجب أن يكون عمرك 18 سنة على الأقل.",
+    "year": "السنة",
+    "selected_date": "التاريخ المحدد",
+    "confirm_date": "تأكيد التاريخ",
+    "month": "الشهر"
+  },
+  "priority_card": {
+    "importance": "ما مدى أهمية هذا الهدف؟"
+  },
+  "onboarding": {
+    "smart_financial_advisor": "المستشار المالي الذكي",
+    "get_started": "ابدأ الآن",
+    "skip": "تخطي",
+    "next": "التالي",
+    "page_one": {
+      "title": "نحن نفهم سلوكك المالي",
+      "description": "يتتبع ألفا أنماط إنفاقك تلقائيًا ويكتشف العادات التي تؤثر في وضعك المالي، دون أي مجهود إضافي منك."
+    },
+    "page_two": {
+      "title": "اسأل قبل أن تشتري",
+      "description": "قبل أي عملية شراء، اسأل ألفا: «هل يناسب هذا ميزانيتي؟» واحصل فورًا على تحليل يوضح تأثيره على أهدافك المالية."
+    },
+    "page_three": {
+      "title": "حقق أهدافك بذكاء",
+      "description": "تابع أهدافك، وتنافس مع أصدقائك من خلال تحديات ممتعة، واطمئن إلى أن بياناتك المالية تبقى محمية بالكامل ولا تتم مشاركتها أبدًا."
+    }
+  },
   "smart_financial_advisor": "المستشار المالي الذكي",
-  "get_started": "ابدأ الآن",
-  "skip": "تخطي",
-  "next": "التالي",
-  "page_one": {
-    "title": "نحن نفهم سلوكك المالي",
-    "description": "يتتبع ألفا أنماط إنفاقك تلقائيًا ويكتشف العادات التي تؤثر في وضعك المالي، دون أي مجهود إضافي منك."
+  "personal_info": {
+    "step": "الخطوة {current} من {total}",
+    "title": "المعلومات الشخصية",
+    "description": "كلما كانت بياناتك أدق، كانت نصائح ألفا أفضل.",
+    "gender": "الجنس",
+    "male": "ذكر",
+    "female": "أنثى",
+    "marital_status": "الحالة الاجتماعية",
+    "single": "أعزب",
+    "married": "متزوج",
+    "other": "أخرى",
+    "head_of_household": "هل أنت معيل الأسرة؟",
+    "contribute_expenses": "هل تساهم في مصاريف الأسرة؟",
+    "university_student": "هل أنت طالب جامعي؟",
+    "yes": "نعم",
+    "no": "لا",
+    "family_members": "عدد أفراد الأسرة",
+    "next": "التالي"
   },
-  "page_two": {
-    "title": "اسأل قبل أن تشتري",
-    "description": "قبل أي عملية شراء، اسأل ألفا: «هل يناسب هذا ميزانيتي؟» واحصل فورًا على تحليل يوضح تأثيره على أهدافك المالية."
+  "setup_goal": {
+    "step": "الخطوة {current} من {total}",
+    "title": "أنشئ أول هدف لك",
+    "description": "يمكنك إضافة المزيد من الأهداف في أي وقت لاحقًا",
+    "choose_goal": "اختر هدفك",
+    "goal_name": "اسم الهدف",
+    "enter_goal_name": "أدخل اسم الهدف",
+    "monthly_saving_amount": "مبلغ الادخار الشهري",
+    "amount_per_month": "المبلغ شهريًا",
+    "priority": "الأولوية",
+    "target_date": "التاريخ المستهدف",
+    "select_target_date": "اختر التاريخ المستهدف",
+    "alpha_suggestion": "اقتراح ألفا",
+    "alpha_suggestion_description": "اختر مبلغ ادخار شهريًا واقعيًا حتى تتمكن من الوصول إلى هدفك بسهولة.",
+    "finish": "إنهاء"
   },
-  "page_three": {
-    "title": "حقق أهدافك بذكاء",
-    "description": "تابع أهدافك، وتنافس مع أصدقائك من خلال تحديات ممتعة، واطمئن إلى أن بياناتك المالية تبقى محمية بالكامل ولا تتم مشاركتها أبدًا."
-  }
-},
-"smart_financial_advisor": "المستشار المالي الذكي" ,
-"personal_info": {
-  "step": "الخطوة {current} من {total}",
-  "title": "المعلومات الشخصية",
-  "description": "كلما كانت بياناتك أدق، كانت نصائح ألفا أفضل.",
-
-  "gender": "الجنس",
-  "male": "ذكر",
-  "female": "أنثى",
-
-  "marital_status": "الحالة الاجتماعية",
-  "single": "أعزب",
-  "married": "متزوج",
-  "other": "أخرى",
-
-  "head_of_household": "هل أنت معيل الأسرة؟",
-  "contribute_expenses": "هل تساهم في مصاريف الأسرة؟",
-  "university_student": "هل أنت طالب جامعي؟",
-
-  "yes": "نعم",
-  "no": "لا",
-
-  "family_members": "عدد أفراد الأسرة",
-
-  "next": "التالي"
-} ,
-"setup_goal": {
-  "step": "الخطوة {current} من {total}",
-  "title": "أنشئ أول هدف لك",
-  "description": "يمكنك إضافة المزيد من الأهداف في أي وقت لاحقًا",
-
-  "choose_goal": "اختر هدفك",
-  "goal_name": "اسم الهدف",
-  "enter_goal_name": "أدخل اسم الهدف",
-
-  "monthly_saving_amount": "مبلغ الادخار الشهري",
-  "amount_per_month": "المبلغ شهريًا",
-
-  "priority": "الأولوية",
-
-  "target_date": "التاريخ المستهدف",
-  "select_target_date": "اختر التاريخ المستهدف",
-
-  "alpha_suggestion": "اقتراح ألفا",
-  "alpha_suggestion_description": "اختر مبلغ ادخار شهريًا واقعيًا حتى تتمكن من الوصول إلى هدفك بسهولة.",
-
-  "finish": "إنهاء"
-} ,
-"otp": {
-  "title": "رمز التحقق",
-  "description": "أرسلنا رمز تحقق مكوّنًا من 6 أرقام إلى بريدك الإلكتروني",
-  "enter_full_code": "يرجى إدخال رمز التحقق المكوّن من 6 أرقام كاملًا",
-  "verification_failed": "فشل التحقق من الرمز",
-  "account_verified": "تم التحقق من الحساب بنجاح",
-  "verified": "تم التحقق بنجاح",
-  "onboarding_failed": "تعذر تحميل حالة إعداد الحساب",
-  "didnt_receive": "لم يصلك الرمز؟",
-  "sending": "جارٍ الإرسال...",
-  "resend_in": "إعادة الإرسال خلال",
-  "resend": "إعادة إرسال الرمز",
-  "resend_unavailable": "إعادة إرسال الرمز غير متاحة حاليًا",
-  "verify": "تحقق",
-  "dev_mode": "وضع التطوير - رمز التحقق",
-  "tap_to_fill": "اضغط لتعبئة الرمز تلقائيًا"
-},
-"create_account": {
-  "sanad_login": "تسجيل الدخول بواسطة سند",
-"sanad_coming_soon": "سيكون تسجيل الدخول بواسطة سند متاحًا قريبًا",
-  "welcome": "لنبدأ",
-  "title": "أنشئ حسابك",
-  "description": "تفصلك دقيقة واحدة عن فهم أعمق لوضعك المالي",
-
-  "full_name": "الاسم الكامل",
-  "enter_full_name": "أدخل اسمك الكامل",
-
-  "phone_number": "رقم الهاتف",
-  "phone_required": "رقم الهاتف مطلوب",
-  "phone_invalid": "أدخل رقم هاتف صحيح",
-
-  "email": "البريد الإلكتروني",
-  "enter_email": "أدخل بريدك الإلكتروني",
-
-  "birth_date": "تاريخ الميلاد",
-  "select_birth_date": "اختر تاريخ ميلادك",
-  "birth_date_required": "تاريخ الميلاد مطلوب",
-
-  "password": "كلمة المرور",
-  "password_hint": "8 أحرف أو أكثر، حرف كبير، حرف صغير، ورقم",
-
-  "password_length": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
-  "password_lower": "يجب أن تحتوي كلمة المرور على حرف صغير",
-  "password_upper": "يجب أن تحتوي كلمة المرور على حرف كبير",
-  "password_number": "يجب أن تحتوي كلمة المرور على رقم",
-
-  "agree": "أوافق على ",
-  "terms": "شروط الاستخدام",
-  "and": " و ",
-  "privacy": "سياسة الخصوصية",
-
-  "terms_required": "يجب الموافقة على شروط الاستخدام وسياسة الخصوصية",
-
-  "create_account": "إنشاء حساب",
-
-  "verification_sent": "تم إرسال رمز التحقق إلى بريدك الإلكتروني",
-  "account_failed": "تعذر إنشاء الحساب",
-
-  "already_have_account": "لديك حساب بالفعل؟",
-  "sign_in": "تسجيل الدخول" ,
-  "name_required": "الاسم الكامل مطلوب",
-  "name_invalid": "يرجى إدخال اسم كامل صحيح",
-  "email_required": "البريد الإلكتروني مطلوب",
-  "email_invalid": "يرجى إدخال بريد إلكتروني صحيح"
-
-
-} ,
-"login": {
-  "or": "أو",
-"could_not_load_onboarding": "تعذر تحميل حالة الإعداد الأولي",
+  "otp": {
+    "title": "رمز التحقق",
+    "description": "أرسلنا رمز تحقق مكوّنًا من 6 أرقام إلى بريدك الإلكتروني",
+    "enter_full_code": "يرجى إدخال رمز التحقق المكوّن من 6 أرقام كاملًا",
+    "verification_failed": "فشل التحقق من الرمز",
+    "account_verified": "تم التحقق من الحساب بنجاح",
+    "verified": "تم التحقق بنجاح",
+    "onboarding_failed": "تعذر تحميل حالة إعداد الحساب",
+    "didnt_receive": "لم يصلك الرمز؟",
+    "sending": "جارٍ الإرسال...",
+    "resend_in": "إعادة الإرسال خلال",
+    "resend": "إعادة إرسال الرمز",
+    "resend_unavailable": "إعادة إرسال الرمز غير متاحة حاليًا",
+    "verify": "تحقق",
+    "dev_mode": "وضع التطوير - رمز التحقق",
+    "tap_to_fill": "اضغط لتعبئة الرمز تلقائيًا"
+  },
+  "create_account": {
+    "sanad_login": "تسجيل الدخول بواسطة سند",
+    "sanad_coming_soon": "سيكون تسجيل الدخول بواسطة سند متاحًا قريبًا",
+    "welcome": "لنبدأ",
+    "title": "أنشئ حسابك",
+    "description": "تفصلك دقيقة واحدة عن فهم أعمق لوضعك المالي",
+    "full_name": "الاسم الكامل",
+    "enter_full_name": "أدخل اسمك الكامل",
+    "phone_number": "رقم الهاتف",
+    "phone_required": "رقم الهاتف مطلوب",
+    "phone_invalid": "أدخل رقم هاتف صحيح",
+    "email": "البريد الإلكتروني",
+    "enter_email": "أدخل بريدك الإلكتروني",
+    "birth_date": "تاريخ الميلاد",
+    "select_birth_date": "اختر تاريخ ميلادك",
+    "birth_date_required": "تاريخ الميلاد مطلوب",
+    "password": "كلمة المرور",
+    "password_hint": "8 أحرف أو أكثر، حرف كبير، حرف صغير، ورقم",
+    "password_length": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+    "password_lower": "يجب أن تحتوي كلمة المرور على حرف صغير",
+    "password_upper": "يجب أن تحتوي كلمة المرور على حرف كبير",
+    "password_number": "يجب أن تحتوي كلمة المرور على رقم",
+    "agree": "أوافق على ",
+    "terms": "شروط الاستخدام",
+    "and": " و ",
+    "privacy": "سياسة الخصوصية",
+    "terms_required": "يجب الموافقة على شروط الاستخدام وسياسة الخصوصية",
+    "create_account": "إنشاء حساب",
+    "verification_sent": "تم إرسال رمز التحقق إلى بريدك الإلكتروني",
+    "account_failed": "تعذر إنشاء الحساب",
+    "already_have_account": "لديك حساب بالفعل؟",
+    "sign_in": "تسجيل الدخول",
+    "name_required": "الاسم الكامل مطلوب",
+    "name_invalid": "يرجى إدخال اسم كامل صحيح",
+    "email_required": "البريد الإلكتروني مطلوب",
+    "email_invalid": "يرجى إدخال بريد إلكتروني صحيح"
+  },
+  "login": {
+    "or": "أو",
+    "could_not_load_onboarding": "تعذر تحميل حالة الإعداد الأولي",
     "welcome_back": "مرحبًا بعودتك",
     "description": "سجّل الدخول لمتابعة رحلتك المالية",
     "phone_number": "رقم الهاتف",
@@ -473,9 +433,8 @@
     "password_hint": "8 أحرف أو أكثر، حرف كبير، حرف صغير، ورقم",
     "login": "تسجيل الدخول",
     "invalid_credentials": "رقم الهاتف أو كلمة المرور غير صحيحة"
-  } ,
-
-   "terms": {
+  },
+  "terms": {
     "title": "شروط الاستخدام والخصوصية والأحكام العامة",
     "last_updated": "آخر تحديث: يوليو 2026",
     "commitment_title": "التزامنا تجاهك",
@@ -514,41 +473,31 @@
     "acceptance_body": "يُعد استخدام ألفا موافقة صريحة على هذه الشروط. ويجوز لألفا تحديثها دوريًا مع تقديم الإشعار الذي تتطلبه القوانين النافذة. ويُنصح المستخدم بمراجعة هذه الصفحة من وقت لآخر للاطلاع على أي تعديلات.",
     "signature": "مع خالص التقدير،\nفريق ألفا",
     "back_button": "حسنًا، العودة"
-  } ,
-
-  
-
-"financial_step": "الخطوة 2 من 3",
+  },
+  "financial_step": "الخطوة 2 من 3",
   "financial_information": "المعلومات المالية",
   "financial_information_subtitle": "كلما كانت بياناتك أدق، كانت نصائح Alpha أكثر دقة",
-
   "relationship_with_money": "كيف تصف علاقتك بالمال؟",
   "careful_spending": "إنفاق بحذر",
   "balanced_spending": "إنفاق متوازن",
   "emotional_spending": "إنفاق عاطفي",
-
   "regular_monthly_salary": "الراتب الأساسي",
   "regular_salary_description": "أدخل الراتب الثابت المتوقع استلامه",
   "enter_monthly_salary": "أدخل الراتب",
-
   "additional_monthly_income": "الدخل الإضافي المتوقع",
   "additional_income_description": "أدخل فقط مصادر الدخل المنفصلة عن راتبك الأساسي والمتوقعة .",
   "additional_monthly_amount": "المبلغ الإضافي",
-
   "expected_monthly_income": "إجمالي الدخل المتوقع",
   "expected_income_note": "يشمل هذا الإجمالي الراتب الأساسي ومصادر الدخل الإضافية فقط.",
-
   "salary_payment_day": "دورية استلام الراتب",
   "select_salary_payment_day": "اختر يوم استلام الراتب",
   "salary_payment_day_description": "اختر اليوم الذي تستلم فيه راتبك عادةً.",
   "salary_payment_day_semantics": "يوم استلام الراتب",
   "day": "اليوم",
   "select_salary_day": "اختر يوم الراتب",
-
   "fixed_monthly_expenses": "المصاريف الشهرية الثابتة",
   "flexible_monthly_expenses": "المصاريف الشهرية المتغيرة",
   "enter_monthly_amount_for": "أدخل المبلغ الشهري لـ {}",
-
   "estimated_financial_summary": "الملخص المالي التقديري",
   "estimated_summary_note": "ملاحظة: هذه القيم تقديرية ولا تمثل معاملات مالية فعلية.",
   "fixed_expenses": "المصاريف الثابتة",
@@ -556,72 +505,60 @@
   "total_estimated_expenses": "إجمالي المصاريف التقديرية",
   "estimated_surplus": "الفائض التقديري",
   "estimated_deficit": "العجز التقديري",
-
   "main_financial_goal": "الهدف المالي الرئيسي",
   "saving": "الادخار",
   "debt_payment": "سداد الديون",
   "daily_budget": "الميزانية اليومية",
   "emergency_fund": "صندوق الطوارئ",
   "other": "أخرى",
-
   "optional_saving_target": "هدف ادخار شهري إضافي (اختياري)",
   "saving_target_description": "هذا هدف شخصي ولا يُحتسب ضمن الدخل الشهري.",
   "enter_optional_saving": "أدخل مبلغ الادخار الاختياري",
-
   "next": "التالي",
-
   "income_sources": {
     "recurring_side_income": "دخل جانبي متكرر"
-  }
-,
-
-
-
-
-
-  
-"complete_profile": "أكمل ملفك المالي",
-"completion_message": "ملفك الشخصي مكتمل بنسبة {percentage}%. أكمل المعلومات الناقصة للحصول على تحليل مالي أكثر دقة.",
-"missing_personal_information": "معلومات شخصية ناقصة",
-"missing_financial_information": "معلومات مالية ناقصة",
-"missing_allocation_preference": "تفضيلات التوزيع ناقصة",
-"improve_analysis_accuracy": "تحسين دقة التحليل",
-"complete_now": "أكمل الآن",
-"profile_complete": "الملف مكتمل",
-"analysis_limited": "محدود",
-"analysis_estimated": "مُقدَّر",
-"analysis_reliable": "موثوق" ,
-"forgot_password": {
-  "title": "نسيت كلمة المرور؟",
-  "description": "أدخل بريدك الإلكتروني لاستلام رمز التحقق وإعادة تعيين كلمة المرور.",
-  "email": "البريد الإلكتروني",
-  "email_hint": "أدخل بريدك الإلكتروني",
-  "email_required": "البريد الإلكتروني مطلوب",
-  "email_invalid": "أدخل بريدًا إلكترونيًا صحيحًا",
-  "send_code": "إرسال الرمز",
-  "code_sent": "إذا كان الحساب موجودًا، فقد تم إرسال رمز التحقق."
-} ,
-"forgot_password_otp": {
-  "title": "رمز التحقق",
-  "description": "يرجى إدخال رمز التحقق المكون من 6 أرقام الذي أُرسل إلى {email}",
-  "verify": "تحقق"
-},
-"reset_password": {
-  "title": "إعادة تعيين كلمة المرور",
-  "description": "أنشئ كلمة مرور جديدة وقوية لحسابك.",
-  "new_password": "كلمة المرور الجديدة",
-  "enter_new_password": "أدخل كلمة المرور الجديدة",
-  "confirm_password": "تأكيد كلمة المرور الجديدة",
-  "confirm_new_password": "أعد إدخال كلمة المرور الجديدة",
-  "password_hint": "استخدم 8 أحرف على الأقل، تتضمن حرفًا كبيرًا وحرفًا صغيرًا ورقمًا.",
-  "both_required": "يجب تعبئة حقلي كلمة المرور",
-  "passwords_not_match": "كلمتا المرور غير متطابقتين",
-  "password_invalid": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل، وأن تحتوي على حرف كبير وحرف صغير ورقم",
-  "reset_success": "تمت إعادة تعيين كلمة المرور بنجاح",
-  "button": "إعادة تعيين كلمة المرور"
-}
-,
-"allocation_review": "مراجعة توزيع الدخل",
+  },
+  "complete_profile": "أكمل ملفك المالي",
+  "completion_message": "ملفك الشخصي مكتمل بنسبة {percentage}%. أكمل المعلومات الناقصة للحصول على تحليل مالي أكثر دقة.",
+  "missing_personal_information": "معلومات شخصية ناقصة",
+  "missing_financial_information": "معلومات مالية ناقصة",
+  "missing_allocation_preference": "تفضيلات التوزيع ناقصة",
+  "improve_analysis_accuracy": "تحسين دقة التحليل",
+  "complete_now": "أكمل الآن",
+  "profile_complete": "الملف مكتمل",
+  "analysis_limited": "محدود",
+  "analysis_estimated": "مُقدَّر",
+  "analysis_reliable": "موثوق",
+  "forgot_password": {
+    "title": "نسيت كلمة المرور؟",
+    "description": "أدخل بريدك الإلكتروني لاستلام رمز التحقق وإعادة تعيين كلمة المرور.",
+    "email": "البريد الإلكتروني",
+    "email_hint": "أدخل بريدك الإلكتروني",
+    "email_required": "البريد الإلكتروني مطلوب",
+    "email_invalid": "أدخل بريدًا إلكترونيًا صحيحًا",
+    "send_code": "إرسال الرمز",
+    "code_sent": "إذا كان الحساب موجودًا، فقد تم إرسال رمز التحقق."
+  },
+  "forgot_password_otp": {
+    "title": "رمز التحقق",
+    "description": "يرجى إدخال رمز التحقق المكون من 6 أرقام الذي أُرسل إلى {email}",
+    "verify": "تحقق"
+  },
+  "reset_password": {
+    "title": "إعادة تعيين كلمة المرور",
+    "description": "أنشئ كلمة مرور جديدة وقوية لحسابك.",
+    "new_password": "كلمة المرور الجديدة",
+    "enter_new_password": "أدخل كلمة المرور الجديدة",
+    "confirm_password": "تأكيد كلمة المرور الجديدة",
+    "confirm_new_password": "أعد إدخال كلمة المرور الجديدة",
+    "password_hint": "استخدم 8 أحرف على الأقل، تتضمن حرفًا كبيرًا وحرفًا صغيرًا ورقمًا.",
+    "both_required": "يجب تعبئة حقلي كلمة المرور",
+    "passwords_not_match": "كلمتا المرور غير متطابقتين",
+    "password_invalid": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل، وأن تحتوي على حرف كبير وحرف صغير ورقم",
+    "reset_success": "تمت إعادة تعيين كلمة المرور بنجاح",
+    "button": "إعادة تعيين كلمة المرور"
+  },
+  "allocation_review": "مراجعة توزيع الدخل",
   "allocation_review_subtitle": "راجع وعدّل طريقة توزيع دخلك.",
   "allocation_total_must_equal_100": "يجب أن يساوي إجمالي التوزيع 100% تمامًا.",
   "income": "الدخل",
@@ -640,49 +577,48 @@
   "total_allocation": "إجمالي التوزيع",
   "reset": "إعادة ضبط",
   "approve": "اعتماد",
-  "jod": "د.أ" ,
+  "jod": "د.أ",
   "main_navigation": {
-  "image_recovery_failed": "تعذر استعادة الصورة: {message}",
-  "start_cycle_first": "ابدأ دورة مالية قبل إضافة الفواتير."
-} ,
-
-"navigation": {
-  "home": "الرئيسية",
-  "expenses": "المصروفات",
-  "ai": "ألفا",
-  "goals": "الأهداف",
-  "profile": "حسابي"
-} ,
-"savings_allocation": {
-  "load_failed": "تعذر تحميل بيانات التخطيط",
-  "title": "تخطيط المدخرات",
-  "description": "وزّع مدخرات هذه الدورة بطريقة تناسب أهدافك.",
-  "emergency_fund_rate": "نسبة صندوق الطوارئ",
-  "emergency_fund_description": "حدد النسبة من إجمالي المدخرات التي تريد تخصيصها لصندوق الطوارئ.",
-  "selected_rate": "النسبة المختارة",
-  "allocation_summary": "ملخص التوزيع",
-  "planned_savings": "إجمالي المدخرات المتوقعة",
-  "emergency_fund": "صندوق الطوارئ",
-  "other_goals": "أهداف أخرى",
-  "unallocated": "المدخرات غير المخصصة",
-  "fund_limit": "تم تحديد الحد الأقصى لصندوق الطوارئ لأنه سيصل إلى هدفه النهائي.",
-  "invalid_allocation": "النسبة الحالية أكبر من المدخرات المتاحة بعد تخصيص الأهداف الأخرى.",
-  "confirm": "اعتماد والبدء"
-},
-"dashboard_buckets": {
-  "needs": "الاحتياجات",
-  "wants": "الرغبات",
-  "savings": "المدخرات",
-  "actual": "الفعلي",
-  "target": "المستهدف",
-  "remaining": "المتبقي",
-  "reserved_commitments": "محجوز للالتزامات",
-  "available_variable": "المتاح للمتغير",
-  "emergency_fund": "صندوق الطوارئ",
-  "goal_allocations": "تخصيصات الأهداف",
-  "unallocated_savings": "المدخرات غير المخصصة"
-},
- "home_extra": {
+    "image_recovery_failed": "تعذر استعادة الصورة: {message}",
+    "start_cycle_first": "ابدأ دورة مالية قبل إضافة الفواتير."
+  },
+  "navigation": {
+    "home": "الرئيسية",
+    "expenses": "المصروفات",
+    "ai": "ألفا",
+    "goals": "الأهداف",
+    "profile": "حسابي"
+  },
+  "savings_allocation": {
+    "load_failed": "تعذر تحميل بيانات التخطيط",
+    "title": "تخطيط المدخرات",
+    "description": "وزّع مدخرات هذه الدورة بطريقة تناسب أهدافك.",
+    "emergency_fund_rate": "نسبة صندوق الطوارئ",
+    "emergency_fund_description": "حدد النسبة من إجمالي المدخرات التي تريد تخصيصها لصندوق الطوارئ.",
+    "selected_rate": "النسبة المختارة",
+    "allocation_summary": "ملخص التوزيع",
+    "planned_savings": "إجمالي المدخرات المتوقعة",
+    "emergency_fund": "صندوق الطوارئ",
+    "other_goals": "أهداف أخرى",
+    "unallocated": "المدخرات غير المخصصة",
+    "fund_limit": "تم تحديد الحد الأقصى لصندوق الطوارئ لأنه سيصل إلى هدفه النهائي.",
+    "invalid_allocation": "النسبة الحالية أكبر من المدخرات المتاحة بعد تخصيص الأهداف الأخرى.",
+    "confirm": "اعتماد والبدء"
+  },
+  "dashboard_buckets": {
+    "needs": "الاحتياجات",
+    "wants": "الرغبات",
+    "savings": "المدخرات",
+    "actual": "الفعلي",
+    "target": "المستهدف",
+    "remaining": "المتبقي",
+    "reserved_commitments": "محجوز للالتزامات",
+    "available_variable": "المتاح للمتغير",
+    "emergency_fund": "صندوق الطوارئ",
+    "goal_allocations": "تخصيصات الأهداف",
+    "unallocated_savings": "المدخرات غير المخصصة"
+  },
+  "home_extra": {
     "financial_profile_load_failed": "تعذر تحميل بيانات الملف المالي",
     "cycle_started_successfully": "تم بدء دورتك المالية بنجاح",
     "dashboard_load_failed": "تعذر تحميل لوحة التحكم",
@@ -736,97 +672,60 @@
     "image": "صورة فاتورة",
     "manual": "إدخال يدوي"
   },
-
   "cycle": {
-  "current_cycle": "الدورة الحالية",
-  "unavailable": "غير متوفر",
-  "ends_today": "تنتهي اليوم",
-  "days_left": "متبقي {days} يوم"
-} ,
-
-"savings_allocation": {
-  "load_failed": "تعذر تحميل بيانات التخطيط",
-  "title": "توزيع الادخار",
-  "description": "قم بتوزيع ادخار هذه الدورة وفقاً لأهدافك المالية.",
-  "emergency_fund_rate": "نسبة صندوق الطوارئ",
-  "emergency_fund_description": "اختر نسبة الادخار المخطط التي سيتم تخصيصها لصندوق الطوارئ.",
-  "selected_rate": "النسبة المختارة",
-  "allocation_summary": "ملخص التوزيع",
-  "planned_savings": "الادخار المخطط",
-  "emergency_fund": "صندوق الطوارئ",
-  "other_goals": "الأهداف الأخرى",
-  "unallocated": "مدخرات غير مخصصة",
-  "fund_limit": "تم تحديد سقف اقتطاع صندوق الطوارئ للوصول إلى هدفه دون زيادات.",
-  "invalid_allocation": "التوزيع المحدد يتجاوز الادخار المتبقي بعد تمويل أهدافك الأخرى.",
-  "zero_savings_hint": "إجمالي الادخار المخطط لهذه الدورة هو 0 د.أ. يمكنك زيادة نسبة الادخار من شاشة مراجعة التوزيع لتغذية صندوق الطوارئ.",
-  "confirm": "حفظ ومتابعة"
-} ,
-
-"bucket_cards": {
-  "needs": "الاحتياجات",
-  "wants": "الرغبات",
-  "savings": "المدخرات",
-  "actual": "الفعلي",
-  "target": "المستهدف",
-  "progress": "التقدم",
-  "reserved": "محجوز للالتزامات",
-  "available_variable": "المتاح للإنفاق المتغير",
-  "emergency_fund": "صندوق الطوارئ",
-  "goal_allocations": "تخصيص الأهداف",
-  "unallocated_savings": "مدخرات غير مخصصة",
-  "remaining": "المتبقي"
-} ,
-
-"commitments": {
-  "summary": "ملخص الالتزامات",
-  "total_reserved": "إجمالي المبلغ المحجوز",
-  "upcoming": "القادمة",
-  "overdue": "المتأخرة"
-} ,
-
-"dashboard_warnings": {
-  "title": "تنبيهات مهمة",
-  "overdue_commitments": "لديك التزامات متأخرة تحتاج إلى اهتمامك.",
-  "no_income": "لم يتم تسجيل أي دخل خلال الدورة المالية الحالية.",
-  "unexpected_expense": "قد تؤثر المصروفات غير المتوقعة على خطة الادخار الخاصة بك.",
-  "notice": "تنبيه: {code}"
-} ,
-"goals_summary": {
-  "title": "ملخص الأهداف",
-  "active_goals": "الأهداف النشطة",
-  "ready_to_complete": "جاهزة للإكمال"
-} ,
-"income_overview": {
-  "title": "ملخص الدخل",
-  "expected_income": "الدخل المتوقع",
-  "recorded_income": "الدخل المسجل",
-  "unexpected_income": "يتضمن {amount} {currency} كدخل غير متوقع."
-} ,
-"safe_daily_spending": {
-  "title": "الإنفاق الآمن اليومي",
-  "no_data": "لا تتوفر بيانات كافية لحساب الإنفاق اليومي الآمن.",
-  "no_cycle": "لا توجد دورة مالية نشطة.",
-  "no_income": "لم يتم تسجيل أي دخل."
-} ,
-"allocation_adjust_hint": "حرّك مؤشري الاحتياجات والرغبات لتعديل التوزيع، وسيتم تحديث الادخار تلقائياً بحيث يبقى المجموع دائماً 100٪.",
-"bucket_cards": {
-  "needs": "الاحتياجات",
-  "wants": "الرغبات",
-  "savings": "المدخرات",
-  "actual": "الفعلي",
-  "target": "المستهدف",
-  "progress": "التقدم",
-  "reserved": "محجوز للالتزامات",
-  "available_variable": "المتاح للإنفاق المتغير",
-  "emergency_fund": "صندوق الطوارئ",
-  "goal_allocations": "تخصيص الأهداف",
-  "unallocated_savings": "مدخرات غير مخصصة",
-  "remaining": "المتبقي"
-} ,
-"receipt_input.scan_hint": "ضع الفاتورة كاملة داخل الإطار وثبّت الكاميرا.",
-"receipt_input.capture_tip": "استخدم إضاءة واضحة وتجنب الظلال للحصول على تحليل أدق للفاتورة.",
-"receipt_input.choose_gallery": "اختيار من المعرض" ,
-
+    "current_cycle": "الدورة الحالية",
+    "unavailable": "غير متوفر",
+    "ends_today": "تنتهي اليوم",
+    "days_left": "متبقي {days} يوم"
+  },
+  "commitments": {
+    "summary": "ملخص الالتزامات",
+    "total_reserved": "إجمالي المبلغ المحجوز",
+    "upcoming": "القادمة",
+    "overdue": "المتأخرة"
+  },
+  "dashboard_warnings": {
+    "title": "تنبيهات مهمة",
+    "overdue_commitments": "لديك التزامات متأخرة تحتاج إلى اهتمامك.",
+    "no_income": "لم يتم تسجيل أي دخل خلال الدورة المالية الحالية.",
+    "unexpected_expense": "قد تؤثر المصروفات غير المتوقعة على خطة الادخار الخاصة بك.",
+    "notice": "تنبيه: {code}"
+  },
+  "goals_summary": {
+    "title": "ملخص الأهداف",
+    "active_goals": "الأهداف النشطة",
+    "ready_to_complete": "جاهزة للإكمال"
+  },
+  "income_overview": {
+    "title": "ملخص الدخل",
+    "expected_income": "الدخل المتوقع",
+    "recorded_income": "الدخل المسجل",
+    "unexpected_income": "يتضمن {amount} {currency} كدخل غير متوقع."
+  },
+  "safe_daily_spending": {
+    "title": "الإنفاق الآمن اليومي",
+    "no_data": "لا تتوفر بيانات كافية لحساب الإنفاق اليومي الآمن.",
+    "no_cycle": "لا توجد دورة مالية نشطة.",
+    "no_income": "لم يتم تسجيل أي دخل."
+  },
+  "allocation_adjust_hint": "حرّك مؤشري الاحتياجات والرغبات لتعديل التوزيع، وسيتم تحديث الادخار تلقائياً بحيث يبقى المجموع دائماً 100٪.",
+  "bucket_cards": {
+    "needs": "الاحتياجات",
+    "wants": "الرغبات",
+    "savings": "المدخرات",
+    "actual": "الفعلي",
+    "target": "المستهدف",
+    "progress": "التقدم",
+    "reserved": "محجوز للالتزامات",
+    "available_variable": "المتاح للإنفاق المتغير",
+    "emergency_fund": "صندوق الطوارئ",
+    "goal_allocations": "تخصيص الأهداف",
+    "unallocated_savings": "مدخرات غير مخصصة",
+    "remaining": "المتبقي"
+  },
+  "receipt_input.scan_hint": "ضع الفاتورة كاملة داخل الإطار وثبّت الكاميرا.",
+  "receipt_input.capture_tip": "استخدم إضاءة واضحة وتجنب الظلال للحصول على تحليل أدق للفاتورة.",
+  "receipt_input.choose_gallery": "اختيار من المعرض",
   "confirm": "تأكيد",
   "expense_added_successfully": "تمت إضافة المصروف بنجاح",
   "edit_store": "تعديل المتجر",
@@ -863,89 +762,60 @@
   "total": "الإجمالي",
   "edit": "تعديل",
   "no_receipt_data": "لم يتم العثور على بيانات للإيصال",
-  "go_back": "رجوع" ,
-
+  "go_back": "رجوع",
   "review_transaction": "مراجعة المعاملة",
   "transaction_progress": "المعاملة {current} من {total}",
-
   "review_error": "خطأ في المراجعة",
   "unable_to_open_transaction_review": "تعذر فتح صفحة مراجعة المعاملة.",
   "back": "رجوع",
-
   "start_financial_cycle_first": "ابدأ دورة مالية قبل إضافة المعاملات.",
   "authentication_failed": "فشلت المصادقة. يرجى تسجيل الدخول مرة أخرى.",
   "unable_to_save_transaction": "تعذر حفظ المعاملة. يرجى المحاولة مرة أخرى.",
   "server_connection_failed": "تعذر الاتصال بالخادم. تحقق من الاتصال وحاول مرة أخرى.",
-
   "movement_type": "نوع الحركة",
   "occasional": "مرة واحدة",
   "recurring": "متكررة",
-
   "expense_type": "نوع المصروف",
   "need": "احتياج",
   "want": "رغبة",
-
   "category": "الفئة",
   "select_expense_type_first": "اختر نوع المصروف لعرض الفئات.",
-
   "expense_name": "اسم المصروف",
   "enter_expense_name": "أدخل اسم المصروف",
-
- 
   "enter_amount": "أدخل المبلغ",
-
   "coverage_period": "فترة التكرار",
   "weekly": "أسبوعي",
   "monthly": "شهري",
   "quarterly": "ربع سنوي",
   "yearly": "سنوي",
-
   "flexibility": "المرونة",
   "fixed": "ثابت",
   "flexible": "مرن",
-
   "next_due_date": "تاريخ الاستحقاق القادم",
   "select_due_date": "اختر تاريخ الاستحقاق",
-
   "payment_method": "طريقة الدفع",
-
   "transaction_date": "تاريخ المعاملة",
   "select_transaction_date": "اختر تاريخ المعاملة",
-
   "transaction_date_future_error": "التاريخ المستخرج في المستقبل. يرجى اختيار تاريخ معاملة صحيح.",
-
   "transaction_type": "نوع المعاملة",
   "expense": "مصروف",
-
-
   "income_type_source": "نوع أو مصدر الدخل",
   "enter_source": "أدخل المصدر",
-
   "description": "الوصف",
   "enter_description": "أدخل الوصف",
-
   "income_date": "تاريخ الدخل",
   "select_income_date": "اختر تاريخ الدخل",
-
   "note_optional": "ملاحظة (اختياري)",
   "add_note": "أضف ملاحظة",
-
   "confirm_and_save": "تأكيد وحفظ",
-
   "ai_analysis": "تحليل الذكاء الاصطناعي",
   "confidence": "مستوى الثقة",
-
   "status": "الحالة",
-
-  
   "image": "صورة",
   "manual": "يدوي",
-
   "review_required": "تحتاج إلى مراجعة",
   "ready_to_save": "جاهزة للحفظ",
-
   "review_required_before_save": "المراجعة مطلوبة قبل الحفظ",
-
   "expense_type_required": "نوع المصروف",
   "expense_name_required": "اسم المصروف",
   "payment_method_required": "طريقة الدفع",
@@ -954,7 +824,6 @@
   "coverage_period_required": "فترة التكرار",
   "next_due_date_required": "تاريخ الاستحقاق القادم",
   "currency_profile_missing": "عملة الملف المالي غير محددة",
-
   "movement_type_required_message": "اختر نوع الحركة.",
   "transaction_type_required_message": "اختر نوع المعاملة.",
   "expense_type_required_message": "اختر نوع المصروف.",
@@ -967,104 +836,103 @@
   "description_required_message": "أدخل الوصف.",
   "coverage_period_required_message": "اختر فترة التكرار.",
   "flexibility_required_message": "اختر مستوى المرونة.",
-  "valid_next_due_date_required": "اختر تاريخ استحقاق صحيح." ,
-  "expense_date.recurring_description": "اختر تاريخ هذا المصروف المتكرر." ,
+  "valid_next_due_date_required": "اختر تاريخ استحقاق صحيح.",
+  "expense_date.recurring_description": "اختر تاريخ هذا المصروف المتكرر.",
   "suggestions": {
-  "save_money": "كيف يمكنني توفير المال؟",
-  "analyze_expenses": "حلّل مصروفاتي",
-  "create_plan": "أنشئ خطة ادخار",
-  "reduce_spending": "ساعدني على تقليل الإنفاق"
-} ,
-"voice_record": {
-  "title": "إضافة مصروف بالصوت",
-  "description": "صف المصروف وسيتولى ألفا تجهيزه للمراجعة.",
-  "microphone_permission_required": "يلزم السماح بالوصول إلى الميكروفون لتسجيل المصروف.",
-  "microphone_permission_denied": "تم رفض إذن الميكروفون بشكل دائم. افتح الإعدادات لتفعيله.",
-  "open_settings": "فتح الإعدادات",
-  "unable_start_recording": "تعذر بدء التسجيل الصوتي.",
-  "empty_recording": "التسجيل فارغ أو قصير جدًا، يرجى إعادة التسجيل.",
-  "unable_analyze": "تعذر تحليل التسجيل الصوتي، حاول مرة أخرى.",
-  "recording": "جاري التسجيل",
-  "ready": "جاهز للتسجيل",
-  "tip": "اذكر المبلغ والفئة ووصفًا مختصرًا للحصول على نتيجة أدق.",
-  "starting": "جارٍ البدء...",
-  "start_recording": "بدء التسجيل",
-  "cancel": "إلغاء",
-  "stopping": "جارٍ الإيقاف...",
-  "stop_analyze": "إيقاف وتحليل",
-  "analyzing": "جارٍ تحليل الصوت...",
-  "analyzing_description": "يقوم ألفا بتحضير تفاصيل العملية للمراجعة.",
-  "processing_failed": "تعذر معالجة نتيجة تحليل الصوت."
-} , 
-"new_goal.total_target_cost": "إجمالي قيمة الهدف",
-"new_goal.target_cost_total": "أدخل إجمالي قيمة الهدف",
-"new_goal.planned_monthly_contribution": "المساهمة الشهرية المخططة",
-"new_goal.monthly_contribution": "أدخل المساهمة الشهرية",
-"new_goal.preview.enter_target_cost": "أدخل قيمة هدف واقعية حتى يتمكن ألفا من تقييم الخطة.",
-"new_goal.preview.enter_contribution": "أدخل مساهمة شهرية مخططة واقعية.",
-"new_goal.preview.low_contribution": "المساهمة الشهرية المخططة منخفضة نسبيًا وقد يحتاج الوصول للهدف وقتًا أطول." ,
-"new_expense": {
-  "title": "إضافة مصروف",
-  "edit_title": "تعديل المصروف",
-  "description": "سجّل المصروف بدقة حتى يتمكن ألفا من تحليل تأثيره على ميزانيتك.",
-  "update_description": "حدّث بيانات المصروف أدناه.",
-  "input_method": "طريقة الإدخال",
-  "movement_type": "نوع الحركة",
-  "expense_type": "نوع المصروف",
-  "category": "الفئة",
-  "expense_name": "اسم المصروف",
-  "enter_expense_name": "أدخل اسم المصروف",
-  "amount": "المبلغ",
-  "enter_amount": "أدخل المبلغ",
-  "coverage_period": "فترة التغطية",
-  "payment_method": "طريقة الدفع",
-  "note_optional": "ملاحظة (اختياري)",
-  "add_note": "أضف ملاحظة",
-  "add_expense": "إضافة مصروف",
-  "add_to_session": "إضافة إلى الجلسة",
-  "updated_successfully": "تم تحديث المصروف بنجاح",
-  "added_successfully": "تمت إضافة المصروف بنجاح",
-  "added_to_session": "تمت إضافة المصروف إلى جلسة التسوق",
-  "could_not_save": "تعذر حفظ المصروف",
-  "no_active_cycle": "لا توجد دورة مالية نشطة",
-  "start_financial_cycle": "بدء دورة مالية",
-  "enter_category_name": "أدخل اسم الفئة",
-  "options": {
-    "manual": "يدوي",
-    "receipt": "فاتورة",
-    "voice": "صوت",
-    "need": "احتياج",
-    "want": "رغبة",
-    "cash": "نقدًا",
-    "card": "بطاقة",
-    "wallet": "محفظة",
-    "food": "الطعام",
-    "shopping": "التسوق",
-    "transport": "المواصلات",
-    "health": "الصحة",
-    "bills": "الفواتير",
-    "education": "التعليم",
-    "entertainment": "الترفيه",
-    "travel": "السفر",
-    "investment": "الاستثمار",
-    "other": "أخرى",
-    "occasional": "عرضي",
-    "recurring": "متكرر",
-    "one_day": "يوم واحد",
-    "three_days": "ثلاثة أيام",
-    "one_week": "أسبوع",
-    "two_weeks": "أسبوعان"
+    "save_money": "كيف يمكنني توفير المال؟",
+    "analyze_expenses": "حلّل مصروفاتي",
+    "create_plan": "أنشئ خطة ادخار",
+    "reduce_spending": "ساعدني على تقليل الإنفاق"
+  },
+  "voice_record": {
+    "title": "إضافة مصروف بالصوت",
+    "description": "صف المصروف وسيتولى ألفا تجهيزه للمراجعة.",
+    "microphone_permission_required": "يلزم السماح بالوصول إلى الميكروفون لتسجيل المصروف.",
+    "microphone_permission_denied": "تم رفض إذن الميكروفون بشكل دائم. افتح الإعدادات لتفعيله.",
+    "open_settings": "فتح الإعدادات",
+    "unable_start_recording": "تعذر بدء التسجيل الصوتي.",
+    "empty_recording": "التسجيل فارغ أو قصير جدًا، يرجى إعادة التسجيل.",
+    "unable_analyze": "تعذر تحليل التسجيل الصوتي، حاول مرة أخرى.",
+    "recording": "جاري التسجيل",
+    "ready": "جاهز للتسجيل",
+    "tip": "اذكر المبلغ والفئة ووصفًا مختصرًا للحصول على نتيجة أدق.",
+    "starting": "جارٍ البدء...",
+    "start_recording": "بدء التسجيل",
+    "cancel": "إلغاء",
+    "stopping": "جارٍ الإيقاف...",
+    "stop_analyze": "إيقاف وتحليل",
+    "analyzing": "جارٍ تحليل الصوت...",
+    "analyzing_description": "يقوم ألفا بتحضير تفاصيل العملية للمراجعة.",
+    "processing_failed": "تعذر معالجة نتيجة تحليل الصوت."
+  },
+  "new_goal.total_target_cost": "إجمالي قيمة الهدف",
+  "new_goal.target_cost_total": "أدخل إجمالي قيمة الهدف",
+  "new_goal.planned_monthly_contribution": "المساهمة الشهرية المخططة",
+  "new_goal.monthly_contribution": "أدخل المساهمة الشهرية",
+  "new_goal.preview.enter_target_cost": "أدخل قيمة هدف واقعية حتى يتمكن ألفا من تقييم الخطة.",
+  "new_goal.preview.enter_contribution": "أدخل مساهمة شهرية مخططة واقعية.",
+  "new_goal.preview.low_contribution": "المساهمة الشهرية المخططة منخفضة نسبيًا وقد يحتاج الوصول للهدف وقتًا أطول.",
+  "new_expense": {
+    "title": "إضافة مصروف",
+    "edit_title": "تعديل المصروف",
+    "description": "سجّل المصروف بدقة حتى يتمكن ألفا من تحليل تأثيره على ميزانيتك.",
+    "update_description": "حدّث بيانات المصروف أدناه.",
+    "input_method": "طريقة الإدخال",
+    "movement_type": "نوع الحركة",
+    "expense_type": "نوع المصروف",
+    "category": "الفئة",
+    "expense_name": "اسم المصروف",
+    "enter_expense_name": "أدخل اسم المصروف",
+    "amount": "المبلغ",
+    "enter_amount": "أدخل المبلغ",
+    "coverage_period": "فترة التغطية",
+    "payment_method": "طريقة الدفع",
+    "note_optional": "ملاحظة (اختياري)",
+    "add_note": "أضف ملاحظة",
+    "add_expense": "إضافة مصروف",
+    "add_to_session": "إضافة إلى الجلسة",
+    "updated_successfully": "تم تحديث المصروف بنجاح",
+    "added_successfully": "تمت إضافة المصروف بنجاح",
+    "added_to_session": "تمت إضافة المصروف إلى جلسة التسوق",
+    "could_not_save": "تعذر حفظ المصروف",
+    "no_active_cycle": "لا توجد دورة مالية نشطة",
+    "start_financial_cycle": "بدء دورة مالية",
+    "enter_category_name": "أدخل اسم الفئة",
+    "options": {
+      "manual": "يدوي",
+      "receipt": "فاتورة",
+      "voice": "صوت",
+      "need": "احتياج",
+      "want": "رغبة",
+      "cash": "نقدًا",
+      "card": "بطاقة",
+      "wallet": "محفظة",
+      "food": "الطعام",
+      "shopping": "التسوق",
+      "transport": "المواصلات",
+      "health": "الصحة",
+      "bills": "الفواتير",
+      "education": "التعليم",
+      "entertainment": "الترفيه",
+      "travel": "السفر",
+      "investment": "الاستثمار",
+      "other": "أخرى",
+      "occasional": "عرضي",
+      "recurring": "متكرر",
+      "one_day": "يوم واحد",
+      "three_days": "ثلاثة أيام",
+      "one_week": "أسبوع",
+      "two_weeks": "أسبوعان"
+    }
+  },
+  "analysis": {
+    "center_title": "مركز التحليل",
+    "tap_to_analyze": "انقر للتحليل",
+    "generating": "جاري إعداد التحليل...",
+    "generate_description": "أنشئ ملخصًا ماليًا محفوظًا من بياناتك الحالية.",
+    "previous_analyses": "التحليلات السابقة",
+    "saved_analysis": "تحليل مالي محفوظ",
+    "no_saved_analyses": "لا توجد تحليلات محفوظة بعد.",
+    "insights": "رؤى"
   }
-} ,
-"analysis": {
-  "center_title": "مركز التحليل",
-  "tap_to_analyze": "انقر للتحليل",
-  "generating": "جاري إعداد التحليل...",
-  "generate_description": "أنشئ ملخصًا ماليًا محفوظًا من بياناتك الحالية.",
-  "previous_analyses": "التحليلات السابقة",
-  "saved_analysis": "تحليل مالي محفوظ",
-  "no_saved_analyses": "لا توجد تحليلات محفوظة بعد.",
-  "insights": "رؤى"
-}
-
 }

@@ -2,6 +2,7 @@
 import 'package:alpha_app/core/utils/app_colors.dart';
 import 'package:alpha_app/core/utils/device.dart';
 import 'package:alpha_app/providers/goal_provider.dart';
+import 'package:alpha_app/providers/language_provider.dart';
 import 'package:alpha_app/providers/themeprovider.dart';
 import 'package:alpha_app/screens/goals/new_goal_screen.dart';
 import 'package:alpha_app/widgets/delete_dialog.dart';
@@ -20,6 +21,7 @@ class MyGoalsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     final languageProvider = Provider.of<LanguageProvider>(context);
     final goalProvider = context.watch<GoalProvider>();
     final themeProvider = context.watch<Themeprovider>();
 
