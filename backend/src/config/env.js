@@ -44,6 +44,11 @@ const env = {
 
   bcryptSaltRounds: numberEnv('BCRYPT_SALT_ROUNDS', 10),
 
+  jwtAccessSecret: requiredEnv('JWT_ACCESS_SECRET'),
+  jwtRefreshSecret: requiredEnv('JWT_REFRESH_SECRET'),
+  jwtAccessExpiresIn: process.env.JWT_ACCESS_EXPIRES_IN ?? '15m',
+  jwtRefreshExpiresIn: process.env.JWT_REFRESH_EXPIRES_IN ?? '30d',
+
   n8nOtpWebhookUrl: process.env.N8N_OTP_WEBHOOK_URL,
 };
 

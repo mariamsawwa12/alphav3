@@ -56,9 +56,9 @@ class SavingsAccountingService {
       `SELECT COALESCE(SUM(gt.amount), 0) AS total
        FROM goal_transactions gt
        JOIN goals g ON g.id = gt.goal_id
-       WHERE gt.user_id = ? AND ? = ? AND gt.transaction_type = 'contribution'
+       WHERE gt.user_id = ? AND gt.cycle_id = ? AND gt.transaction_type = 'contribution'
          AND (g.goal_type != 'emergency_fund' OR g.is_system_managed = FALSE)`,
-      [userId, cycleId, cycleId]
+      [userId, cycleId]
     );
     return Number(rows[0].total);
   }
@@ -68,9 +68,9 @@ class SavingsAccountingService {
       `SELECT COALESCE(SUM(gt.amount), 0) AS total
        FROM goal_transactions gt
        JOIN goals g ON g.id = gt.goal_id
-       WHERE gt.user_id = ? AND ? = ? AND gt.transaction_type = 'contribution'
+       WHERE gt.user_id = ? AND gt.cycle_id = ? AND gt.transaction_type = 'contribution'
          AND g.goal_type = 'emergency_fund' AND g.is_system_managed = TRUE`,
-      [userId, cycleId, cycleId]
+      [userId, cycleId]
     );
     return Number(rows[0].total);
   }

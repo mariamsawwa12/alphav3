@@ -1,5 +1,5 @@
 const { NotificationRepository } = require('../repositories/notification.repository');
-const { AppError } = require('../middleware/error.middleware');
+const { AppError } = require('../utils/app-error');
 const axios = require('axios');
 
 class NotificationService {

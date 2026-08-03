@@ -74,7 +74,7 @@ class _VoiceChatScreenState extends State<VoiceChatScreen>
                       children: [
                         SizedBox(height: screenH * 0.03),
                         Text(
-                          "Talk to Alpha",
+                          "Talk to Basira",
                           style: GoogleFonts.ibmPlexSansArabic(
                             color: themeprovider.isDark
                                 ? AppColors.darkText

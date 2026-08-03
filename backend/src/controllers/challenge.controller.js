@@ -1,5 +1,5 @@
 const { ChallengeService } = require('../services/challenge.service');
-const { AppError } = require('../middleware/error.middleware');
+const { AppError } = require('../utils/app-error');
 
 class ChallengeController {
   static async getChallenges(req, res) {

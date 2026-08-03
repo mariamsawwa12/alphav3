@@ -286,12 +286,21 @@ class SettlementRepository {
   }
 
   static async createGoalTransaction(conn, data) {
-    // Based on goal_transactions schema in migration 009
     const [result] = await conn.execute(
       `INSERT INTO goal_transactions
-         (user_id, goal_id, amount, transaction_type, description)
-       VALUES (?, ?, ?, 'contribution', ?)`,
-      [data.userId, data.goalId, data.amount, data.description || null]
+         (user_id, goal_id, cycle_id, amount, transaction_type, description,
+          source_type, source_id, settlement_id)
+       VALUES (?, ?, ?, ?, 'contribution', ?, ?, ?, ?)`,
+      [
+        data.userId,
+        data.goalId,
+        data.cycleId ?? null,
+        data.amount,
+        data.description || null,
+        data.sourceType || null,
+        data.sourceId ?? null,
+        data.settlementId ?? null
+      ]
     );
     return result.insertId;
   }

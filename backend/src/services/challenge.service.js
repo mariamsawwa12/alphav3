@@ -1,5 +1,5 @@
 const { ChallengeRepository } = require('../repositories/challenge.repository');
-const { AppError } = require('../middleware/error.middleware');
+const { AppError } = require('../utils/app-error');
 
 class ChallengeService {
   static _mapToFlutterModel(row, isAvailable = false) {

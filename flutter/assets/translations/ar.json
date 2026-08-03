@@ -25,5 +25,16 @@
   "profile_complete": "الملف مكتمل",
   "analysis_limited": "محدود",
   "analysis_estimated": "مُقدَّر",
-  "analysis_reliable": "موثوق"
+  "analysis_reliable": "موثوق",
+  "nav_home": "الرئيسية",
+  "nav_expenses": "المصاريف",
+  "nav_basira": "بصيرة",
+  "nav_goals": "الأهداف",
+  "nav_profile": "الملف",
+  "ask_basira_title": "اسأل بصيرة قبل الشراء",
+  "ask_basira_button": "اسأل بصيرة",
+  "language": "اللغة",
+  "welcome_back": "مرحباً بعودتك",
+  "login_subtitle": "سجّل الدخول لمتابعة رحلتك المالية",
+  "use_demo_account": "استخدم حساب العرض"
 }

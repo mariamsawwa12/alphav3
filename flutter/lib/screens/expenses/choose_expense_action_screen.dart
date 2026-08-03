@@ -3,6 +3,7 @@ import 'package:alpha_app/core/utils/device.dart';
 import 'package:alpha_app/providers/themeprovider.dart';
 import 'package:alpha_app/screens/expenses/advice_screen.dart';
 import 'package:alpha_app/screens/expenses/new_expense_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -128,17 +129,17 @@ class ChooseExpenseActionScreen extends StatelessWidget {
                 isDark: isDark,
                 screenW: screenW,
                 icon: Icons.psychology_alt_outlined,
-                title: "Ask Financial Advice",
+                title: "ask_basira_title".tr(),
                 subtitle:
-                    "Thinking about buying something? Ask Alpha before spending.",
+                    "Thinking about buying something? Ask Basira how it fits your budget.",
                 points: const [
-                  "Run a what-if simulation",
+                  "Get Basira's take with your cycle context",
                   "Check the effect on your goals",
                   "Explore cheaper alternatives",
                   "No expense will be saved",
                 ],
                 accentColor: const Color(0xFFF4C95D),
-                buttonText: "Ask Alpha",
+                buttonText: "ask_basira_button".tr(),
                 onTap: () {
                   Navigator.push(
                     context,

@@ -4,6 +4,7 @@ import 'package:alpha_app/core/utils/device.dart';
 import 'package:alpha_app/core/utils/session_state_cleaner.dart';
 import 'package:alpha_app/providers/expense_provider.dart';
 import 'package:alpha_app/providers/goal_provider.dart';
+import 'package:alpha_app/providers/language_provider.dart';
 import 'package:alpha_app/providers/profile_provider.dart';
 import 'package:alpha_app/providers/themeprovider.dart';
 import 'package:alpha_app/screens/analysis/financial_analysis_screen.dart';
@@ -12,6 +13,7 @@ import 'package:alpha_app/screens/profile/change_password_dialog.dart';
 import 'package:alpha_app/screens/profile/components/profile_completion_card.dart';
 import 'package:alpha_app/screens/profile/personal_info_screen.dart';
 import 'package:alpha_app/screens/profile/financial_profile_screen.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -654,7 +656,7 @@ class ProfileScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           title: Text(
-            'Language',
+            'language'.tr(),
             style: GoogleFonts.ibmPlexSansArabic(
               color: isDark ? AppColors.darkText : AppColors.lightText,
               fontWeight: FontWeight.bold,
@@ -676,10 +678,13 @@ class ProfileScreen extends StatelessWidget {
                   color:
                       isDark ? AppColors.darkPrimary : AppColors.lightPrimary,
                 ),
-                onTap: () {
-                  Navigator.pop(
-                    dialogContext,
-                  );
+                onTap: () async {
+                  await context
+                      .read<LanguageProvider>()
+                      .changeLanguage(context, 'en');
+                  if (dialogContext.mounted) {
+                    Navigator.pop(dialogContext);
+                  }
                 },
               ),
               ListTile(
@@ -690,17 +695,13 @@ class ProfileScreen extends StatelessWidget {
                     color: isDark ? AppColors.darkText : AppColors.lightText,
                   ),
                 ),
-                subtitle: Text(
-                  'سيتم ربطها لاحقًا',
-                  style: TextStyle(
-                    color:
-                        isDark ? AppColors.darkSubText : AppColors.lightSubText,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pop(
-                    dialogContext,
-                  );
+                onTap: () async {
+                  await context
+                      .read<LanguageProvider>()
+                      .changeLanguage(context, 'ar');
+                  if (dialogContext.mounted) {
+                    Navigator.pop(dialogContext);
+                  }
                 },
               ),
             ],

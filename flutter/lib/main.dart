@@ -36,6 +36,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:alpha_app/config/api_config.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:provider/provider.dart';
 
@@ -53,13 +54,18 @@ class MyHttpOverrides extends HttpOverrides {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  HttpOverrides.global = MyHttpOverrides();
-  // API Config handles environment setup now
+  // Only bypass TLS for local debug against self-signed certs — never in production builds.
+  if (kDebugMode && ApiConfig.environment == AppEnvironment.local) {
+    HttpOverrides.global = MyHttpOverrides();
+  }
   await EasyLocalization.ensureInitialized();
+
+  final prefs = await SharedPreferences.getInstance();
+  final savedLang = prefs.getString('language_code') ?? 'en';
 
   if (kDebugMode) {
     debugPrint('\n=========================================');
-    debugPrint('AlphaV3 Environment: ${ApiConfig.environment.name.toUpperCase()}');
+    debugPrint('Alpha Environment: ${ApiConfig.environment.name.toUpperCase()}');
     debugPrint('API Base URL: ${ApiConfig.apiV1BaseUrl}');
     debugPrint('=========================================\n');
   }
@@ -69,7 +75,7 @@ void main() async {
         supportedLocales: const [Locale('en'), Locale('ar')],
         path: 'assets/translations',
         fallbackLocale: const Locale('en'),
-        startLocale: const Locale('en'),
+        startLocale: Locale(savedLang),
         child: MultiProvider(providers: [
           ChangeNotifierProvider(
             create: (context) => Themeprovider()..loadtheme(),
@@ -129,17 +135,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    Future.microtask(() {
-      String currentLang = context.locale.languageCode;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    print(context.locale.languageCode);
-
     return Consumer<Themeprovider>(
       builder: (context, themeprovider, _) {
         return MaterialApp(

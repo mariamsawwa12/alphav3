@@ -25,5 +25,16 @@
   "profile_complete": "Profile Complete",
   "analysis_limited": "Limited",
   "analysis_estimated": "Estimated",
-  "analysis_reliable": "Reliable"
+  "analysis_reliable": "Reliable",
+  "nav_home": "Home",
+  "nav_expenses": "Expenses",
+  "nav_basira": "Basira",
+  "nav_goals": "Goals",
+  "nav_profile": "Profile",
+  "ask_basira_title": "Ask Basira Before You Buy",
+  "ask_basira_button": "Ask Basira",
+  "language": "Language",
+  "welcome_back": "Welcome back",
+  "login_subtitle": "Log in to continue your financial journey",
+  "use_demo_account": "Use demo account"
 }

@@ -772,7 +772,9 @@ class FinanceService {
       try {
         await FinanceRepository.createGoalTransaction(connection, {
           userId, goalId, amount: targetAmount, transactionType: 'execution',
-          idempotencyKey, requestHash, description: 'Goal execution'
+          idempotencyKey, requestHash, description: 'Goal execution',
+          cycleId: openCycle.id,
+          sourceType: 'goal_execution'
         });
       } catch (err) {
         if (err.code === 'CONCURRENT_IDEMPOTENT_REPLAY') {
@@ -913,10 +915,15 @@ class FinanceService {
         throw new AppError('Reallocation amount causes destination overfunding', 400, 'BAD_REQUEST');
       }
 
+      const openCycle = await FinanceRepository.lockOpenCycleForUser(connection, userId);
+      const reallocationCycleId = openCycle ? openCycle.id : null;
+
       try {
         await FinanceRepository.createGoalTransaction(connection, {
           userId, goalId: sourceGoal.id, amount, transactionType: 'reallocation_out', relatedGoalId: destGoal.id,
-          idempotencyKey, requestHash, description: `Reallocated to ${destGoal.name}`
+          idempotencyKey, requestHash, description: `Reallocated to ${destGoal.name}`,
+          cycleId: reallocationCycleId,
+          sourceType: 'goal_reallocation'
         });
       } catch (err) {
         if (err.code === 'CONCURRENT_IDEMPOTENT_REPLAY') {
@@ -929,7 +936,9 @@ class FinanceService {
 
       await FinanceRepository.createGoalTransaction(connection, {
         userId, goalId: destGoal.id, amount, transactionType: 'reallocation_in', relatedGoalId: sourceGoal.id,
-        idempotencyKey: null, requestHash: null, description: `Reallocated from ${sourceGoal.name}`
+        idempotencyKey: null, requestHash: null, description: `Reallocated from ${sourceGoal.name}`,
+        cycleId: reallocationCycleId,
+        sourceType: 'goal_reallocation'
       });
 
       const newSourceBalance = sourceBalance - amount;

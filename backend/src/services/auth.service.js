@@ -94,8 +94,8 @@ class AuthService {
     // Usually we would generate JWT tokens here since the user is now fully verified and logged in
     const user = await UserRepository.findById(result.userId);
 
-    const accessToken = jwt.sign({ id: user.id }, env.jwtAccessSecret || 'secret', { expiresIn: env.jwtAccessExpiresIn || '15m' });
-    const refreshToken = jwt.sign({ id: user.id }, env.jwtRefreshSecret || 'secret', { expiresIn: env.jwtRefreshExpiresIn || '30d' });
+    const accessToken = jwt.sign({ id: user.id }, env.jwtAccessSecret, { expiresIn: env.jwtAccessExpiresIn });
+    const refreshToken = jwt.sign({ id: user.id }, env.jwtRefreshSecret, { expiresIn: env.jwtRefreshExpiresIn });
 
     return {
       user: {
@@ -132,8 +132,8 @@ class AuthService {
       throw new AppError('Account not verified', 403, 'ACCOUNT_NOT_VERIFIED');
     }
 
-    const accessToken = jwt.sign({ id: user.id }, env.jwtAccessSecret || 'secret', { expiresIn: env.jwtAccessExpiresIn || '15m' });
-    const refreshToken = jwt.sign({ id: user.id }, env.jwtRefreshSecret || 'secret', { expiresIn: env.jwtRefreshExpiresIn || '30d' });
+    const accessToken = jwt.sign({ id: user.id }, env.jwtAccessSecret, { expiresIn: env.jwtAccessExpiresIn });
+    const refreshToken = jwt.sign({ id: user.id }, env.jwtRefreshSecret, { expiresIn: env.jwtRefreshExpiresIn });
 
     return {
       user: {
@@ -215,8 +215,8 @@ class AuthService {
     return { success: true };
   }
   static generateTokens(userId) {
-    const accessToken = jwt.sign({ id: userId }, env.jwtAccessSecret || 'secret', { expiresIn: env.jwtAccessExpiresIn || '15m' });
-    const refreshToken = jwt.sign({ id: userId }, env.jwtRefreshSecret || 'secret', { expiresIn: env.jwtRefreshExpiresIn || '30d' });
+    const accessToken = jwt.sign({ id: userId }, env.jwtAccessSecret, { expiresIn: env.jwtAccessExpiresIn });
+    const refreshToken = jwt.sign({ id: userId }, env.jwtRefreshSecret, { expiresIn: env.jwtRefreshExpiresIn });
     return { accessToken, refreshToken };
   }
 
@@ -226,7 +226,7 @@ class AuthService {
       throw new AppError('Refresh token required', 400);
     }
     try {
-      const decoded = jwt.verify(refreshToken, env.jwtRefreshSecret || 'secret');
+      const decoded = jwt.verify(refreshToken, env.jwtRefreshSecret);
       const tokens = this.generateTokens(decoded.id);
       return { tokens };
     } catch (err) {

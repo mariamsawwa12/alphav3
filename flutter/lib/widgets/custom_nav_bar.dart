@@ -1,5 +1,6 @@
 import 'package:alpha_app/core/utils/app_colors.dart';
 import 'package:alpha_app/providers/themeprovider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +56,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               child: _NavigationItem(
                 icon: Icons.home_outlined,
                 selectedIcon: Icons.home,
-                label: "Home",
+                label: "nav_home".tr(),
                 isSelected: currentIndex == 0,
                 isDark: isDark,
                 onTap: () => onTap(0),
@@ -65,7 +66,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               child: _NavigationItem(
                 icon: Icons.receipt_long_outlined,
                 selectedIcon: Icons.receipt_long,
-                label: "Expenses",
+                label: "nav_expenses".tr(),
                 isSelected: currentIndex == 1,
                 isDark: isDark,
                 onTap: () => onTap(1),
@@ -81,7 +82,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               child: _NavigationItem(
                 icon: Icons.track_changes_outlined,
                 selectedIcon: Icons.track_changes,
-                label: "Goals",
+                label: "nav_goals".tr(),
                 isSelected: currentIndex == 3,
                 isDark: isDark,
                 onTap: () => onTap(3),
@@ -91,7 +92,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               child: _NavigationItem(
                 icon: Icons.person_outline,
                 selectedIcon: Icons.person,
-                label: "Profile",
+                label: "nav_profile".tr(),
                 isSelected: currentIndex == 4,
                 isDark: isDark,
                 onTap: () => onTap(4),

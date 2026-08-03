@@ -317,6 +317,18 @@ describe('Phase 3B – Settlement and Closure (integration)', () => {
       // Verify goal balance updated
       const [goals] = await conn.execute('SELECT current_balance FROM goals WHERE id = ?', [goalId]);
       expect(Number(goals[0].current_balance)).toBe(40);
+
+      // Verify goal_transactions persist cycle_id / source metadata
+      const [goalTxs] = await conn.execute(
+        `SELECT cycle_id, source_type, settlement_id, transaction_type, amount
+         FROM goal_transactions WHERE goal_id = ? AND transaction_type = 'contribution'`,
+        [goalId]
+      );
+      expect(goalTxs.length).toBe(1);
+      expect(Number(goalTxs[0].cycle_id)).toBe(cycleId);
+      expect(goalTxs[0].source_type).toBe('settlement_goal_allocation');
+      expect(Number(goalTxs[0].settlement_id)).toBe(Number(settlements[0].id));
+      expect(Number(goalTxs[0].amount)).toBe(40);
     });
 
     it('rejects closure when action totals do not match surplus', async () => {

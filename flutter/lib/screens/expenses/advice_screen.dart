@@ -1,6 +1,7 @@
 import 'package:alpha_app/core/utils/app_colors.dart';
 import 'package:alpha_app/core/utils/device.dart';
 import 'package:alpha_app/providers/themeprovider.dart';
+import 'package:alpha_app/services/chat_service.dart';
 import 'package:alpha_app/widgets/custom_textfield.dart';
 import 'package:alpha_app/widgets/option_chip.dart';
 import 'package:flutter/material.dart';
@@ -283,7 +284,7 @@ class _AdviceScreenState extends State<AdviceScreen> {
                   ),
                   CustomTextfield(
                     controller: _noteController,
-                    hint: 'Tell Alpha anything relevant',
+                    hint: 'Tell Basira anything relevant',
                     icon: Icons.notes_rounded,
                     type: TextFieldType.name,
                     onChanged: (_) {
@@ -435,7 +436,7 @@ class _AdviceScreenState extends State<AdviceScreen> {
         ),
         Expanded(
           child: Text(
-            'Ask Alpha',
+            'Ask Basira',
             style: GoogleFonts.ibmPlexSansArabic(
               color: isDark ? AppColors.darkText : AppColors.lightText,
               fontSize: screenW * 0.065,
@@ -466,20 +467,80 @@ class _AdviceScreenState extends State<AdviceScreen> {
       _showResult = false;
     });
 
-    await Future.delayed(
-      const Duration(
-        milliseconds: 900,
-      ),
-    );
+    final String item = _itemController.text.trim();
+    final String category = (_expenseType ?? 'Want').toLowerCase();
+    final String language =
+        Localizations.localeOf(context).languageCode == 'ar' ? 'ar' : 'en';
+
+    try {
+      final response = await ChatService.sendMessage(
+        message:
+            'Should I buy "$item" for $_amount JOD? '
+            'It is a ${_expenseType!.toLowerCase()}, funding from $_fundingSource, '
+            'planning: $_planningType, can delay: $_canDelay, '
+            'has alternative: $_hasAlternative'
+            '${_noteController.text.trim().isEmpty ? '' : '. Note: ${_noteController.text.trim()}'}',
+        intent: 'chat',
+        language: language,
+        contextData: {
+          'purchase': {
+            'item': item,
+            'price': _amount,
+            'category': category,
+          },
+        },
+      );
+
+      if (!mounted) return;
+
+      if (response['success'] == true &&
+          response['message'] is Map &&
+          (response['message']['content'] as String?)?.trim().isNotEmpty ==
+              true) {
+        final content = (response['message']['content'] as String).trim();
+        _applyBasiraReply(content);
+      } else {
+        _createAdviceResult();
+        _resultMessage =
+            '$_resultMessage\n\n(Quick check — Basira was unavailable, so Alpha used a local guideline.)';
+      }
+    } catch (_) {
+      if (!mounted) return;
+      _createAdviceResult();
+      _resultMessage =
+          '$_resultMessage\n\n(Quick check — Basira was unavailable, so Alpha used a local guideline.)';
+    }
 
     if (!mounted) return;
-
-    _createAdviceResult();
 
     setState(() {
       _isAnalyzing = false;
       _showResult = true;
     });
+  }
+
+  void _applyBasiraReply(String content) {
+    final lower = content.toLowerCase();
+    if (lower.contains('wait') ||
+        lower.contains('avoid') ||
+        lower.contains('high risk') ||
+        lower.contains('لا تشتري') ||
+        lower.contains('انتظر') ||
+        lower.contains('خطر')) {
+      _adviceLevel = AdviceLevel.highRisk;
+      _resultTitle = 'Basira recommends waiting';
+    } else if (lower.contains('caution') ||
+        lower.contains('consider') ||
+        lower.contains('review') ||
+        lower.contains('حذر') ||
+        lower.contains('راجع')) {
+      _adviceLevel = AdviceLevel.caution;
+      _resultTitle = 'Basira suggests a closer look';
+    } else {
+      _adviceLevel = AdviceLevel.safe;
+      _resultTitle = 'Basira weighed in';
+    }
+    _resultMessage = content;
   }
 
   void _createAdviceResult() {
@@ -547,18 +608,16 @@ class _AdviceScreenState extends State<AdviceScreen> {
 
       _resultMessage =
           'The purchase may be possible, but Alpha recommends reviewing the price and its effect on your remaining monthly balance. '
-          'Check a cheaper option and avoid using savings or installments unless the purchase is important.';
+          'Check whether $item still fits after your needs and savings targets for this cycle.';
 
       return;
     }
 
     _adviceLevel = AdviceLevel.safe;
-    _resultTitle = 'The purchase looks manageable';
-
+    _resultTitle = 'Looks manageable';
     _resultMessage =
-        'Based on the information provided, purchasing $item appears reasonably manageable. '
-        'It is classified as ${_expenseType!.toLowerCase()} and the funding method is $_fundingSource. '
-        'Confirm that the amount fits within your actual available balance before completing the purchase.';
+        'Based on your answers, buying $item appears compatible with a cautious spend. '
+        'Still confirm it fits your needs/wants buckets before you commit.';
   }
 
   void _clearResult() {

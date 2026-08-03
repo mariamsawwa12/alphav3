@@ -12,6 +12,7 @@ import 'package:alpha_app/widgets/custom_phonefield.dart';
 import 'package:alpha_app/widgets/custom_textfield.dart';
 import 'package:easy_localization/easy_localization.dart';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -57,7 +58,7 @@ class _LoginState extends State<Login> {
                   )),
                   Center(
                     child: Text(
-                      "Welcome back",
+                      "welcome_back".tr(),
                       style: GoogleFonts.ibmPlexSansArabic(
                         fontSize: screenW * 0.08,
                         fontWeight: FontWeight.bold,
@@ -72,7 +73,7 @@ class _LoginState extends State<Login> {
                   ),
                   Center(
                     child: Text(
-                      "Log in to continue your financial journey",
+                      "login_subtitle".tr(),
                       style: GoogleFonts.ibmPlexSansArabic(
                         fontSize: screenW * 0.04,
                         fontWeight: FontWeight.w500,
@@ -244,6 +245,32 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: screenW * 0.01,
                   ),
+                  if (kDebugMode)
+                    Center(
+                      child: TextButton(
+                        onPressed: () {
+                          authprovider.phoneController.text = '790000001';
+                          authprovider.passwordController.text = 'DemoPass123!';
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Demo credentials filled — tap Log In',
+                              ),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'use_demo_account'.tr(),
+                          style: TextStyle(
+                            color: themeprovider.isDark
+                                ? AppColors.darkSecondary
+                                : AppColors.lightSecondary,
+                            fontSize: screenW * 0.035,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
                   Center(
                     child: TextButton(
                         onPressed: () {

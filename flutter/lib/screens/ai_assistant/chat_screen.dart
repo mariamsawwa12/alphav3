@@ -81,7 +81,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Alpha",
+                        "Basira",
                         style: GoogleFonts.ibmPlexSansArabic(
                           color: themeprovider.isDark
                               ? AppColors.darkText
