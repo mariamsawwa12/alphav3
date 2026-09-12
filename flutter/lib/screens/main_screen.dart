@@ -14,6 +14,7 @@ import 'package:alpha_app/screens/profile/profile_screen.dart';
 import 'package:alpha_app/screens/receipts/receipt_input_screen.dart';
 import 'package:alpha_app/widgets/custom_nav_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -61,7 +62,7 @@ class _MainNavigationScreenState
         final OnboardingProvider onboardingProvider =
             context.read<OnboardingProvider>();
 
-        if (Platform.isAndroid &&
+        if (!kIsWeb && Platform.isAndroid &&
             !_didCheckLostData &&
             onboardingProvider.isOnboarded) {
           _didCheckLostData = true;
