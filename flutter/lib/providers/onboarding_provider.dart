@@ -3,6 +3,7 @@ import 'package:alpha_app/services/onboarding_service.dart';
 import 'package:alpha_app/services/api_service.dart';
 
 class OnboardingProvider extends ChangeNotifier {
+  bool _portfolioDemo = false;
   String _nextStep = 'otp_verification';
   bool _isOnboarded = false;
   bool _canCreateCycle = false;
@@ -22,7 +23,18 @@ class OnboardingProvider extends ChangeNotifier {
   String? get errorMessage => _errorMessage;
   dynamic get allocation => _allocation;
 
+  void enablePortfolioDemo() {
+    _portfolioDemo = true;
+    _isOnboarded = true;
+    _canCreateCycle = true;
+    _financialProfileComplete = true;
+    _nextStep = 'completed';
+    _missingFinancialFields = [];
+    _allocation = {'income': 1200, 'tier': 'balanced'};
+  }
+
   Future<bool> checkOnboardingStatus() async {
+    if (_portfolioDemo) return true;
     if (_isLoading) return false;
     _setLoading(true);
     _clearError();
