@@ -31,6 +31,7 @@ Future<void> main() async {
   final cycle = CycleProvider()..enablePortfolioDemo();
   final home = HomeProvider()..enablePortfolioDemo();
   final profile = ProfileProvider()..enablePortfolioDemo();
+  final expenses = ExpenseProvider(initialize: false)..enablePortfolioDemo();
 
   runApp(
     EasyLocalization(
@@ -56,7 +57,7 @@ Future<void> main() async {
           ChangeNotifierProvider(create: (_) => ChatbotProvider()),
           ChangeNotifierProvider.value(value: home),
           ChangeNotifierProvider(create: (_) => ReceiptProvider()),
-          ChangeNotifierProvider(create: (_) => ExpenseProvider()),
+          ChangeNotifierProvider.value(value: expenses),
           ChangeNotifierProvider(create: (_) => FinancialAnalysisProvider()),
           ChangeNotifierProvider(create: (_) => NotificationProvider()),
           ChangeNotifierProvider.value(value: profile),
