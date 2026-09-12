@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:alpha_app/core/utils/finance_mappings.dart';
 
 class ExpenseProvider extends ChangeNotifier {
-  ExpenseProvider() {
-    Future.microtask(_initialize);
+  ExpenseProvider({bool initialize = true}) {
+    if (initialize) {
+      Future.microtask(_initialize);
+    }
   }
 
   static const String _storageKey = 'alpha_saved_expenses';
@@ -89,6 +91,13 @@ class ExpenseProvider extends ChangeNotifier {
   String? _errorMessage;
 
   String? get errorMessage => _errorMessage;
+
+  void enablePortfolioDemo() {
+    _expenses.clear();
+    _isLoading = false;
+    _isInitialized = true;
+    _errorMessage = null;
+  }
 
   // =========================================================
   // TRANSACTION DRAFT
