@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: portfolio-web-mariam-ui-mariam-ui
+          ref: portfolio-web-mariam-ui
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
