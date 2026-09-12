@@ -1,5 +1,5 @@
 name: Build Alpha portfolio web
-# Rebuild profile-safe demo
+# Rebuild Alpha-branded chat demo
 
 on:
   push:
