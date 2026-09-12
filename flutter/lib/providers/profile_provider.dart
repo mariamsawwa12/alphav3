@@ -9,6 +9,27 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ProfileProvider extends ChangeNotifier {
   ProfileProvider();
 
+  void enablePortfolioDemo() {
+    _profile = ProfileModel(
+      id: 'portfolio-user',
+      name: 'Mariam',
+      email: 'demo@alpha.app',
+      birthDate: DateTime(2005, 4, 30),
+      joinedAt: DateTime(2026, 1, 1),
+    );
+    _profileCompletion = ProfileCompletionModel(
+      isComplete: true,
+      percentage: 100,
+      missingFields: const [],
+      missingSections: const [],
+      analysisReliability: 'complete',
+    );
+    _financialLevel = 'Intermediate';
+    _financialTier = 'balanced';
+    _activeGoalsCount = 2;
+    _confirmedCycleExpensesCount = 8;
+  }
+
   ProfileModel? _profile;
   ProfileModel? get profile => _profile;
 
