@@ -1,0 +1,32 @@
+name: Build Alpha portfolio web
+
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/build-alpha-portfolio-web.yml]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: portfolio-web
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Prepare safe demo environment
+        working-directory: flutter
+        run: |
+          touch .env
+          flutter pub get
+      - name: Build original Alpha screens
+        working-directory: flutter
+        run: flutter build web --release --target lib/main_portfolio.dart --base-href /alpha/ --no-wasm-dry-run
+      - uses: actions/upload-artifact@v4
+        with:
+          name: alpha-original-web
+          path: flutter/build/web
+          retention-days: 3
