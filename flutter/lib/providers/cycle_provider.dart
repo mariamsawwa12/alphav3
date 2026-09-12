@@ -30,7 +30,8 @@ class CycleProvider extends ChangeNotifier {
     _currentCycle = {
       'id': 'portfolio-cycle',
       'status': 'active',
-      'startDate': DateTime.now().subtract(const Duration(days: 8)).toIso8601String(),
+      'startDate':
+          DateTime.now().subtract(const Duration(days: 8)).toIso8601String(),
       'endDate': DateTime.now().add(const Duration(days: 22)).toIso8601String(),
       'daysRemaining': 22,
     };
@@ -154,8 +155,24 @@ class CycleProvider extends ChangeNotifier {
   }
 
   Future<Map<String, dynamic>?> getCyclePlanningSummary(String cycleId) async {
+    if (_portfolioDemo) {
+      return {
+        'plannedSavings': 300.0,
+        'emergencyFundTarget': 1800.0,
+        'emergencyFundBalance': 420.0,
+        'goalAllocations': [
+          {
+            'goal_type': 'travel',
+            'is_system_managed': false,
+            'planned_amount': 60.0
+          },
+        ],
+        'savingsAllocation': {'emergency_fund_rate': 20.0},
+      };
+    }
     try {
-      final response = await ApiService.get('/financial-cycles/$cycleId/planning-summary');
+      final response =
+          await ApiService.get('/financial-cycles/$cycleId/planning-summary');
       if (response != null && response.statusCode == 200) {
         final body = await ApiService.parseJson(response);
         return body['data'];
@@ -167,13 +184,19 @@ class CycleProvider extends ChangeNotifier {
     }
   }
 
-  Future<bool> linkSavingsAllocation(String cycleId, double emergencyFundPercentage) async {
+  Future<bool> linkSavingsAllocation(
+      String cycleId, double emergencyFundPercentage) async {
+    if (_portfolioDemo) {
+      _error = null;
+      return true;
+    }
     try {
       final response = await ApiService.post(
         '/financial-cycles/$cycleId/savings-allocation',
         body: {'emergencyFundPercentage': emergencyFundPercentage},
       );
-      if (response != null && (response.statusCode == 200 || response.statusCode == 201)) {
+      if (response != null &&
+          (response.statusCode == 200 || response.statusCode == 201)) {
         return true;
       }
       _error = await _handleSavingsError(response, "فشل حفظ التخصيص");
@@ -190,13 +213,19 @@ class CycleProvider extends ChangeNotifier {
     }
   }
 
-  Future<bool> updateSavingsAllocation(String cycleId, double emergencyFundPercentage) async {
+  Future<bool> updateSavingsAllocation(
+      String cycleId, double emergencyFundPercentage) async {
+    if (_portfolioDemo) {
+      _error = null;
+      return true;
+    }
     try {
       final response = await ApiService.put(
         '/financial-cycles/$cycleId/savings-allocation',
         body: {'emergencyFundPercentage': emergencyFundPercentage},
       );
-      if (response != null && (response.statusCode == 200 || response.statusCode == 201)) {
+      if (response != null &&
+          (response.statusCode == 200 || response.statusCode == 201)) {
         return true;
       }
       _error = await _handleSavingsError(response, "فشل تحديث التخصيص");

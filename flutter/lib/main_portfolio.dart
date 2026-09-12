@@ -58,7 +58,8 @@ Future<void> main() async {
           ChangeNotifierProvider.value(value: home),
           ChangeNotifierProvider(create: (_) => ReceiptProvider()),
           ChangeNotifierProvider.value(value: expenses),
-          ChangeNotifierProvider(create: (_) => FinancialAnalysisProvider()),
+          ChangeNotifierProvider(
+              create: (_) => FinancialAnalysisProvider(portfolioDemo: true)),
           ChangeNotifierProvider(create: (_) => NotificationProvider()),
           ChangeNotifierProvider.value(value: profile),
         ],

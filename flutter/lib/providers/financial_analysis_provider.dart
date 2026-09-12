@@ -7,10 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
 class FinancialAnalysisProvider extends ChangeNotifier {
-  FinancialAnalysisProvider() {
-    Future.microtask(loadHistory);
+  FinancialAnalysisProvider({bool portfolioDemo = false}) {
+    _portfolioDemo = portfolioDemo;
+    if (_portfolioDemo) {
+      enablePortfolioDemo();
+    } else {
+      Future.microtask(loadHistory);
+    }
     _listenToAudioPlayer();
   }
+
+  bool _portfolioDemo = false;
 
   final AudioPlayer _audioPlayer = AudioPlayer();
 
@@ -55,9 +62,30 @@ class FinancialAnalysisProvider extends ChangeNotifier {
   bool get hasAnalysis => _analysis != null;
   bool get hasAudio => _analysis?.audio.hasAudio == true;
 
+  void enablePortfolioDemo() {
+    _portfolioDemo = true;
+    _errorMessage = null;
+    _isHistoryLoading = false;
+    _history = [
+      FinancialAnalysisListItem(
+        id: 1,
+        analysisId: 'portfolio-analysis',
+        status: 'completed',
+        summaryPreview:
+            'Spending is within plan, with room to strengthen savings.',
+        scope: 'financial_snapshot',
+        analysisAsOfDate: DateTime.now(),
+        generatedAt: DateTime.now(),
+        insightCount: 3,
+        hasAudio: false,
+      ),
+    ];
+  }
+
   double get audioProgress {
     if (_duration.inMilliseconds <= 0) return 0;
-    return (_position.inMilliseconds / _duration.inMilliseconds).clamp(0.0, 1.0);
+    return (_position.inMilliseconds / _duration.inMilliseconds)
+        .clamp(0.0, 1.0);
   }
 
   void _listenToAudioPlayer() {
@@ -92,12 +120,18 @@ class FinancialAnalysisProvider extends ChangeNotifier {
   }
 
   Future<void> loadHistory() async {
+    if (_portfolioDemo) {
+      enablePortfolioDemo();
+      _safeNotify();
+      return;
+    }
     _isHistoryLoading = true;
     _errorMessage = null;
     _safeNotify();
 
     try {
-      final response = await ApiService.get('/financial-analysis', queryParameters: {
+      final response =
+          await ApiService.get('/financial-analysis', queryParameters: {
         'page': '1',
         'limit': '20',
       });
@@ -112,7 +146,8 @@ class FinancialAnalysisProvider extends ChangeNotifier {
       _history = items is List
           ? items
               .whereType<Map>()
-              .map((item) => FinancialAnalysisListItem.fromJson(Map<String, dynamic>.from(item)))
+              .map((item) => FinancialAnalysisListItem.fromJson(
+                  Map<String, dynamic>.from(item)))
               .toList()
           : const [];
     } catch (error) {
@@ -125,6 +160,51 @@ class FinancialAnalysisProvider extends ChangeNotifier {
   }
 
   Future<bool> generateAnalysis() async {
+    if (_portfolioDemo) {
+      await setAnalysisFromJson({
+        'id': 1,
+        'analysisId': 'portfolio-analysis',
+        'status': 'completed',
+        'scope': 'financial_snapshot',
+        'summary':
+            'Your monthly spending is within the planned range, while savings can still be strengthened.',
+        'insights': [
+          'Needs spending is controlled and below its target.',
+          'Wants remain within the planned allowance.',
+          'Savings are progressing, with room to increase the monthly contribution.'
+        ],
+        'recommendations': [
+          'Keep discretionary spending below the current limit.',
+          'Move part of the remaining balance into savings.',
+          'Review recurring expenses before the next cycle.'
+        ],
+        'uiMetrics': {
+          'savings': {
+            'current': 300,
+            'target': 360,
+            'percent': 83.3,
+            'status': 'warning'
+          },
+          'needs': {
+            'current': 340,
+            'target': 600,
+            'percent': 56.7,
+            'status': 'on_track'
+          },
+          'wants': {
+            'current': 145,
+            'target': 360,
+            'percent': 40.3,
+            'status': 'on_track'
+          }
+        },
+        'audio': {'hasAudio': false},
+        'dataQuality': {},
+        'generatedAt': DateTime.now().toIso8601String(),
+        'asOfDate': DateTime.now().toIso8601String()
+      });
+      return true;
+    }
     if (_isGenerating) return false;
 
     _isGenerating = true;
@@ -132,7 +212,8 @@ class FinancialAnalysisProvider extends ChangeNotifier {
     _safeNotify();
 
     try {
-      final response = await ApiService.post('/financial-analysis', body: const {
+      final response =
+          await ApiService.post('/financial-analysis', body: const {
         'mode': 'financial_snapshot',
         'language': 'ar',
         'includeSpeechText': true,
@@ -142,7 +223,8 @@ class FinancialAnalysisProvider extends ChangeNotifier {
 
       if (!ApiService.isSuccess(response)) {
         _errorMessage = 'تعذر إنشاء التحليل الآن. حاول لاحقاً.';
-        debugPrint('Analysis generation failed: ${await ApiService.getErrorMessage(response)}');
+        debugPrint(
+            'Analysis generation failed: ${await ApiService.getErrorMessage(response)}');
         return false;
       }
 
@@ -155,7 +237,8 @@ class FinancialAnalysisProvider extends ChangeNotifier {
         throw const FormatException('Invalid analysis response');
       }
 
-      final ok = await setAnalysisFromJson(Map<String, dynamic>.from(rawAnalysis));
+      final ok =
+          await setAnalysisFromJson(Map<String, dynamic>.from(rawAnalysis));
       if (ok) await loadHistory();
       return ok;
     } catch (error) {
@@ -169,6 +252,51 @@ class FinancialAnalysisProvider extends ChangeNotifier {
   }
 
   Future<bool> loadAnalysisDetail(int id) async {
+    if (_portfolioDemo) {
+      await setAnalysisFromJson({
+        'id': 1,
+        'analysisId': 'portfolio-analysis',
+        'status': 'completed',
+        'scope': 'financial_snapshot',
+        'summary':
+            'Your monthly spending is within the planned range, while savings can still be strengthened.',
+        'insights': [
+          'Needs spending is controlled and below its target.',
+          'Wants remain within the planned allowance.',
+          'Savings are progressing, with room to increase the monthly contribution.'
+        ],
+        'recommendations': [
+          'Keep discretionary spending below the current limit.',
+          'Move part of the remaining balance into savings.',
+          'Review recurring expenses before the next cycle.'
+        ],
+        'uiMetrics': {
+          'savings': {
+            'current': 300,
+            'target': 360,
+            'percent': 83.3,
+            'status': 'warning'
+          },
+          'needs': {
+            'current': 340,
+            'target': 600,
+            'percent': 56.7,
+            'status': 'on_track'
+          },
+          'wants': {
+            'current': 145,
+            'target': 360,
+            'percent': 40.3,
+            'status': 'on_track'
+          }
+        },
+        'audio': {'hasAudio': false},
+        'dataQuality': {},
+        'generatedAt': DateTime.now().toIso8601String(),
+        'asOfDate': DateTime.now().toIso8601String()
+      });
+      return true;
+    }
     _isLoading = true;
     _errorMessage = null;
     _safeNotify();
@@ -177,7 +305,8 @@ class FinancialAnalysisProvider extends ChangeNotifier {
       final response = await ApiService.get('/financial-analysis/$id');
       if (!ApiService.isSuccess(response)) {
         _errorMessage = 'تعذر فتح التحليل المحفوظ.';
-        debugPrint('Analysis detail failed: ${await ApiService.getErrorMessage(response)}');
+        debugPrint(
+            'Analysis detail failed: ${await ApiService.getErrorMessage(response)}');
         return false;
       }
 
@@ -230,7 +359,8 @@ class FinancialAnalysisProvider extends ChangeNotifier {
       return false;
     }
 
-    if (_loadedAudioUrl == url && _audioPlayer.processingState != ProcessingState.idle) {
+    if (_loadedAudioUrl == url &&
+        _audioPlayer.processingState != ProcessingState.idle) {
       _errorMessage = null;
       return true;
     }
@@ -244,7 +374,8 @@ class FinancialAnalysisProvider extends ChangeNotifier {
       _loadedAudioUrl = url;
       _duration = loadedDuration ??
           _audioPlayer.duration ??
-          Duration(milliseconds: ((_analysis?.audio.duration ?? 0) * 1000).round());
+          Duration(
+              milliseconds: ((_analysis?.audio.duration ?? 0) * 1000).round());
       _position = Duration.zero;
       return true;
     } catch (error) {
@@ -302,7 +433,8 @@ class FinancialAnalysisProvider extends ChangeNotifier {
     final prepared = await _ensureAudioPrepared();
     if (!prepared) return;
     final safeValue = value.clamp(0.0, 1.0);
-    await _audioPlayer.seek(Duration(milliseconds: (_duration.inMilliseconds * safeValue).round()));
+    await _audioPlayer.seek(
+        Duration(milliseconds: (_duration.inMilliseconds * safeValue).round()));
   }
 
   Future<void> stopAudio() async {
@@ -334,12 +466,14 @@ class FinancialAnalysisProvider extends ChangeNotifier {
   }
 
   String get analysisTitleDate {
-    final date = _analysis?.metadata.analysisAsOfDate ?? _analysis?.metadata.generatedAt;
+    final date =
+        _analysis?.metadata.analysisAsOfDate ?? _analysis?.metadata.generatedAt;
     if (date == null) return '';
     return '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}';
   }
 
-  String _cleanError(Object error) => error.toString().replaceFirst('Exception: ', '');
+  String _cleanError(Object error) =>
+      error.toString().replaceFirst('Exception: ', '');
 
   void _safeNotify() {
     if (!_disposed) notifyListeners();
