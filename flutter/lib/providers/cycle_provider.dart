@@ -5,6 +5,7 @@ import 'package:alpha_app/services/api_service.dart';
 import 'package:alpha_app/services/api_exception.dart';
 
 class CycleProvider extends ChangeNotifier {
+  bool _portfolioDemo = false;
   dynamic _currentCycle;
   bool _isLoading = false;
   bool _isCreatingCycle = false;
@@ -24,7 +25,19 @@ class CycleProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void enablePortfolioDemo() {
+    _portfolioDemo = true;
+    _currentCycle = {
+      'id': 'portfolio-cycle',
+      'status': 'active',
+      'startDate': DateTime.now().subtract(const Duration(days: 8)).toIso8601String(),
+      'endDate': DateTime.now().add(const Duration(days: 22)).toIso8601String(),
+      'daysRemaining': 22,
+    };
+  }
+
   Future<void> loadCurrentCycle() async {
+    if (_portfolioDemo) return;
     if (_isLoading) return;
 
     _isLoading = true;
