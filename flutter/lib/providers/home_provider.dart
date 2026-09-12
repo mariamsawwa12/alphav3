@@ -21,6 +21,31 @@ class HomeProvider extends ChangeNotifier {
 
   bool get hasData => _homeData != null;
 
+  void enablePortfolioDemo() {
+    _homeData = HomeModel.fromJson({
+      'cycle': {
+        'id': 'portfolio-cycle',
+        'status': 'active',
+        'startDate': DateTime.now().subtract(const Duration(days: 8)).toIso8601String(),
+        'endDate': DateTime.now().add(const Duration(days: 22)).toIso8601String(),
+        'daysRemaining': 22,
+      },
+      'income': {'expected': 1200, 'recorded': 1200, 'recurring': 1000, 'unexpected': 200},
+      'buckets': {
+        'needs': {'target': 600, 'actual': 340, 'remaining': 260, 'usagePercent': 56.7, 'status': 'healthy'},
+        'wants': {'target': 360, 'actual': 145, 'remaining': 215, 'usagePercent': 40.3, 'status': 'healthy'},
+        'savings': {'target': 240, 'actual': 180, 'remaining': 60, 'usagePercent': 75, 'status': 'on_track', 'plannedEmergencyFund': 100, 'plannedGoalAllocations': 140, 'unallocatedSavings': 0},
+      },
+      'goals': {'activeCount': 2, 'readyCount': 0, 'items': []},
+      'commitments': {'totalReserved': 95, 'upcomingCount': 2, 'overdueCount': 0},
+      'safeDailySpending': {'amount': 21.5, 'reliability': 'high', 'reasons': []},
+      'comparison': {'previousPeriodAvailable': true, 'incomeChange': 8, 'expenseChange': -4, 'savingsChange': 12},
+      'setupRequired': false,
+      'reliability': 'high',
+      'warnings': [],
+    });
+  }
+
   bool get hasError {
     return _errorMessage != null && _errorMessage!.trim().isNotEmpty;
   }
