@@ -1,0 +1,58 @@
+name: Deploy Alpha Portfolio Demo
+
+on:
+  push:
+    branches:
+      - portfolio-web-mariam-ui
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout portfolio demo branch
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Prepare safe demo environment
+        working-directory: flutter
+        run: cp .env.example .env
+
+      - name: Install dependencies
+        working-directory: flutter
+        run: flutter pub get
+
+      - name: Build portfolio web demo
+        working-directory: flutter
+        run: flutter build web -t lib/main_portfolio.dart --release --base-href "/alphav3/"
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: flutter/build/web
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
