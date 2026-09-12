@@ -1,5 +1,5 @@
 name: Build Alpha portfolio web
-# Rebuild Alpha-branded chat demo
+# Build mariam-ui demo with safe expenses
 
 on:
   push:
